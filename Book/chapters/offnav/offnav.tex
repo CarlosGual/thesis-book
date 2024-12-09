@@ -1,0 +1,37 @@
+\section{Offline Visual Semantic Navigation}\label{sec:offline-navigation}
+
+In this work, we study \objnav navigation~\cite{batra2020}, a setup in which an agent is asked to navigate to a target object in an environment.
+To perform this task, the agent does it using only egocentric perceptions.
+Specifically, the agent receives RGB images and GPS+Compass information that provides the agent with the current position and orientation relative to the starting point.
+The set of movements is discrete and consists of the following actions: \turnleft, \turnright, \moveforward, \lookup, \lookdown and \stopac.
+If the agent spawns the \stopac action within 1$m$ Euclidean distance respect to the target object within a 500 steps time limit, the episode is considered successful.
+In the other case, it is considered a failure.
+The success rate (SR) is measured by averaging the success over all the episodes present in an evaluation set.
+%We also report the Success weighted by Path Length (SPL) metric, which is the success rate weighted by the ratio between ideal and actual path length.
+
+Since we are on an offline RL setup, we need a previously collected dataset of navigation experience.
+The dataset that we chose is collected in~\cite{ramrakhya2023}.
+It consists of $77k$ episodes of human navigation trajectories using the HM3D~\cite{Ramakrishnan2021HabitatMatterport3D} dataset.
+
+We train our policies using our DD-IQL implementation on the human demonstrations.
+The objetive is to find a policy with optimal parameters $\phi^*$ that maximizes the expected return from the dataset.
+To do so, the IQL algorithm relies on the use of expectile regression to modify a temporal-difference (TD) loss.
+This modified TD loss is able to learn an approximate Q-function from the dataset actions.
+This Q-function does not explicitly represent the corresponding policy, so a separate policy extraction step is needed.
+For policy extraction, we use advantage-weighted regression~\cite{peters2007, peng2019advantageweighted}:
+
+\begin{equation}
+    L_\pi(\phi)=\mathbb{E}_{(s, a) \sim \mathcal{D}}\left[\exp \left(\beta\left(Q_{\hat{\theta}}(s, a)-V_\psi(s)\right)\right) \log \pi_\phi(a|s)\right]\; ,
+    \label{eq:loss}
+\end{equation}
+
+where $\beta \in [0, \infty)$ controls the trade-off between cloning the expert policy and maximizing the Q-function.
+This loss can be seen as a selection of most optimal actions to clone in the dataset.
+We also employ inflection weighting~\cite{wijmans2019} to modify the loss function, thereby giving more importance to those time steps where there is a change in actions.
+
+For the policy architecture, we use a simple CNN+RNN model from\cite{ramrakhya2023}.
+The difference is that we use ResNet18 for the visual encoders.
+We copy the same architecture for the policy net, the Q net and the Q target net.
+For the V net, we only use the visual encoder and a single linear layer, without any recurrent module.
+
+

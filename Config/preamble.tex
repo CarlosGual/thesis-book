@@ -38,6 +38,8 @@
 
 \synctex=1
 
+\usepackage{chapters/ros4vsn/symbols}
+
 % To generate a proper PDF/A document
 %\usepackage[a-1b]{pdfx}
 
@@ -46,7 +48,11 @@
 
 % To allow simple notes to be used in the review process (see defined
 % commands at the end of this file)
-\usepackage{todonotes} 
+\usepackage{todonotes}
+
+% To allow ues of epigraphs
+\usepackage{epigraph}
+\usepackage{lettrine}
 
 % ifthen to allow using language dependent settings
 \usepackage{ifthen}
@@ -689,9 +695,12 @@ hyperfootnotes=false
 
 % Some TFG/TFM regulations state that Arial font should be used. In my
 % opinion the LaTeX standard fornt is better, but if you want to do so, use Helvetica instead (Arial is not free) adding the following commands here:
-% \usepackage{helvet}
-% \renewcommand{\familydefault}{\sfdefault}
+%\usepackage{helvet}
+%\renewcommand{\familydefault}{\sfdefault}
 
+% I would like to use montserrat font so I include it here:
+\usepackage{montserrat}
+\renewcommand{\familydefault}{\sfdefault}
 
 %%% Local Variables:
 %%% TeX-master: "../book"

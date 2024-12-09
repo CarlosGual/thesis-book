@@ -1,0 +1,13 @@
+\textbf{Visual Semantic Navigation.} We can identify in the literature the following groups of works for the VSN problem, depending on the learning paradigm.
+In the first group, there are those works that focus on the task of navigating to an object in realistic indoor environments, \eg~\cite{zhu2017, wijmans2020, chang2020, khandelwal2022}, using simulators and an agent based on CNNs as visual encoders and RNNs as the actor-critic head, following a RL paradigm.
+The second group consists of the works that address the VSN problem using imitation learning~\cite{wu2020a, ramrakhya2022} to build navigation policies from expert demonstrations.
+Finally, in the third set we have the approaches using meta-learning techniques in order to be able to quickly adapt to new environments~\cite{wang2017, wortsman2019, zhang2022}.
+
+Our work belongs to the first group.
+In fact, our proposal is a simplification of the approach in~\cite{khandelwal2022}, where we build a model based on a CLIP feature extractor and two LSTMs encoders for the agent state, introducing also reward shaping~\cite{wijmans2020} and $\epsilon\text{-}greedy$~\cite{mnih2013}.
+
+\textbf{Sparsity and exploration methods.} To address the sparse reward and exploration problems, different approaches have been proposed.
+Auxiliary tasks~\cite{jaderberg2016, ye2021} help the agent to explore the environment and gather extrinsic reward by maximizing pseudo-reward functions.
+Curiosity-driven exploration~\cite{pathak2017} leverages on the error of the agent's ability to predict the next state to introduce a new intrinsic reward that enables the agent to explore the environment.
+When dealing with procedurally-generated environments, a curriculum learning mechanism can be incorporated so the episodes are ordered by an exploration score~\cite{zha2020b}, and then the agent imitates the best ones.
+We also use procedurally-generated environments, but we rely on a RL approach combined with reward shaping~\cite{ng1999, jestel2021} and $\epsilon\text{-}greedy$~\cite{mnih2013} techniques to learn to navigate in them.

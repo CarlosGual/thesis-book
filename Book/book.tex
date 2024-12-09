@@ -34,7 +34,7 @@
 % rubber: watch book.glo book.acr book.sym book.slg book.alg
 
 
-\documentclass[spanish,openright]{book}
+\documentclass[spanish,openany]{book}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BEGIN Preamble and configuration section
@@ -105,17 +105,17 @@
 %                                                       % 3-4 of pdf file
 %\clearemptydoublepage % You need to include this after including each pdf
 
-\includepdf[pages=-]{letters/sampleLetter.pdf}   % include all pages of
+%\includepdf[pages=-]{letters/sampleLetter.pdf}   % include all pages of
                                                  % pdf file
 %\includepdf[pages=-]{letters/sampleLetter-pages.pdf}   % include all pages of
 %                                                 % pdf file
-\clearemptydoublepage % You need to add this after including each pdf
+%\clearemptydoublepage % You need to add this after including each pdf
 
 %\includepdf[pages=-]{papeleo/vistoBuenoTutorTFM-MUSEA.pdf}   % for TFMs
 %\clearemptydoublepage % You need to add this after including each pdf
 
 % Dedication+ackowledgements (dedicatorias+agradecimientos)
-\input{dedication/dedicatoria}            % EDIT this file or
+%\input{dedication/dedicatoria}            % EDIT this file or
                                               % comment it out
 \input{acknowledgements/agradecimientos}  % EDIT this file or
                                               % comment it out
@@ -149,7 +149,7 @@
 % package. As an example, I include here the listing of source code
 % snippets and algorithms (you have some examples in
 % appendix/manual.tex)
-\input{cover/extralistings}               % Edit this file or
+%\input{cover/extralistings}               % Edit this file or
                                               % comment it out
 
 % Now include list of acronyms and options (if this is the case)
@@ -200,6 +200,7 @@
 
 \input{chapters/conclusions}
 
+
 % Optional in PFCs
 %\input{pliego/pliego.tex}
 
@@ -233,11 +234,11 @@
 
 %\appendix                                         % DO NOT TOUCH THIS LINE!
 
-\begin{appendices}
-  \input{appendix/manual}
-  \input{appendix/herramientas}
-  \input{appendix/versiones}
-\end{appendices}
+%\begin{appendices}
+%  \input{appendix/manual}
+%  \input{appendix/herramientas}
+%  \input{appendix/versiones}
+%\end{appendices}
 %
 % END Appendices. Edit/modify all within this section
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
