@@ -96,14 +96,14 @@ When the agent reaches a corner near the target (red square), it can get stuck a
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth]{graphics/S3_S5_reward}
+    \includegraphics[width=0.8\linewidth]{figures/understanding_vsn/S3_S5_reward}
     \caption{\textbf{Learning curves for Maze-S3 and Maze-S5.} These curves show that the bigger the maze, the higher the complexity. On Maze-S3 the agent already starts at the saturation value around 6.5, but for Maze-S5 the agent needs more steps until it reaches its peak reward around a value of 5.}
     \label{fig:reward-maze-results}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth]{graphics/S5_ablation_success}
+    \includegraphics[width=0.8\linewidth]{figures/understanding_vsn/S5_ablation_success}
     \caption{\textbf{Ablation study on Maze-S5 during learning process.} Curves show that the best success rate is obtained using reward shaping and exploration techniques.}
     \label{fig:ablation-maze-success}
 \end{figure}
@@ -148,14 +148,14 @@ When the agent reaches a corner near the target (red square), it can get stuck a
     \centering
     \begin{subfigure}[b]{0.4\textwidth}
         \centering
-        \includegraphics[width=0.8\textwidth]{graphics/qualitative_results/fail}
+        \includegraphics[width=0.8\textwidth]{figures/understanding_vsn/qualitative_results/fail}
         \caption{Failure case.}
         \label{fig:maze_qualitative_fail}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.4\textwidth}
         \centering
-        \includegraphics[width=0.8\textwidth]{graphics/qualitative_results/success}
+        \includegraphics[width=0.8\textwidth]{figures/understanding_vsn/qualitative_results/success}
         \caption{Success case.}
         \label{fig:maze_qualitative_success}
     \end{subfigure}~\caption{\textbf{Qualitative results for Miniworld-Maze agent.} We show agent final state and trajectory for a fail case (\ref{fig:maze_qualitative_fail}) and a success case (\ref{fig:maze_qualitative_success}). In the success case, $\epsilon\text{-}greedy$ forces the agent to select a random action, thus exploring the environment, escaping the corner and finally reaching the target.}
@@ -196,7 +196,7 @@ These figures clearly show how in both cases a different valid goal is reached (
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{graphics/habitat_reward}
+    \includegraphics[width=0.7\linewidth]{figures/understanding_vsn/habitat_reward}
     \caption{\textbf{Learning curve of Habitat experiment.} This curve shows how the agent starts with a sub-optimal policy, receiving low rewards around $-5$. Then, the rewards increase until a value around 5, once the agent gets an optimal policy.}
     \label{fig:reward-habitat-results}
 \end{figure}
@@ -205,14 +205,14 @@ These figures clearly show how in both cases a different valid goal is reached (
     \centering
     \begin{subfigure}[b]{0.4\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{graphics/qualitative_results/habitat_epsilon}
+        \includegraphics[width=\textwidth]{figures/understanding_vsn/qualitative_results/habitat_epsilon}
         \caption{$\epsilon\text{-greedy}$ output.}
         \label{fig:habitat_qualitative_epsilon}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.4\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{graphics/qualitative_results/habitat_stochastic}
+        \includegraphics[width=\textwidth]{figures/understanding_vsn/qualitative_results/habitat_stochastic}
         \caption{$Stochastic$ output.}
         \label{fig:habitat_qualitative_stochastic}
     \end{subfigure}~\caption{\textbf{Qualitative results for Habitat agent.} Here we show the agent final state and trajectory on the scene using $\epsilon\text{-greedy}$ with $\epsilon = 0.2$ (\ref{fig:habitat_qualitative_epsilon}) and $stochastic$ output (\ref{fig:habitat_qualitative_stochastic}). Note that the $stochastic$ output produces a smother trajectory.}
@@ -221,7 +221,7 @@ These figures clearly show how in both cases a different valid goal is reached (
 
 \begin{figure}    
     \centering
-    \includegraphics[width=0.6\linewidth]{graphics/dollhouse}
+    \includegraphics[width=0.6\linewidth]{figures/understanding_vsn/dollhouse}
     \caption{\textbf{Scene 00744-1S7LAXRdDqK from HM3D dataset.} Scene used for Habitat experiments.}
     \label{fig:dollhouse}
 \end{figure}

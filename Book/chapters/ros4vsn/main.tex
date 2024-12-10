@@ -1,403 +1,18 @@
-%Version 3 October 2023
-% See section 11 of the User Manual for version history
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                                                 %%
-%% Please do not use \input{...} to include other tex files.       %%
-%% Submit your LaTeX manuscript as one .tex document.              %%
-%%                                                                 %%
-%% All additional figures and files should be attached             %%
-%% separately and not embedded in the \TeX\ document itself.       %%
-%%                                                                 %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%\documentclass[referee,sn-basic]{sn-jnl}% referee option is meant for double line spacing
-
-%%=======================================================%%
-%% to print line numbers in the margin use lineno option %%
-%%=======================================================%%
-
-%%\documentclass[lineno,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
-
-%%======================================================%%
-%% to compile with pdflatex/xelatex use pdflatex option %%
-%%======================================================%%
-
-%%\documentclass[pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
-
-
-%%Note: the following reference styles support Namedate and Numbered referencing. By default the style follows the most common style. To switch between the options you can add or remove �Numbered� in the optional parenthesis. 
-%%The option is available for: sn-basic.bst, sn-vancouver.bst, sn-chicago.bst%  
- 
-%%\documentclass[sn-nature]{sn-jnl}% Style for submissions to Nature Portfolio journals
-%%\documentclass[sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
-\documentclass[sn-mathphys-num]{sn-jnl}% Math and Physical Sciences Numbered Reference Style 
-%%\documentclass[sn-mathphys-ay]{sn-jnl}% Math and Physical Sciences Author Year Reference Style
-%%\documentclass[sn-aps]{sn-jnl}% American Physical Society (APS) Reference Style
-%%\documentclass[sn-vancouver,Numbered]{sn-jnl}% Vancouver Reference Style
-%%\documentclass[sn-apa]{sn-jnl}% APA Reference Style 
-%%\documentclass[sn-chicago]{sn-jnl}% Chicago-based Humanities Reference Style
-
-%%%% Standard Packages
-%%<additional latex packages if required can be included here>
-\usepackage{hyperref}
-\usepackage{graphicx}%
-\usepackage{multirow}%
-\usepackage{amsmath,amssymb,amsfonts}%
-\usepackage{amsthm}%
-\usepackage{mathrsfs}%
-\usepackage[title]{appendix}%
-\usepackage{xcolor}%
-\usepackage{textcomp}%
-\usepackage{manyfoot}%
-\usepackage{booktabs}%
-\usepackage{algorithm}%
-\usepackage{algorithmicx}%
-\usepackage{algpseudocode}%
-\usepackage{listings}%
-%%%%
-
-% Useful packages
-\usepackage{cite}
-\usepackage{subcaption}
-% Some definitions
-%\newtheorem{theorem}{Theorem}
-%\newtheorem{lemma}{Lemma}
-%\newtheorem{proof}{Proof}
-%\newtheorem{definition}{Definition}
-%\newtheorem{algo}{Algorithm}
-%\newtheorem{proc}{Procedure}
-%\newtheorem{rem}{Remark}
-%\newtheorem{observation}{Observation}
-%\newtheorem{proposition}{Proposition}
-\RequirePackage{xspace}
-
-%\newtheorem{theorem}{Theorem}[section]
-%\newtheorem{lemma}[theorem]{Lemma}
-%\newtheorem{proposition}[theorem]{Proposition}
-%\newtheorem{corollary}[theorem]{Corollary}
-%\newtheorem{theorem}{Theorem}
-%\newtheorem{lemma}{Lemma}
-%\newtheorem{proposition}{Proposition}
-%\newtheorem{corollary}{Corollary}
-%\newtheorem{construction}{Construction}
-%\newtheorem{claim}{Claim}
-
-%\newenvironment{proof}[1][Proof]{\begin{trivlist}
-%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
-%\newenvironment{definition}[1][Definition]{\begin{trivlist}
-%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
-%\newenvironment{example}[1][Example]{\begin{trivlist}
-%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
-%\newenvironment{remark}[1][Remark]{\begin{trivlist}
-%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
-
-%\newcommand{\qed}{\nobreak \ifvmode \relax \else
-%      \ifdim\lastskip<1.5em \hskip-\lastskip
-%      \hskip1.5em plus0em minus0.5em \fi \nobreak
-%      \vrule height0.75em width0.5em depth0.25em\fi}
-
-
-% % general symbols
-% \newcommand{\RF}{\mathbb{R}}
-% \newcommand{\FF}{\mathbb{F}}
-% \newcommand{\NN}{\mathbb{N}}
-% \newcommand{\ZZ}{\mathbb{Z}}
-% \newcommand{\nn}{\nonumber}
-% \newcommand{\paren}[1]{\left( #1 \right)}
-% \newcommand{\sqprn}[1]{\left[ #1 \right]}
-% \newcommand{\tlprn}[1]{\left\{ #1 \right\}}
-% \newcommand{\abs}[1]{\left| #1 \right|}
-% \newcommand{\tr}[2]{\left<\left< #1 , #2 \right>\right>}
-% \newcommand{\trs}[2]{\left< #1 , #2 \right>}
-% \newcommand{\iprod}[2]{\left\langle #1 , #2 \right\rangle}
-% \newcommand{\del}{\partial}
-% \newcommand{\dd}[2]{\frac{d#1}{d#2}}
-% \newcommand{\ddel}[2]{\frac{\del#1}{\del#2}}
-% \newcommand{\ddell}[2]{\frac{\del^2#1}{{\del#2}^2}}
-% \newcommand{\ddelll}[3]{\frac{\del^2#1}{{\del#2}{\del#3}}}
-% \newcommand{\beq}{\begin{eqnarray*}}
-% \newcommand{\eeq}{\end{eqnarray*}}
-% \newcommand{\beqn}{\begin{eqnarray}}
-% \newcommand{\eeqn}{\end{eqnarray}}
-% \newcommand{\ben}{\begin{enumerate}}
-% \newcommand{\een}{\end{enumerate}}
-% \newcommand{\bit}{\begin{itemize}}
-% \newcommand{\eit}{\end{itemize}}
-% \newcommand{\hide}[1]{}
-% \newcommand{\oo}[1]{\frac{1}{#1}}
-% \newcommand{\eps}{\epsilon}
-% \newcommand{\evalat}[2]{\left.#1\right|_{#2}}
-% \newcommand{\ceil}[1]{\ensuremath{\left\lceil#1\right\rceil}}
-% \newcommand{\floor}[1]{\ensuremath{\left\lfloor#1\right\rfloor}}
-% \newcommand{\ontop}[2]{\overset{{\scriptsize #1}}{#2}}
-% \newcommand{\Perp}{\perp\!\!\!\perp}
-% \newcommand{\limsu}{\mathop{\overline{\mathrm{lim}}}}
-% \newcommand{\limin}{\mathop{\underline{\mathrm{lim}}}}
-% \newcommand{\argmin}{\mathop{\mathrm{argmin}}}
-\newcommand{\argmax}{\mathop{\mathrm{argmax}}}
-% \newcommand{\mean}{\mathop{\mathrm{mean}}}
-% \newcommand{\map}{\mathop{\mathrm{map}}}
-% \newcommand{\powrs}[1]{\langle\!\langle #1 \rangle\!\rangle}
-% \newcommand{\polys}[1]{\langle #1 \rangle}
-% \newcommand{\contf}{\mathscr{C}}
-% %\newcommand{\trn}{^{{}^\intercal}} %operator transpose
-% \newcommand{\trn}{^\intercal} %operator transpose
-% %\newcommand{\trn}{^{{}^{\!\intercal}}} %operator transpose
-% \newcommand{\inv}{^{-1}} %inverse
-% \newcommand{\unit}{\boldsymbol{1}}
-% \newcommand{\zero}{\boldsymbol{0}}
-% \newcommand{\defeq}{\stackrel{\mathrm{def}}{=}}
-% \newcommand{\pleq}{~+\!=}
-% \newcommand{\chr}{\mathrm{\bs{1}\hspace{-3pt}I}} % characteristic function
-% \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
-
-% % function names
-% \newcommand{\zeros}{\mathrm{zeros}}
-% \newcommand{\rank}{\mathrm{rank}}
-% \newcommand{\TR}{\mathrm{tr}}
-% \newcommand{\vol}{\mathrm{vol}}
-% \newcommand{\sgn}{\mathrm{sgn}}
-% \newcommand{\acos}{\mathrm{acos}}
-% \newcommand{\intr}{\mathrm{int}\,}
-% \newcommand{\extr}{\mathrm{ext}\,}
-% \newcommand{\dom}{\mathrm{dom}\,}
-% \newcommand{\conv}{\mathrm{conv}\hspace{1pt}}
-% \newcommand{\cone}{\mathrm{cone}\hspace{1pt}}
-
-
-% %probability & statistics symbols
-% \newcommand{\convd}{\overset{{\scriptsize d}}{\to}}
-% \newcommand{\convp}{\overset{{\scriptsize p}}{\to}}
-% \newcommand{\unif}{\mathrm{Uniform}}
-% \newcommand{\bern}{\mathrm{Bernoulli}}
-% \newcommand{\negbin}{\mathrm{NegBinom}}
-% \newcommand{\Binom}{\mathrm{Bin}}
-% \newcommand{\pois}{\mathrm{Poisson}}
-% %\newcommand{\ndistr}{\mathrm{Normal}}
-% \newcommand{\ndistr}{\mathrm{n}}
-% \newcommand{\Bdistr}{\mathrm{Beta}}
-% \newcommand{\Gdistr}{\mathrm{Gamma}}
-% % f(x) = \frac{1}{\beta^\alpha\Gamma(\alpha)}x^{\alpha-1}e^{-x/\beta}
-% \newcommand{\iGdistr}{\mathrm{InvGamma}}
-% % f(x) = \frac{1}{\beta^\alpha\Gamma(\alpha)}x^{-\alpha-1}e^{-1/(\beta x)}
-% \newcommand{\MSE}{\mathrm{MSE}}
-% \newcommand{\MAE}{\mathrm{MAE}}
-% \newcommand{\ARE}{\mathrm{ARE}}
-% \newcommand{\se}{\mathrm{se}}
-
-
-% \newcommand{\calA}{\mathcal{A}}
-% \newcommand{\calB}{\mathcal{B}}
-% \newcommand{\calC}{\mathcal{C}}
-% \newcommand{\calD}{\mathcal{D}}
-% \newcommand{\calE}{\mathcal{E}}
-% \newcommand{\calF}{\mathcal{F}}
-% \newcommand{\calG}{\mathcal{G}}
-% \newcommand{\calH}{\mathcal{H}}
-% \newcommand{\calI}{\mathcal{I}}
-% \newcommand{\calJ}{\mathcal{J}}
-% \newcommand{\calK}{\mathcal{K}}
-% \newcommand{\calL}{\mathcal{L}}
-% \newcommand{\calM}{\mathcal{M}}
-% \newcommand{\calN}{\mathcal{N}}
-% \newcommand{\calO}{\mathcal{O}}
-% \newcommand{\calP}{\mathcal{P}}
-% \newcommand{\calQ}{\mathcal{Q}}
-% \newcommand{\calR}{\mathcal{R}}
-% \newcommand{\calS}{\mathcal{S}}
-% \newcommand{\calT}{\mathcal{T}}
-% \newcommand{\calU}{\mathcal{U}}
-% \newcommand{\calV}{\mathcal{V}}
-% \newcommand{\calW}{\mathcal{W}}
-% \newcommand{\calX}{\mathcal{X}}
-% \newcommand{\calY}{\mathcal{Y}}
-% \newcommand{\calZ}{\mathcal{Z}}
-% \newcommand{\tha}{\theta}
-\newcommand{\mexp}{\mathbb{E}}
-% %\newcommand{\mexp}[1]{\ensuremath{\text{{\bf E}$\left[#1\right]$}}}
-% %\newcommand{\mexp}{\text{{\bf E}}}
-% \newcommand{\var}{\mathrm{Var}}
-% \newcommand{\cov}{\mathrm{Cov}}
-% \newcommand{\corr}{\mathrm{Cor}}
-% \newcommand{\bW}{\bs{W}}
-% \newcommand{\bw}{\bs{w}}
-% \newcommand{\bX}{\bs{X}}
-% \newcommand{\bx}{\bs{x}}
-% \newcommand{\bY}{\bs{Y}}
-% \newcommand{\by}{\bs{y}}
-% \newcommand{\bZ}{\bs{Z}}
-% \newcommand{\bz}{\bs{z}}
-% \newcommand{\Xbar}{\overline{X}}
-% \newcommand{\ev}{\mathrm{Ev}} %evidence
-% \newcommand{\pr}{\boldsymbol{\mathrm{P}}}
-% %\newcommand{\prob}{\mathrm{Pr}}
-
-
-% % embeddings
-% \newcommand{\embeds}[1]{\;\lhook\joinrel\xrightarrow{#1}\;}
-
-% %misc commands
-% \newcommand{\ds}{\displaystyle}
-% %\newcommand{\ts}{\textstyle}
-% \newcommand{\bs}{\boldsymbol}
-% \renewcommand{\th}{\ensuremath{^{\mathrm{th}}}~}
-
-% \usepackage{eso-pic}
-% \usepackage{xspace}
-% \makeatletter
-%\DeclareRobustCommand{\futurelet\@let@token\@onedot}
-%\newcommand\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
-
-\newcommand{\eg}{\emph{e.g}} \newcommand{\Eg}{\emph{E.g}}
-\newcommand{\ie}{\emph{i.e~}} \newcommand{\Ie}{\emph{I.e}}
-\newcommand\st{s.t} \newcommand\St{\emph{S.t}}
-\newcommand\cf{\emph{c.f}} \newcommand\Cf{\emph{C.f}}
-\newcommand\etc{\emph{etc}} \newcommand\vs{\emph{vs}}
-\newcommand\wrt{w.r.t} \newcommand\dof{d.o.f}
-\newcommand\etal{\emph{et al}}
-%\makeatother
-
-% % Miscellaneous
-% \def\naive{na\"\i ve\xspace}
-% \def\naively{na\"\i vely\xspace}
-% \def\Naive{Na\"\i ve\xspace}
-% \def\Naively{Na\"\i vely\xspace}
-
-\newcommand{\figref}[1]{Fig.~\ref{#1}}
-\newcommand{\eqnref}[1]{(\ref{#1})}
-\newcommand{\secref}[1]{Section \ref{#1}}
-% \newcommand{\chapref}[1]{Chapter \ref{#1}}
-\newcommand{\tableref}[1]{Table \ref{#1}}
-
-\newcommand{\pointnav}{\textsc{PointNav}\xspace}
-\newcommand{\pointnavfull}{PointGoal Navigation\xspace}
-\newcommand{\objnav}{\textsc{ObjectNav}\xspace}
-\newcommand{\objnavfull}{ObjectGoal Navigation\xspace}
-\newcommand{\pickplace}{\textsc{Pick\&Place}\xspace}
-\newcommand{\objnavhd}{\textsc{ObjectNav-HD}\xspace}
-\newcommand{\pickplacehd}{\textsc{Pick\&Place-HD}\xspace}
-\newcommand{\obj}{{\tt <object>}\xspace}
-\newcommand{\rec}{{\tt <receptacle>}\xspace}
-\newcommand{\goal}{{\tt <goal\_object\_category>}\xspace}
-\newcommand{\moveforward}{\textsc{move\_forward}\xspace}
-\newcommand{\movebackward}{\textsc{move\_backward}\xspace}
-\newcommand{\turnac}{\textsc{turn}\xspace}
-\newcommand{\turnleft}{\textsc{turn\_left}\xspace}
-\newcommand{\turnright}{\textsc{turn\_right}\xspace}
-\newcommand{\lookup}{\textsc{look\_up}\xspace}
-\newcommand{\lookdown}{\textsc{look\_down}\xspace}
-\newcommand{\stopac}{\textsc{stop}\xspace}
-\newcommand{\noop}{\textsc{no\_op}\xspace}
-\newcommand{\grabrelease}{\textsc{grab\_release}\xspace}
-
-\newcommand{\hmdval}{HM3D \textsc{val}\xspace}
-\newcommand{\testchallenge}{\textsc{test-challenge}\xspace}
-\newcommand{\teststd}{\textsc{test-standard}\xspace}
-
-\newcommand{\movebase}{\textsc{MoveBase}\xspace}
-
-%\newcommand{\datasetname}{\textsc{FindIt-52k}\xspace}
-\newcommand{\datasetname}{\textsc{FindIt}\xspace}
-\newcommand{\Tau}{\mathcal{T}}
-
-
-\newcommand{\myquote}[1]{\emph{`#1'}}
-
-\newcommand{\avgpool}{\textsc{2x2-AvgPool}\xspace}
-
-% %\include{mathmacro}
-% \makeatletter
-% \newcommand{\bfgreek}[1]{\bm{\@nameuse{#1}}}
-% \makeatother
-
-% \newcommand{\ind}[1]{[\hspace{-1pt}[#1]\hspace{-1pt}] }
- \newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
- \newcommand{\outline}[1]{\textcolor{purple}{Outline: #1}}
- %\newcommand{\ram}[1]{\textcolor{orange}{Ram: #1}}
- \newcommand{\ram}[1]{\textcolor{orange}{#1}}
- \newcommand{\update}[1]{\textcolor{blue}{#1}}
- \newcommand{\question}[1]{\textbf{Question}: #1}
- \newcommand{\answer}[1]{\textbf{Answer}: \textcolor{blue}{#1}}
-
- % \newcommand{\Rone}[1]{\textcolor{BrickRed}{@7drB}}
- % \newcommand{\Rtwo}[1]{\textcolor{OliveGreen}{@rDzH}}
- % \newcommand{\Rthree}[1]{\textcolor{BlueViolet}{@nmuC}}
- \newcommand{\Rone}[1]{\textcolor{Bittersweet}{@7drB}}
- \newcommand{\Rtwo}[1]{\textcolor{LimeGreen}{@rDzH}}
- \newcommand{\Rthree}[1]{\textcolor{Cerulean}{@nmuC}}
-
-
-% \newcommand{\red}[1]{\textcolor{red}{#1}}
-
-% consistent bold starts
-\newcommand{\xhdr}[1]{\vspace{0pt}\noindent\textbf{#1}\xspace}
-\newcommand*{\rowstyle}[1]{% sets the style of the next row
-  \gdef\@rowstyle{#1}%
-  \@rowstyle\ignorespaces%
-}
-
-% \newcommand{\norm}[1]{\left| \hspace{-0.7pt}\left|#1\right| \hspace{-0.7pt}\right|}
-
-% \newenvironment{indentpar}[1]%
-%      {\begin{list}{}%
-%              {\setlength{\leftmargin}{#1}}%
-%              \item[]%
-%      }
-% {\end{list}}
-
-%\makeatletter
-%\newcounter{problem}
-%\newenvironment{problem}[1][]{\refstepcounter{problem}\par\noindent%
-%\textbf{Problem~\theproblem: #1}}
-%%\textbf{Problem~\theproblem: #1}\rmfamily}
-%\makeatother
-
-%%%%%=============================================================================%%%%
-%%%%  Remarks: This template is provided to aid authors with the preparation
-%%%%  of original research articles intended for submission to journals published 
-%%%%  by Springer Nature. The guidance has been prepared in partnership with 
-%%%%  production teams to conform to Springer Nature technical requirements. 
-%%%%  Editorial and presentation requirements differ among journal portfolios and 
-%%%%  research disciplines. You may find sections in this template are irrelevant 
-%%%%  to your work and are empowered to omit any such section if allowed by the 
-%%%%  journal you intend to submit to. The submission guidelines and policies 
-%%%%  of the journal take precedence. A detailed User Manual is available in the 
-%%%%  template package for technical guidance.
-%%%%%=============================================================================%%%%
-
-%% as per the requirement new theorem styles can be included as shown below
-\theoremstyle{thmstyleone}%
-\newtheorem{theorem}{Theorem}%  meant for continuous numbers
-%%\newtheorem{theorem}{Theorem}[section]% meant for sectionwise numbers
-%% optional argument [theorem] produces theorem numbering sequence instead of independent numbers for Proposition
-\newtheorem{proposition}[theorem]{Proposition}% 
-%%\newtheorem{proposition}{Proposition}% to get separate numbers for theorem and proposition etc.
-
-\theoremstyle{thmstyletwo}%
-\newtheorem{example}{Example}%
-\newtheorem{remark}{Remark}%
-
-\theoremstyle{thmstylethree}%
-\newtheorem{definition}{Definition}%
-
-%%\unnumbered% uncomment this for unnumbered level heads
-
 
 
 %% main text
 \section{Introduction}\label{sec:introduction}
 
 %Motivation an VSN problem description.
-\textcolor{red}{Can a robotic agent navigate and interact in the real world as seamlessly as humans do?
+Can a robotic agent navigate and interact in the real world as seamlessly as humans do?
 This is the fundamental question driving research within the embodied AI community.
 The problem is formally known as Visual Semantic Navigation (VSN), \eg~\cite{ramrakhya2023,Cai2024DGMemLV,chang2020}.
 However, mimicking human navigation is a challenging task for robots, particularly in unseen environments, as it requires efficient exploration and a deep understanding of the objects and structures within the space.
 For unknown scenarios, humans can leverage prior semantic information achieved from previous scenes to navigate in new environments, but it is still a challenging task to incorporate that knowledge into embodied agents, especially in real robotic platforms navigating in the real world.
-The potential of autonomous robots with these advanced navigation capabilities is vast, ranging from assistive robots that can guide individuals with reduced mobility to specific locations, to platforms that can aid in complex environments such as search and rescue operations or logistic centers.}
+The potential of autonomous robots with these advanced navigation capabilities is vast, ranging from assistive robots that can guide individuals with reduced mobility to specific locations, to platforms that can aid in complex environments such as search and rescue operations or logistic centers.
 
 %Problem statement -> VSN is solved in a virtual world!
-\textcolor{red}{Technically, in this work, we focus on embedding VSN models in real robotic platforms.
+Technically, in this work, we focus on embedding VSN models in real robotic platforms.
 This is our main objective.
 We focus on the Object-Goal Navigation (\objnav)~\cite{batra2020} problem.
 As it is seen in figure~\ref{fig:abstract}, in \objnav task the agent has to navigate from a random position to certain object goals present in the scene, mainly using vision-based sensors.
@@ -406,11 +21,11 @@ Therefore, VSN solutions must learn visual representations of the environment to
 Notably, many of these solutions combine reinforcement learning (RL) and/or imitation learning (IL) strategies with recent advances in deep learning models for visual perception to address the navigation problem in \emph{virtual} environments, where embodied AI agents are trained and tested.
 However, we believe it is crucial to thoroughly investigate how the latest solutions to the VSN problem perform when deployed with real robots navigating in real-world environments.
 This is where our work makes its most significant contribution.
-Although there are VSN works that achieve \textit{near-human} navigation performance, \eg~\cite{ramrakhya2023}, these systems are mainly trained and tested in virtual environments, so how these models would behave in the real world is still a question to answer.}
+Although there are VSN works that achieve \textit{near-human} navigation performance, \eg~\cite{ramrakhya2023}, these systems are mainly trained and tested in virtual environments, so how these models would behave in the real world is still a question to answer.
 
 \begin{figure}[t]
     \centering
-        \includegraphics[width=\linewidth]{abstract_paper}
+        \includegraphics[width=\linewidth]{figures/ros4vsn/abstract_paper}
         \caption{
         \objnav task is a complex navigation problem.
         An agent needs to employ vision-based sensors to navigate from a random starting point to specific object goals within the scene.
@@ -425,7 +40,7 @@ Although there are VSN works that achieve \textit{near-human} navigation perform
 In this work, our objective is to build true embodied agents proposing a new solution for the integration of VSN models into real robots.
 The main contributions of our work are as follows:
 \begin{enumerate}
- \item We first provide to the embodied agents community the ROS4VSN development, a novel Robot Operating System (ROS)~\cite{ros} based architecture that allows \textcolor{red}{testing and comparing} different VSN models in real robots.
+ \item We first provide to the embodied agents community the ROS4VSN development, a novel Robot Operating System (ROS)~\cite{ros} based architecture that allows testing and comparing different VSN models in real robots.
  Our ROS4VSN development is model agnostic; thus, any VSN solution can be integrated into it with ease.
  Section~\ref{subsec:ros4vsn} includes all the technical details.
  \item We also have embedded two state-of-the-art VSN models in two different robotic platforms.
@@ -465,7 +80,7 @@ Figure~\ref{fig:arch_scheme} shows a visual representation of the global archite
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{arquitectura_paper}
+    \includegraphics[width=\linewidth]{figures/ros4vsn/arquitectura_paper}
     \caption{Architecture scheme of the ROS44VSN framework.
     It shows the different packages, topics and connections within them and the hardware devices.}
     \label{fig:arch_scheme}
@@ -505,7 +120,7 @@ It is in charge of executing the actions requested by the visual\_semantic\_navi
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{comunicaciones_service}
+    \includegraphics[width=\linewidth]{figures/ros4vsn/comunicaciones_service}
     \caption{Communications between visual\_semantic\_navigation and discrete\_move packages.}
     \label{fig:discrete_move}
 \end{figure}
@@ -557,7 +172,7 @@ With these equations, we can progressively adjust the linear speed ($v$) that is
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{move_robot_acceleration}
+    \includegraphics[width=\linewidth]{figures/ros4vsn/move_robot_acceleration}
     \caption{Acceleration and braking control scheme.}
     \label{fig:acceleration_stop}
 \end{figure}
@@ -700,13 +315,13 @@ These two policies have been integrated into our ROS4VSN nodes, and with them, w
 \begin{figure}
     \centering
     \begin{subfigure}[b]{\textwidth}
-        \includegraphics[width=\textwidth]{vlv_diagram}
+        \includegraphics[width=\textwidth]{figures/ros4vsn/vlv_diagram}
         \caption{VLV model.}
         \label{fig:vlv_overview}
     \end{subfigure}
     ~
     \begin{subfigure}[b]{\textwidth}
-        \includegraphics[width=\textwidth]{pirlnav_diagram}
+        \includegraphics[width=\textwidth]{figures/ros4vsn/pirlnav_diagram}
         \caption{PIRLNav model.}
         \label{fig:pirlnav_overview}
     \end{subfigure}
@@ -719,7 +334,7 @@ As of today, this model reports the best performance in the \objnav~\cite{batra2
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=\linewidth]{dataset_scene}
+    \includegraphics[width=\linewidth]{figures/ros4vsn/dataset_scene}
     \caption{One of the 3D reconstructions of the HM3D-Semantics v0.1 dataset~\cite{Ramakrishnan2021HabitatMatterport3D}, used to train PILRNav.}
     \label{fig:scene_hm3d}
 \end{figure}
@@ -764,13 +379,13 @@ We then follow with an analysis of the results obtained in the real world.
 \subsection{Experimental setup}
 \label{subsec:experimental_setup}
 
-\textcolor{red}{One of the primary objectives of our work is to provide a comprehensive and clear protocol for the experimental evaluation of state-of-the-art VSN models in real-world scenarios using real robots.
-Our goal is for other researchers to carry out similar experimental evaluations, using the same evaluation metrics, to facilitate comparisons of how different VSN models perform in real-world navigation tasks.}
+One of the primary objectives of our work is to provide a comprehensive and clear protocol for the experimental evaluation of state-of-the-art VSN models in real-world scenarios using real robots.
+Our goal is for other researchers to carry out similar experimental evaluations, using the same evaluation metrics, to facilitate comparisons of how different VSN models perform in real-world navigation tasks.
 For doing so, we propose the following experimental setup.
 
 \begin{figure}[t]
     \centering
-        \includegraphics[width=\linewidth]{plano_vivienda}
+        \includegraphics[width=\linewidth]{figures/ros4vsn/plano_vivienda}
         \caption{Floor plan where the experiments were performed, indicating the 15 starting positions used.}
         \label{fig:floor_plan}
 \end{figure}
@@ -778,15 +393,15 @@ For doing so, we propose the following experimental setup.
 In a 75 m$^2$ apartment, we define up to 15 random starting positions (see Fig.~\ref{fig:floor_plan}).
 The apartment can be divided into three main areas: a bedroom, a bathroom, and a larger space that includes the kitchen, living room, and study area.
 This setting contains all the object categories used to train the VSN models in the experiments, such as chair, bed, plant, bathroom, monitor, table, and sofa.
-\textcolor{red}{We encourage other researchers to conduct their experiments in real-world settings that are similar in size and characteristics, allowing the robot to navigate from at least 15 different starting positions across multiple instances.}
+We encourage other researchers to conduct their experiments in real-world settings that are similar in size and characteristics, allowing the robot to navigate from at least 15 different starting positions across multiple instances.
 
-\textcolor{red}{From these positions, the robot is tasked with navigating to various object categories.
-Consequently, one must conduct 15 navigation experiments for each target category and measure the success of the episodes based on whether the robot reaches the designated object category in fewer than 150 discrete actions and without any collisions.}
+From these positions, the robot is tasked with navigating to various object categories.
+Consequently, one must conduct 15 navigation experiments for each target category and measure the success of the episodes based on whether the robot reaches the designated object category in fewer than 150 discrete actions and without any collisions.
 This limit of 150 steps was chosen to establish a balance between the average size of the houses typically used in Habitat~\cite{NEURIPS2021_021bbc7e} and the apartment used in our experiments.
-\textcolor{red}{
+
 For the evaluation metric, we propose reporting the success rate (SR) of the VSN models as the percentage of episodes in which navigation is deemed successful.
 An experiment is considered successful if the robot halts (when the VSN model samples the action \stopac) and the Euclidean distance to the target object is less than one meter.
-}
+
 Note that our navigation experiment mimics the evaluation performed in the \objnav~\cite{batra2020} task, with the same metric.
 This is the standard experiment on which most VSN models are compared and which currently defines the state of the art.
 
@@ -803,13 +418,13 @@ Our intention in using two different platforms has been to provide evidence of t
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.4\textwidth}
-        \includegraphics[width=\textwidth,trim=3cm 0cm 3cm 0cm, clip]{turtlebot_2}
+        \includegraphics[width=\textwidth,trim=3cm 0cm 3cm 0cm, clip]{figures/ros4vsn/turtlebot_2}
         \caption{Turtlebot 2.}
         \label{fig:robot_turtlebot}
     \end{subfigure}
     ~
     \begin{subfigure}[b]{0.4\textwidth}
-        \includegraphics[width=\textwidth]{lola2}
+        \includegraphics[width=\textwidth]{figures/ros4vsn/lola2}
         \caption{LOLA2 platform.}
         \label{fig:robot_lola}
     \end{subfigure}
@@ -823,7 +438,7 @@ In particular, all the images observed by the robot during its trajectories have
 
 \begin{figure}
     \centering
-        \includegraphics[width=\linewidth]{hw-sw-scheme}
+        \includegraphics[width=\linewidth]{figures/ros4vsn/hw-sw-scheme}
         \caption{Hardware-software architecture for the development of experiments.}
         \label{fig:setup_experiment}
 \end{figure}
@@ -835,7 +450,7 @@ The robotic platforms were equipped with a laptop.
 This device was used to establish the communication with the robotic platform and the camera by executing the robot\_api and camera\_api packages.
 At the same time, the discrete\_move package was executed to receive the actions to be executed by the robot.
 On the other hand, we used a workstation to run the VSN nodes, which was equipped with an i7-1165G7 processor and an NVIDIA GeForce RTX 2060 graphics card.
-\textcolor{red}{We provide code to reproduce all our experiments at \url{https://github.com/gramuah/ros4vsn}.}
+We provide code to reproduce all our experiments at \url{https://github.com/gramuah/ros4vsn}.
 
 
 \subsection{VSN navigation results}
@@ -904,7 +519,7 @@ Due to noise in the depth image, the target point calculation was inaccurate, le
 \begin{figure*}[t]
     \centering
         \makebox[\textwidth][c]{
-        \includegraphics[width=1.2\linewidth]{vlv_qualitative}}
+        \includegraphics[width=1.2\linewidth]{figures/ros4vsn/vlv_qualitative}}
         \caption{VLV qualitative navigation results. The first two rows show two successful cases, where the robot reached the target, while the last two rows show two situations where the navigation experiment failed.}
         \label{fig:vlv_qualitative}
 \end{figure*}
@@ -960,7 +575,7 @@ As it can be seen in this episode, the model had difficulty getting through the 
 \begin{figure}
     \centering
         \makebox[\textwidth][c]{
-        \includegraphics[width=1.2\linewidth]{pirlnav_qualitative}}
+        \includegraphics[width=1.2\linewidth]{figures/ros4vsn/pirlnav_qualitative}}
         \caption{PIRLNav qualitative navigation results. The first two rows show two successful cases, where the robot reached the target, while the last two rows show two situations where the navigation experiment failed.}
         \label{fig:pirlnav_qualitative}
 \end{figure}
@@ -1009,7 +624,7 @@ This explains the difference of performance we have observed between VLV and PIR
 
 \begin{figure}[t]
     \centering
-        \includegraphics[width=\linewidth]{histograma_PIRLNav}
+        \includegraphics[width=\linewidth]{figures/ros4vsn/histograma_PIRLNav}
         \caption{Histogram of navigation actions sampled by PIRLNav model.}
         \label{fig:histrogram_pirlnav}
 \end{figure}
@@ -1045,6 +660,6 @@ We expect that our efforts will lay the foundation for addressing this significa
 
 \section*{Statements and Declarations}
 This research was partially funded by projects: NAVISOCIAL, with reference 2023/00405/001 from the University of Alcal\'a; NAVIGATOR-D, with reference PID2023-148310OB-I00 from the Ministry of Science and Innovation of Spain.\\
-\textcolor{brown}{The authors have no relevant financial or non-financial interests to disclose.} \\
-\textcolor{brown}{This research is already publicly available on arXiv (\url{https://arxiv.org/abs/2311.16623}) as a pre-print.} \\
+The authors have no relevant financial or non-financial interests to disclose. \\
+This research is already publicly available on arXiv (\url{https://arxiv.org/abs/2311.16623}) as a pre-print. \\
 
