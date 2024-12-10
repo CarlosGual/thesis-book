@@ -4,7 +4,7 @@
 % visited date, in the .bib file). It also support multiple files more easily
 % and more bibliography styles
 
-% \newcommand{\bibliosystem}{bibtex} % Valid options are biblatex or bibtex
+%\newcommand{\bibliosystem}{bibtex} % Valid options are biblatex or bibtex
 \newcommand{\bibliosystem}{biblatex} % Valid options are biblatex or bibtex
 
 \ifthenelse{\equal{\bibliosystem}{biblatex}}
@@ -26,20 +26,20 @@
 
   \ifdef{\mybibfileOne}
   {
-    \addbibresource{\myreferencespath\mybibfileOne}
+    \addbibresource{../Book/biblio/library.bib}
   }
   {
     \errorYOUmustDEFINEatLEASTmybibfileOneInbibliofilesDOTtex
   }
   \ifdef{\mybibfileTwo}
   {
-    \addbibresource{\myreferencespath\mybibfileTwo}
+    \addbibresource{../Book/biblio/library_harl.bib}
   }
   {
   }
   \ifdef{\mybibfileThree}
   {
-    \addbibresource{\myreferencespath\mybibfileThree}
+    \addbibresource{../Book/biblio/library_icara.bib}
   }
   {
   }

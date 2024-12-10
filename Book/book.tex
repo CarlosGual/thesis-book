@@ -61,7 +61,11 @@
 \graphicspath{{./logos/}{./figures/}{./diagrams/}} % Edit this to your
                                 % needs. Only logos is really required
                                 % when you generate your own content.
-%
+
+%% I dont know why, but I need to include this here, otherwise the code will not work properly
+\addbibresource{biblio/library.bib}
+\addbibresource{biblio/library_harl.bib}
+\addbibresource{biblio/library_icara.bib}
 % END Preamble and configuration section
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -221,7 +225,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{biblio/bibliography}               % EDIT this file if required
+\printbibliography[heading=bibintoc]   % EDIT this file if required
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

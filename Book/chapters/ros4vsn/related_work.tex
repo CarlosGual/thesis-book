@@ -10,10 +10,10 @@ These models often rely on the use of CNNs as visual encoders followed by RNNs; 
 The neural networks are trained using imitation learning (IL) or reinforcement learning (RL) approaches.
 
 When IL is applied to the visual navigation problem, navigation policies are learnt from expert demonstrations (\eg~\cite{ramrakhya2022,yadav2022}).
-It can also be used combined with \textcolor{red}{an} RL \textcolor{red}{fine-tuning} phase to achieve better performance~\cite{ramrakhya2023}.
+It can also be used combined with an RL fine-tuning phase to achieve better performance~\cite{ramrakhya2023}.
 
 Other works focus on the use of an end-to-end RL approach to solve \objnav navigation~\cite{zhu2017, gutierrez2019, wijmans2020, khandelwal2022, Liu2022, Yadav2023OVRLV2AS} \hypersetup{citecolor=red}~\cite{Xu2024DeepRL, YokoyamaHM3DOVONAD} \hypersetup{citecolor=blue}.
-Some authors have proposed \textcolor{red}{combining} the RL training with different strategies, like auxiliary tasks~\cite{ye2021}, improved visual representations via object relation graphs~\cite{yang2018}, semantic segmentations~\cite{Mousavian2018} or combining audio feedback with the visual inputs~\cite{Wang2023, Kondoh2023MultigoalAN}.
+Some authors have proposed combining the RL training with different strategies, like auxiliary tasks~\cite{ye2021}, improved visual representations via object relation graphs~\cite{yang2018}, semantic segmentations~\cite{Mousavian2018} or combining audio feedback with the visual inputs~\cite{Wang2023, Kondoh2023MultigoalAN}.
 
 Modular-learning based approaches~\cite{chaplot2020, chang2020, skillfusion, Li2023RDDRLAR, zhou2022improving} \hypersetup{citecolor=red}~\cite{Cai2024DGMemLV, Kang2024HSPNavHS, Wang2023ProbableOL, Wasserman2023ExploitationGuidedEF, Yokoyama2023VLFMVF} \hypersetup{citecolor=blue} decompose the navigation process in separate modules that execute different tasks.
 It is common for these methods to be composed of a high-level semantic exploration module trained by RL that indicates the agent subgoals that have to be reached by a low-level navigation policy.
@@ -25,12 +25,11 @@ And the recent progress in large language models (LLMs) has led to the possibili
 In this case, the LLMs are used as a reasoning module in charge of understanding the semantic information present on the environment.
 They then share this information with different modules in charge of navigating to the specified goal.
 
-\textcolor{blue}{
 Our goal in this work is not to develope VSN approaches, but to integrate various state-of-the-art VSN models into multiple real-world robots by using our novel ROS4VSN library.
 Technically, we have chosen to integrate the PIRLNav~\cite{ramrakhya2023} and VLV~\cite{chang2020} models into two different robots.
 These integrations required several technical adaptations, particularly in the areas of sensor data integration and navigation planning.
 Overall, we are able to show how ROS4VSN allows easily testing and comparing different VSN methods in the real world.
-To the best of our knowledge, our work is the first to develop a model agnostic ROS package for visual semantic navigation, where multiple models can be integrated.}
+To the best of our knowledge, our work is the first to develop a model agnostic ROS package for visual semantic navigation, where multiple models can be integrated.
 
 \textbf{Simulation-to-reality transfer in robotic navigation}.
 Deploying a model trained in simulation to a real robot is a challenging task.
@@ -50,7 +49,7 @@ For the problem of VSN, we have the studiy by \cite{gervet2022} that shows how t
 However, we would like to highlight the novel contributions that our work offers.
 First, while~\cite{gervet2022} focuses mainly on the comparison of their navigation methods, we here, along with a similar study, release to the research community the modular ROS4VSN software architecture.
 Our main goal is to facilitate the prototyping of new VSN solutions on real robots.
-So, we offer \textcolor{red}{a ROS-compatible} software architecture, model agnostic, that allows a simple integration of different VSN approaches in ROS robots.
+So, we offer a ROS-compatible software architecture, model agnostic, that allows a simple integration of different VSN approaches in ROS robots.
 In this way, future VSN solutions will be able to be tested on real robots in a convenient and straightforward manner.
 Second, we include in our study more recent VSN solutions than the ones reported in~\cite{gervet2022}, as the PIRLNav model~\cite{ramrakhya2023}, which defines the state-of-the-art for the \objnav problem.
 Third, we also provide, for the first time, a detailed analysis on how a model directly trained with real videos, such as the VLV~\cite{chang2020}, performs in real robots.
