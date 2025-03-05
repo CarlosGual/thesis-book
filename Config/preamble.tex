@@ -264,15 +264,16 @@ hyperfootnotes=false
 % \glsdisablehyper
 % In future versiones (not as for ubuntu 12.04) You can also selectively
 % disable hyperlinks for given glossaries, using:
-% \usepackage[acronym,shortcuts,nomain,nohypertypes={acronyms,symbols}]{glossaries}
+%\usepackage[acronym,shortcuts,nomain,nohypertypes={acronyms,symbols}]{glossaries}
 % Or (for newwer versions also), you can even use
 % \GlsDeclareNoHyperList{acronyms,symbols}
 % You can also disable hyperlinks in the acronym use, like in \ac*{symbol}
 
 
 \newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
-
+\definecolor{accent_color}{RGB}{255, 102, 0}
 \pagestyle{fancy}
+
 
 \providecommand\phantomsection{}
 \onehalfspacing
@@ -294,7 +295,8 @@ hyperfootnotes=false
 \renewcommand{\sectionmark}[1]{\markright{\thesection \ \ #1}}
 \makeatother
 
-\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{accent_color}\leaders\hrule height \headrulewidth\hfill}}
 \renewcommand{\footrulewidth}{0pt}
 \addtolength{\headheight}{3.5pt}
 \fancypagestyle{plain}{\fancyhead{}\renewcommand{\headrulewidth}{0pt}}
@@ -310,61 +312,15 @@ hyperfootnotes=false
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % BEGIN Set nice chapter titles
-
-% BEGIN Example 0 from http://texblog.org/2012/07/03/fancy-latex-chapter-styles/
-% \usepackage[explicit]{titlesec}
-% \usepackage{blindtext}
-% \definecolor{gray75}{gray}{0.75}
-% \newcommand{\hsp}{\hspace{20pt}}
-% \titleformat{\chapter}[hang]{\Huge\bfseries}{\chaptername~\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
-% END Example 0 from http://texblog.org/2012/07/03/fancy-latex-chapter-styles/
-
-% BEGIN Example 1 from http://texblog.org/2012/07/03/fancy-latex-chapter-styles/
-% \usepackage{titlesec}
-% \usepackage{blindtext}
-% \definecolor{gray75}{gray}{0.75}
-% \newcommand{\hsp}{\hspace{20pt}}
-% \titleformat{\chapter}[hang]{\Huge\bfseries}{\chaptername~\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
-% END Example 1 from http://texblog.org/2012/07/03/fancy-latex-chapter-styles/
-
-% BEGIN Example 2 from http://texblog.org/2012/07/03/fancy-latex-chapter-styles/
-% Options: Sonny, Lenny, Glenn, Conny, Rejne, Bjarne, Bjornstrup
-% \usepackage[Sonny]{fncychap}
-% \usepackage[Lenny]{fncychap} % ugly
-% \usepackage[Glenn]{fncychap}
-% \usepackage[Conny]{fncychap} % ugly
-% \usepackage[Rejne]{fncychap}
-% \usepackage[Bjarne]{fncychap} % Doesn't work in Spanish
-% \usepackage[Bjornstrup]{fncychap}
-% END   Example 2 from http://texblog.org/2012/07/03/fancy-latex-chapter-styles/
-
-% BEGIN Example 3 from http://texblog.org/2012/07/03/fancy-latex-chapter-styles/
-% This is a nice colored example
-% \usepackage{kpfonts}
-% \usepackage[explicit]{titlesec}
-% \newcommand*\chapterlabel{}
-% \titleformat{\chapter}
-% {\gdef\chapterlabel{}
-% \normalfont\sffamily\Huge\bfseries\scshape}
-% {\gdef\chapterlabel{\thechapter\ }}{0pt}
-% {\begin{tikzpicture}[remember picture,overlay]
-%   \node[yshift=-3cm] at (current page.north west)
-%   {\begin{tikzpicture}[remember picture, overlay]
-%     \draw[fill=LightSkyBlue] (0,0) rectangle
-%     (\paperwidth,3cm);
-%     \node[anchor=east,xshift=.9\paperwidth,rectangle,
-%     rounded corners=20pt,inner sep=11pt,
-%     fill=MidnightBlue]
-%     {\color{white}\chapterlabel#1};
-%   \end{tikzpicture}
-% };
-% \end{tikzpicture}
-% }
-%   \titlespacing*{\chapter}{0pt}{50pt}{-60pt}
-%   END   Example 3 from http://texblog.org/2012/07/03/fancy-latex-chapter-styles/
-
-%   BEGIN Example 4 from http://texblog.org/2012/07/03/fancy-latex-chapter-styles/
-%   END   Example 4 from http://texblog.org/2012/07/03/fancy-latex-chapter-styles/
+\usepackage{titlesec}
+\titleformat{\chapter}[hang]
+  {\Huge\bfseries\color{accent_color}} % Apply the color to the chapter title
+  {\thechapter.}{20pt}{\Huge\bfseries}
+\usepackage{tocloft}
+% Change the color of the titles of the list of figures and table of contents
+\renewcommand{\cfttoctitlefont}{\color{accent_color}\Huge\bfseries}
+\renewcommand{\cftloftitlefont}{\color{accent_color}\Huge\bfseries}
+\renewcommand{\cftlottitlefont}{\color{accent_color}\Huge\bfseries}
 
 
 %   END Set nice chapter titles
