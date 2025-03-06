@@ -30,6 +30,9 @@
 
 
 % Define a new glossary type for symbols used in equations (example)
+% Redefine the \glsnamefont command to change the color of the glossary entries and make it bold
+\renewcommand*{\glsnamefont}[1]{\textcolor{accent_color}{\textbf{#1}}}
+
 \newacronym{objnav}{\textsc{ObjectNav}}{Object Goal Navigation}
 \newacronym{vsn}{VSN}{Visual Semantic Navigation}
 
