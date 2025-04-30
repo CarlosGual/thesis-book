@@ -1,0 +1,32 @@
+\subsection{Experiments}
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{c|cccc}
+        \toprule
+        \textit{\textbf{Setup}} & \textit{\textbf{SR (\uparrow)}} & \textit{SPL (\uparrow)} & \textit{\textbf{Distance to Goal (\downarrow)}} \\ \midrule
+        1                       & 5/15                            & 33,33\%                 & 49                                              \\
+        2                       & 5/15                            & 33,33\%                 & 91                                              \\
+        3                       & 5/15                            & 33,33\%                 & 70                                              \\
+        4                       & 3/15                            & 20,00\%                 & 97                                              \\
+        5                       & 1/15                            & 6,67\%                  & 61                                              \\
+    \end{tabular}
+    \caption{Evaluation of MetaNav on the VSN task. Results obtained with continuos evaluation}
+    \label{tab:pirlnav}
+\end{table}
+
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{c|cccc}
+        \toprule
+        \textit{\textbf{Setup}} & \textit{\textbf{SR (\uparrow)}} & \textit{SPL (\uparrow)} & \textit{\textbf{Distance to Goal (\downarrow)}} \\ \midrule
+        1                       & 0.80                           & 38\%                 & 49                                              \\
+        2                       & 0.61                            & 27\%                 & 91                                              \\
+        3                       & 0.55                          & 26\%                 & 70                                              \\
+        4                       & 0.16                            & 5\%                 & 12                                              \\
+        5                       & 0.25                            & \%                  & 61                                              \\
+    \end{tabular}
+    \caption{Evaluation of MetaNav on the VSN task. Results obtained with per episode evaluation}
+    \label{tab:pirlnav}
+\end{table}
