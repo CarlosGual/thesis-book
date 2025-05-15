@@ -2,23 +2,23 @@
 
 \section{Offline Reinforcement Learning for Robotic Visual Navigation}\label{sec:offline_rl4rvsn}
 
-\subsection{Introduction}\label{sec:introduction}
+\subsection{Introduction}\label{subsec:introduction_offnav}
 
-The task of delivering Visual Semantic Navigation (VSN) capabilities to real robots in the real world is still a challenge.
-To teach robots how to navigate in indoor environments, the VSN community has been using online reinforcement learning (RL) algorithms, which require querying environments to learn.
+The task of delivering Visual Semantic Navigation (\acrshort{vsn}) capabilities to real robots in the real world is still a challenge.
+To teach robots how to navigate in indoor environments, the \acrshort{vsn} community has been using online reinforcement learning (RL) algorithms, which require querying environments to learn.
 This is a problem because querying real environments is expensive and time-consuming, and querying simulated environments is not always a good proxy for real-world performance.
 Offline RL~\cite{levine2020} can be a solution to these challenges by learning policies from a fixed dataset consisting in human demonstrations and their associated reward signals.
-Therefore, in this work, we propose a novel approach to train VSN agents without ever querying an environment, by leveraging on the Offline RL paradigm.
+Therefore, in this work, we propose a novel approach to train \acrshort{vsn} agents without ever querying an environment, by leveraging on the Offline RL paradigm.
 We call this approach \textbf{Off}line Visual Semantic \textbf{Nav}igation (OffNav).
 
 Technically, we have implemented Implicit Q-Learning (IQL)~\cite{kostrikov2022offline} offline RL algorithm using the decentralized distributed philosophy of DD-PPO~\cite{wijmans2020} to create DD-IQL, a decentralized distributed version of IQL\@.
 Our DD-IQL is trained against a fixed dataset containing thousands of human navigation experiences~\cite{ramrakhya2023}.
-As depicted in Figure~\ref{fig:abstract}, we propose the OffNav approach, capable of efficiently learning the navigation policy required by a VSN agent from human demonstrations.
+As depicted in Figure~\ref{fig:abstract_offnav}, we propose the OffNav approach, capable of efficiently learning the navigation policy required by a \acrshort{vsn} agent from human demonstrations.
 Subsequently, these policies can be deployed across various scenarios, and if necessary, further refined through online RL for more specific tasks.
 
 To demonstrate the capabilities of our implementation, we carried out a small analysis of its performance using different environments from HM3D dataset~\cite{Ramakrishnan2021HabitatMatterport3D}.
 Preliminary results shows that our DD-IQL implementation is able to learn navigation policies effectively.
-To the best of our knowledge, this is the first time that an offline RL algorithm is implemented for VSN\@ and large environments, predicting actions directly from raw input observations.
+To the best of our knowledge, this is the first time that an offline RL algorithm is implemented for \acrshort{vsn}\@ and large environments, predicting actions directly from raw input observations.
 
 \begin{figure}
     \centering
@@ -27,7 +27,7 @@ To the best of our knowledge, this is the first time that an offline RL algorith
     By leveraging on the offline reinforcement learning paradigm, we can train agents from a fixed dataset of navigation experience, without querying any environment.
     This opens the possibility to create many navigation datasets from any navigation agent in any \textbf{real or simulated} environment, and then use them to train new agents for different scenarios without the need to ever query that environment.
     }
-    \label{fig:abstract}
+    \label{fig:abstract_offnav}
 \end{figure}
 
 %Current state-of-the-art models~\cite{ramrakhya2023} achieve 70,4\% SR on Habitat Simulator~\cite{szot2021} by using a two-phase training schedule.
@@ -40,9 +40,9 @@ To the best of our knowledge, this is the first time that an offline RL algorith
 %The performance of the navigation is measured by averaging the success over all the episodes present in an evaluation, and it receives the name of Success Rate (SR).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Offline Visual Semantic Navigation}\label{sec:offline-navigation}
+\subsection{Offline Visual Semantic Navigation}\label{subsec:offline-navigation}
 
-In this work, we study \gls{objnav} navigation~\cite{batra2020}, a setup in which an agent is asked to navigate to a target object in an environment.
+In this work, we study \acrshort{objnav} navigation~\cite{batra2020}, a setup in which an agent is asked to navigate to a target object in an environment.
 To perform this task, the agent does it using only egocentric perceptions.
 Specifically, the agent receives RGB images and GPS+Compass information that provides the agent with the current position and orientation relative to the starting point.
 The set of movements is discrete and consists of the following actions: \turnleft, \turnright, \moveforward, \lookup, \lookdown and \stopac.
@@ -76,7 +76,7 @@ The difference is that we use ResNet18 for the visual encoders.
 We copy the same architecture for the policy net, the Q net and the Q target net.
 For the V net, we only use the visual encoder and a single linear layer, without any recurrent module.
 
-\subsection{Experiments and Results}\label{sec:experiments}
+\subsection{Experiments and Results}\label{subsec:experiments_offnav}
 
 Is an offline RL algorithm able to learn navigation policies effectively?
 To answer this question, we have trained our DD-IQL model using the expert demonstrations on five different experimental setups.
@@ -121,7 +121,7 @@ However, on setup 5, the most challenging one, OffNav outperforms PirlNav by $8.
     \label{fig:setups}
 \end{figure}
 
-\subsection{Conclusions and Future Work}\label{sec:conclusions}
+\subsection{Conclusions and Future Work}\label{subsec:conclusions_offnav}
 
 From the results obtained in the experiments, we can conclude that the proposed OffNav method is able to learn navigation policies effectively from human demonstrations.
 It can also be seen that the method is able to generalize to unseen environments, as shown in setups 4 and 5, and outperform the state-of-the-art model PirlNav~\cite{ramrakhya2023} in the most challenging one.
@@ -129,9 +129,13 @@ Future work will focus on training the policy with more diverse environments to 
 
 \section{Meta Imitation Learning for Real World Navigation}\label{sec:meta-reinforcement-learning-for-real-world-navigation}
 
-\subsection{Introduction}
-\subsection{Meta Imitation Learning for Robotic Visual Navigation}\label{sec:meta-imitation-learning-for-robotic-visual-navigation}
-\subsection{Experiments}
+\subsection{Introduction}\label{subsec:introduction_metanav}
+
+Once
+
+\subsection{Meta Imitation Learning for Robotic Visual Navigation}\label{subsec:meta-imitation-learning-for-robotic-visual-navigation}
+
+\subsection{Experiments}\label{subsec:experiments_metanav}
 
 \begin{table}[t]
     \centering
@@ -144,8 +148,8 @@ Future work will focus on training the policy with more diverse environments to 
         4                       & 23.07\%                           & 11.87\%                            & 12.23                                             \\
         5                       & 21.74\%                           & 9.38\%                             & 7.99                                              \\
     \end{tabular}
-    \caption{Evaluation of MetaNav on the VSN task. Results obtained with continuos evaluation}
-    \label{tab:pirlnav}
+    \caption{Evaluation of MetaNav on the \acrshort{vsn} task. Results obtained with continuos evaluation}
+    \label{tab:metanav_continuos}
 \end{table}
 
 
@@ -160,8 +164,8 @@ Future work will focus on training the policy with more diverse environments to 
         4                       & 16.67\%                           & 4.84\%                             & 12.72                                             \\
         5                       & 25.00\%                           & 9.31\%                             & 8.19                                              \\
     \end{tabular}
-    \caption{Evaluation of MetaNav on the VSN task. Results obtained with per episode evaluation}
-    \label{tab:pirlnav}
+    \caption{Evaluation of MetaNav on the \acrshort{vsn} task. Results obtained with per episode evaluation}
+    \label{tab:metanav_episode}
 \end{table}
 
-\subsection{Conclusions}
+\subsection{Conclusions}\label{subsec:conclusions_metanav}

@@ -1,8 +1,8 @@
 \chapter{Related Work}\label{ch:related-work}
 
-\textbf{Visual Semantic Navigation.} We can identify in the literature the following groups of works for the VSN problem, depending on the learning paradigm.
+\textbf{Visual Semantic Navigation.} We can identify in the literature the following groups of works for the \acrshort{vsn} problem, depending on the learning paradigm.
 In the first group, there are those works that focus on the task of navigating to an object in realistic indoor environments, \eg~\cite{zhu2017, wijmans2020, chang2020, khandelwal2022}, using simulators and an agent based on CNNs as visual encoders and RNNs as the actor-critic head, following a RL paradigm.
-The second group consists of the works that address the VSN problem using imitation learning~\cite{wu2020a, ramrakhya2022} to build navigation policies from expert demonstrations.
+The second group consists of the works that address the \acrshort{vsn} problem using imitation learning~\cite{wu2020a, ramrakhya2022} to build navigation policies from expert demonstrations.
 Finally, in the third set we have the approaches using meta-learning techniques in order to be able to quickly adapt to new environments~\cite{wang2017, wortsman2019, zhang2022}.
 
 Our work belongs to the first group.
@@ -22,7 +22,7 @@ Typically, these SLAM models use heuristic algorithms to create graph-based repr
 Semantic SLAM (\eg~\cite{zhang2018, rosinol2020, jin2023}) expands upon SLAM by integrating semantic data from the environment, allowing the robot to identify and store objects in memory.
 
 A recent approach, made possible by advances in machine learning and computer vision, involves designing navigation policies that directly train deep neural networks to learn semantic information from visual observations in an end-to-end fashion (\eg~\cite{ramrakhya2022,yadav2022, gutierrez2019, khandelwal2022, chaplot2020,chang2020}).
-This approach is termed \textit{visual semantic navigation} (VSN).
+This approach is termed \textit{visual semantic navigation} (\acrshort{vsn}).
 These models often rely on the use of CNNs as visual encoders followed by RNNs; that are in charge of predicting an action distribution directly from raw input observations.
 The neural networks are trained using imitation learning (IL) or reinforcement learning (RL) approaches.
 
@@ -42,10 +42,10 @@ And the recent progress in large language models (LLMs) has led to the possibili
 In this case, the LLMs are used as a reasoning module in charge of understanding the semantic information present on the environment.
 They then share this information with different modules in charge of navigating to the specified goal.
 
-Our goal in this work is not to develope VSN approaches, but to integrate various state-of-the-art VSN models into multiple real-world robots by using our novel ROS4VSN library.
+Our goal in this work is not to develope \acrshort{vsn} approaches, but to integrate various state-of-the-art \acrshort{vsn} models into multiple real-world robots by using our novel ROS4\acrshort{vsn} library.
 Technically, we have chosen to integrate the PIRLNav~\cite{ramrakhya2023} and VLV~\cite{chang2020} models into two different robots.
 These integrations required several technical adaptations, particularly in the areas of sensor data integration and navigation planning.
-Overall, we are able to show how ROS4VSN allows easily testing and comparing different VSN methods in the real world.
+Overall, we are able to show how ROS4\acrshort{vsn} allows easily testing and comparing different \acrshort{vsn} methods in the real world.
 To the best of our knowledge, our work is the first to develop a model agnostic ROS package for visual semantic navigation, where multiple models can be integrated.
 
 \textbf{Simulation-to-reality transfer in robotic navigation}.
@@ -62,13 +62,13 @@ This breakthrough was subsequently tested on real aerial drones, with promising 
 By focusing on simulation refinement~\cite{Son2020}, the accuracy of simulations can be improved by exploiting the disparities between simulated and real-world observations.
 In the field of locomotion, training legged robotic systems in a simulated environment and subsequently transferring the acquired policies to real-world applications~\cite{Hwangbo_2019, agarwal2022} has always been a challenging task.
 
-For the problem of VSN, we have the studiy by \cite{gervet2022} that shows how their approaches perform in real-world settings.
+For the problem of \acrshort{vsn}, we have the studiy by \cite{gervet2022} that shows how their approaches perform in real-world settings.
 However, we would like to highlight the novel contributions that our work offers.
-First, while~\cite{gervet2022} focuses mainly on the comparison of their navigation methods, we here, along with a similar study, release to the research community the modular ROS4VSN software architecture.
-Our main goal is to facilitate the prototyping of new VSN solutions on real robots.
-So, we offer a ROS-compatible software architecture, model agnostic, that allows a simple integration of different VSN approaches in ROS robots.
-In this way, future VSN solutions will be able to be tested on real robots in a convenient and straightforward manner.
-Second, we include in our study more recent VSN solutions than the ones reported in~\cite{gervet2022}, as the PIRLNav model~\cite{ramrakhya2023}, which defines the state-of-the-art for the \objnav problem.
+First, while~\cite{gervet2022} focuses mainly on the comparison of their navigation methods, we here, along with a similar study, release to the research community the modular ROS4\acrshort{vsn} software architecture.
+Our main goal is to facilitate the prototyping of new \acrshort{vsn} solutions on real robots.
+So, we offer a ROS-compatible software architecture, model agnostic, that allows a simple integration of different \acrshort{vsn} approaches in ROS robots.
+In this way, future \acrshort{vsn} solutions will be able to be tested on real robots in a convenient and straightforward manner.
+Second, we include in our study more recent \acrshort{vsn} solutions than the ones reported in~\cite{gervet2022}, as the PIRLNav model~\cite{ramrakhya2023}, which defines the state-of-the-art for the \objnav problem.
 Third, we also provide, for the first time, a detailed analysis on how a model directly trained with real videos, such as the VLV~\cite{chang2020}, performs in real robots.
 This allows us to compare, as in~\cite{gervet2022}, how a modular-learning model (\ie VLV~\cite{chang2020}), compares with a typical end-to-end learning approach (\ie PIRLNav).
 Interestingly, our study also concludes, like in~\cite{gervet2022}, that modular-learning approaches perform better in the real world.
