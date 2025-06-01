@@ -1,13 +1,20 @@
 \chapter{Beyond Reinforcement Learning for Real World Robotic Visual Navigation}\label{ch:rl4rvsn}
 
+When it comes to training robots to navigate in the real world, reinforcement learning (RL) has been the go-to approach for many years.
+However, RL has its limitations, especially when it comes to real-world applications.
+The task of delivering Visual Semantic Navigation (\acrshort{vsn}) capabilities to real robots in the real world is still a challenge.
+
+To teach robots how to navigate in indoor environments, the \acrshort{vsn} community has been using online reinforcement learning (RL) algorithms, which require querying environments to learn.
+This is a problem because querying real environments is expensive and time-consuming, and querying simulated environments is not always a good proxy for real-world performance.
+In this chapter, we explore two alternative approaches to RL for robotic visual navigation: Offline Reinforcement Learning and Meta Imitation Learning.
+
 \section{Offline Reinforcement Learning for Robotic Visual Navigation}\label{sec:offline_rl4rvsn}
 
 \subsection{Introduction}\label{subsec:introduction_offnav}
 
-The task of delivering Visual Semantic Navigation (\acrshort{vsn}) capabilities to real robots in the real world is still a challenge.
-To teach robots how to navigate in indoor environments, the \acrshort{vsn} community has been using online reinforcement learning (RL) algorithms, which require querying environments to learn.
-This is a problem because querying real environments is expensive and time-consuming, and querying simulated environments is not always a good proxy for real-world performance.
-Offline RL~\cite{levine2020} can be a solution to these challenges by learning policies from a fixed dataset consisting in human demonstrations and their associated reward signals.
+The first approach that we explore is Offline RL~\cite{levine2020}.
+Offline RL consist on learning policies from a fixed dataset consisting in human demonstrations and their associated reward signals.
+This can be a powerful approach for training agents in complex environments, as it allows the agent to learn from a large amount of data without the need to interact with the environment.
 Therefore, in this work, we propose a novel approach to train \acrshort{vsn} agents without ever querying an environment, by leveraging on the Offline RL paradigm.
 We call this approach \textbf{Off}line Visual Semantic \textbf{Nav}igation (OffNav).
 
@@ -30,30 +37,20 @@ To the best of our knowledge, this is the first time that an offline RL algorith
     \label{fig:abstract_offnav}
 \end{figure}
 
-%Current state-of-the-art models~\cite{ramrakhya2023} achieve 70,4\% SR on Habitat Simulator~\cite{szot2021} by using a two-phase training schedule.
-%First, a
-
-
-%% Maybe for experiments
-%If the agent successfully reaches the object within a time limit, the episode is considered successful.
-%In the other case, it is considered a failure.
-%The performance of the navigation is measured by averaging the success over all the episodes present in an evaluation, and it receives the name of Success Rate (SR).
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Offline Visual Semantic Navigation}\label{subsec:offline-navigation}
 
 In this work, we study \acrshort{objnav} navigation~\cite{batra2020}, a setup in which an agent is asked to navigate to a target object in an environment.
 To perform this task, the agent does it using only egocentric perceptions.
 Specifically, the agent receives RGB images and GPS+Compass information that provides the agent with the current position and orientation relative to the starting point.
 The set of movements is discrete and consists of the following actions: \turnleft, \turnright, \moveforward, \lookup, \lookdown and \stopac.
-If the agent spawns the \stopac action within 1$m$ Euclidean distance respect to the target object within a 500 steps time limit, the episode is considered successful.
+If the agent samples the \stopac action within 1m Euclidean distance respect to the target object within a 500 steps time limit, the episode is considered successful.
 In the other case, it is considered a failure.
-The success rate (SR) is measured by averaging the success over all the episodes present in an evaluation set.
-%We also report the Success weighted by Path Length (SPL) metric, which is the success rate weighted by the ratio between ideal and actual path length.
+The performance of the navigation is measured by averaging the success over all the episodes present in an evaluation, and it receives the name of Success Rate (SR).
+We also report the Success weighted by Path Length (SPL) metric, which is the success rate weighted by the ratio between ideal and actual path length.
 
 Since we are on an offline RL setup, we need a previously collected dataset of navigation experience.
 The dataset that we chose is collected in~\cite{ramrakhya2023}.
-It consists of $77k$ episodes of human navigation trajectories using the HM3D~\cite{Ramakrishnan2021HabitatMatterport3D} dataset.
+It consists of 77k episodes of human navigation trajectories using the HM3D~\cite{Ramakrishnan2021HabitatMatterport3D} dataset.
 
 We train our policies using our DD-IQL implementation on the human demonstrations.
 The objetive is to find a policy with optimal parameters $\phi^*$ that maximizes the expected return from the dataset.
@@ -96,7 +93,6 @@ Offnav method outperforms PirlNav on setup 2, while PirlNav outperforms OffNav o
 When evaluated on setup 4, PirlNav outperforms OffNav by 2.27\% absolute points.
 However, on setup 5, the most challenging one, OffNav outperforms PirlNav by 8.69\% absolute points.
 
-
 \begin{table}
     \centering
     \begin{tabular}{c|ccc}
@@ -131,8 +127,8 @@ Future work will focus on training the policy with more diverse environments to 
 
 \subsection{Introduction}\label{subsec:introduction_metanav}
 
-Training reinforcement learning algorithms for specific tasks has been a common practice in the field of robotics.
-
+The second approach that we explore is Meta Imitation Learning~\cite{finnOneShotVisualImitation2017}.
+Meta Imitation Learning (MIL) is a paradigm that allows agents to learn from a small number of demonstrations, enabling them to adapt quickly to new tasks.
 
 \subsection{Meta Imitation Learning for Robotic Visual Navigation}\label{subsec:meta-imitation-learning-for-robotic-visual-navigation}
 
