@@ -2,10 +2,11 @@
 
 When it comes to training robots to navigate in the real world, reinforcement learning (RL) has been the go-to approach for many years.
 However, RL has its limitations, especially when it comes to real-world applications.
-The task of delivering Visual Semantic Navigation (\acrshort{vsn}) capabilities to real robots in the real world is still a challenge.
-
-To teach robots how to navigate in indoor environments, the \acrshort{vsn} community has been using online reinforcement learning (RL) algorithms, which require querying environments to learn.
+Using online reinforcement learning (RL) algorithms require querying environments to learn.
 This is a problem because querying real environments is expensive and time-consuming, and querying simulated environments is not always a good proxy for real-world performance.
+
+Furthermore, another limitation of online RL is that it requires a large number of interactions to learn.
+This is known as sample-inefficiency, and it is a major bottleneck for real-world applications, as it requires a lot of time and resources to collect enough interactions to train a robot.
 In this chapter, we explore two alternative approaches to RL for robotic visual navigation: Offline Reinforcement Learning and Meta Imitation Learning.
 
 \section{Offline Reinforcement Learning for Robotic Visual Navigation}\label{sec:offline_rl4rvsn}
@@ -127,8 +128,23 @@ Future work will focus on training the policy with more diverse environments to 
 
 \subsection{Introduction}\label{subsec:introduction_metanav}
 
-The second approach that we explore is Meta Imitation Learning~\cite{finnOneShotVisualImitation2017}.
-Meta Imitation Learning (MIL) is a paradigm that allows agents to learn from a small number of demonstrations, enabling them to adapt quickly to new tasks.
+In section~\ref{sec:offline_rl4rvsn}, we explored the possibility of training agents from a fixed dataset of human demonstrations using offline reinforcement learning.
+Despite the elimination of the need to query environments, this approach still requires a large amount of data to learn effectively.
+This reduces the applicability of this approach in real-world scenarios, where collecting large datasets can become an unfeasible task.
+To address this issue, we explore a different approach that can also learn from a fixed dataset, but with the ability to adapt quickly to new tasks with few examples.
+This will help us to bridge the gab between training agents in simulation and deploying them in the real world.
+
+This second approach that we explore is known as Meta Imitation Learning~\cite{finnOneShotVisualImitation2017}.
+Here we enter into a combination of two different paradigms: Imitation Learning and Meta Reinforcement Learning.
+On one hand, Meta Reinforcement learning~\cite{Beck_2025} is a set of techniques that try to teach agents to learn how to learn, enabling them to adapt quickly to new tasks with few examples.
+Imitation Learning~\cite{10602544}, on the other hand, is a paradigm that allows agents to learn from demonstrations provided by an expert.
+Thus, Meta Imitation Learning (MIL) is a combination of both realms, allowing agents to learn from a small number of demonstrations and adapt quickly to new tasks.
+We could describe our approach as a meta-learning algorithm that learns to imitation learn.
+We call this approach \textbf{Meta} Visual Semantic \textbf{Nav}igation (MetaNav).
+
+In our setting, we learn a parametrized policy $\pi_\phi$ that can adapt to new tasks by learning from a small number of gradient updates.
+
+
 
 \subsection{Meta Imitation Learning for Robotic Visual Navigation}\label{subsec:meta-imitation-learning-for-robotic-visual-navigation}
 
