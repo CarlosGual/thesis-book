@@ -141,10 +141,16 @@ Imitation Learning~\cite{10602544}, on the other hand, is a paradigm that allows
 Thus, Meta Imitation Learning (MIL) is a combination of both realms, allowing agents to learn from a small number of demonstrations and adapt quickly to new tasks.
 We could describe our approach as a meta-learning algorithm that learns to imitation learn.
 We call this approach \textbf{Meta} Visual Semantic \textbf{Nav}igation (MetaNav).
-
 In our setting, we learn a parametrized policy $\pi_\phi$ that can adapt to new tasks by learning from a small number of gradient updates.
+Due to this adaptability, we can train the policy on simulation using a set of task demonstrations, and then deploy it in the real world to perform new tasks.
 
+The main question that we want to answer is: \textit{Can we learn visual navigation policies via meta imitation learning that can adapt to new tasks with few examples?}
+To answer this question, we have implemented a meta imitation learning algorithm based on the work of~\cite{finnOneShotVisualImitation2017}.
+We train our algorithm on a small set of different environments from HM3D dataset~\cite{Ramakrishnan2021HabitatMatterport3D}.
+Preliminary results show that our algorithm is able to learn visual navigation policies that can adapt to new tasks with few examples.
+To the best of our knowledge, this is the first time that a meta imitation learning algorithm is implemented for \acrshort{vsn}\@ and large environments, predicting actions directly from raw input observations.
 
+% Include a graphical abstract of the approach
 
 \subsection{Meta Imitation Learning for Robotic Visual Navigation}\label{subsec:meta-imitation-learning-for-robotic-visual-navigation}
 
