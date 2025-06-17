@@ -2126,9 +2126,9 @@ var getSuperClass = function (cls) {
 // Search query-string manipulation utils
 /* **************************************************** */
 
-var QSutils = QSutils || {};  // TODO: unit-test me
+var QSutils = QSutils || {};  // TODO.md: unit-test me
 
-QSutils.TAG_SEP = ','; // should match const.TAG_SEP; TODO: maybe prepopulate this in javascript.html ?
+QSutils.TAG_SEP = ','; // should match const.TAG_SEP; TODO.md: maybe prepopulate this in javascript.html ?
 
 QSutils.DEFAULT_QUERY_STRING = 'scope:all/sort:activity-desc/page:1/';
 
