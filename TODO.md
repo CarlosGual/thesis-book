@@ -4,7 +4,7 @@
 
 - [x] Finish section 5.2.3.2 (Results metanav)
 - [x] Finish section 5.2.4 (Conclusions metanav)
-- [ ] Finish section 5.3 (General conclusions)
+- [ ] Finish section 5.3 (Training problems)
 - [ ] Finish section 1 (Introduction)
 - [ ] Finish section 6 (Conclusions and future work)
 - [ ] Finish section 2 (Related work)
