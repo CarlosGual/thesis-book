@@ -326,8 +326,15 @@ Further work is needed to search for different meta-learning algorithms that can
 \section{Training Problems}\label{sec:training-problems}
 
 Despite presenting totally different approaches to tackle the problem of robotic visual navigation on this chapter, both Offline Reinforcement Learning and Meta Imitation Learning have suffered from the same limitation.
-Its inability to learn navigation policies from the whole set of training environments present in the HM3D dataset~\cite{Ramakrishnan2021HabitatMatterport3D}.
+This limitation is its inability to learn navigation policies from the whole set of training environments present in the HM3D dataset~\cite{Ramakrishnan2021HabitatMatterport3D}.
+This is the reason why all the experiments presented in this chapter have been done using a reduced version of the HM3D dataset.
+
 % Hablar de que por eso hemos usado un dataset reducido.
 % Poner un par de gráficas de entrenamientos para ver que la pérdida no se estabiliza.
+In figure~\ref{fig:training_problems}, we can see the training curves of both algorithms on the full training dataset.
+The training curves show that the loss does not stabilize, and the performance of the algorithms does not improve over time.
+This is a clear indication that the algorithms are not able to learn from the whole dataset, and they are not able to generalize to new environments.
+
+
 % Hablar filosoficamente de que parece que el problema procede de que estos algoritmos alternativos a RL no son capaces de aprender de un dataset tan grande, ya que el modelo funciona bien bajo otros algoritmos más sencillos.
 % Mencionar el tema de que hay aproximaciones más promising como por ejemplo task inference methods, que no modifican sustancialmente el algoritmo subyacente, pero que permiten al algoritmo aprender de un dataset más grande.
