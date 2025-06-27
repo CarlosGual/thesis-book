@@ -1,4 +1,4 @@
-\chapter{Beyond Reinforcement Learning for Real World Robotic Visual Navigation}\label{ch:rl4rvsn}
+\chapter[Beyond RL for Real World Robotic Navigation]{Beyond Reinforcement Learning for Real World Robotic Visual Navigation}\label{ch:rl4rvsn}
 
 When it comes to training robots to navigate in the real world, reinforcement learning (RL) has been the go-to approach for many years.
 However, RL has its limitations, especially when it comes to real-world applications.
@@ -331,18 +331,39 @@ This is the reason why all the experiments presented in this chapter have been d
 
 % Hablar de que por eso hemos usado un dataset reducido.
 % Poner un par de gráficas de entrenamientos para ver que la pérdida no se estabiliza.
-In figure~\ref{fig:training_problems}, we can see the training curves of both algorithms on the full training dataset.
-The training curves show that the loss does not stabilize, and the performance of the algorithms does not improve over time.
-This is a clear indication that the algorithms are not able to learn from the whole dataset, and they are not able to generalize to new environments.
+In figure~\ref{fig:training_problems}, we can see the average training curves of both algorithms for four different runs, each one on the full training dataset.
+The training curves show that the loss is not able to stabilize, and the performance of the algorithms does not improve over time.
+In the case of OffNav, the average value function loss even diverges.
+This is a clear indication that the algorithms are not able to learn from the whole dataset, which translates in a very poor SR, close to 0\%.
 
 % Create a two-column figure with the training curves of both algorithms.
 \begin{figure}
     \centering
-    \includegraphics[width=0.49\linewidth]{figures/offnav/offnav_losses_avg_std}
-    \includegraphics[width=0.49\linewidth]{figures/metanav/metanav_losses_avg_std}
-    \caption{Training curves of OffNav (left) and MetaNav (right) on the full training dataset. The loss does not stabilize, and the performance of the algorithms does not improve over time.}
+    \begin{subfigure}[b]{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/offnav/offnav_losses_avg_std}
+        \caption{OffNav average value function loss over four different runs.}
+        \label{fig:training_problems_offnav}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/metanav/metanav_losses_avg_std}
+        \caption{MetaNav average action loss over four different runs.}
+        \label{fig:training_problems_metanav}
+    \end{subfigure}~\caption{Training curves of OffNav (\ref{fig:training_problems_offnav}) and Metanav (\ref{fig:training_problems_metanav}) on the full training dataset. The loss does not stabilize and even diverges, indicating the algorithm's inability to learn from the complete dataset.}
     \label{fig:training_problems}
 \end{figure}
 
 % Hablar filosoficamente de que parece que el problema procede de que estos algoritmos alternativos a RL no son capaces de aprender de un dataset tan grande, ya que el modelo funciona bien bajo otros algoritmos más sencillos.
+For these experiments, an extensive hyperparameter search was performed to find the best hyperparameters for each algorithm to achieve convergence.
+Different pretrained initializations of the networks were also tested, but none of them were able to converge.
+This suggests that the problem is not related to the hyperparameters or the initialization of the networks, but rather to the algorithms themselves.
+Significant modifications to the baseline imitation learning algorithm~\cite{ramrakhya2023} or the baseline RL algorithm~\cite{wijmans2020} like the ones presented in this chapter seem to hurt the performance of the trained agents when presented with a large dataset.
+
 % Mencionar el tema de que hay aproximaciones más promising como por ejemplo task inference methods, que no modifican sustancialmente el algoritmo subyacente, pero que permiten al algoritmo aprender de un dataset más grande.
+These last training efforts indicate that to go beyond the limitations of these algorithms, new approaches that do not modify substantially the underlying algorithm need to be explored.
+For example, task inference methods~\cite{Beck_2025} could be a promising approach to tackle this problem.
+These methods typically meta-train a context vector that summarizes the task information.
+This context vector can then be used to condition the policy, allowing it to adapt to new tasks.
+This approach could be compatible with more robust and proven algorithms like DD-PPO~\cite{wijmans2020} or imitation learning~\cite{ramrakhya2023} that have proven to be effective in the past.
