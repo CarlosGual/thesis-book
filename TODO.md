@@ -17,3 +17,4 @@
 - [ ] Check tables chapter 3.
 - [ ] Check if VF loss in OffNav makes sense to diverge or not.
 - [ ] Detect and prepare all acronyms.
+- [ ] Delete all introduction sections in the chapters and just leave them without a section.
