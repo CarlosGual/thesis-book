@@ -117,9 +117,13 @@ The main contributions of this thesis are summarized as follows:
 The structure of this thesis is as follows:
 
 \begin{itemize}
-    \item \textbf{Chapter~\ref{ch:background}:} This chapter provides a comprehensive background on \acrshort{vsn} and \acrshort{rl}, including a review of the state-of-the-art methods and their limitations.
-    \item \textbf{Chapter~\ref{ch:benchmarks}:} This chapter defines the \acrshort{vsn} problem and provides a set of benchmarks that can be used to evaluate the performance of different algorithms in simulated environments.
-    \item \textbf{Chapter~\ref{ch:ros4vsn}:} This chapter presents ROS4VSN, a novel ROS package that provides a set of tools and utilities to facilitate the development of \acrshort{vsn} algorithms in real-world scenarios.
-    \item \textbf{Chapter~\ref{ch:offline_rl}:} This chapter presents a novel approach to offline reinforcement learning for robotic visual navigation that uses a combination of imitation learning and reinforcement learning.
-    \item \textbf{Chapter~\ref{ch:meta_imitation_learning}:} This chapter presents a novel approach to meta imitation learning for robotic visual navigation that uses a combination of meta-learning and imitation learning.
+    \item \textbf{Chapter~\ref{ch:related-work}}: This chapter provides a comprehensive review of the literature on \acrshort{vsn}, \acrshort{rl} sparsity and exploration methods, Offline\acrshort{rl}, and meta-imitation learning.
+    This chapter will provide the reader with a clear context of the methods and techniques discussed in this thesis, and how they relate to the state of the art.
+    \item \textbf{Chapter~\ref{ch:understanding-robotic-visual-semantic-navigation}}: This chapter sets a clear definition of the \acrshort{vsn} problem, and provides a set of benchmarks that can be used to evaluate the performance of \acrshort{vsn} algorithms in simulated environments.
+    \item \textbf{Chapter~\ref{ch:ros4vsn:-enable-real-world-robotic-visual-semantic-navigation}}: This chapter presents ROS4VSN, a novel ROS package that provides a set of tools and utilities to facilitate the development of \acrshort{vsn} algorithms in real-world scenarios.
+    It also includes a comprehensive study of the different \acrshort{vsn} algorithms in real-world scenarios, and a definition of an experimental setup that can be used to evaluate the performance of different models in real-world environments.
+    \item \textbf{Chapter~\ref{ch:beyond-rl}}: This chapter presents two novel approaches to \acrshort{rl} for navigation.
+    In section~\ref{sec:offline_rl4rvsn} the advantages of Offline Reinforcement Learning are combined with DD-PPO to train \acrshort{vsn} agents without the need to query any environment, just by using offline data.
+    In section~\ref{sec:mil-for-real-world-navigation} a novel approach to imitation learning via meta-learning is presented, which allows agents to learn from a few demonstrations and adapt to new environments.
     \item \textbf{Chapter~\ref{ch:conclusions}:} This chapter summarizes the main contributions of the thesis, discusses the limitations and future work, and concludes the thesis.
+\end{itemize}
