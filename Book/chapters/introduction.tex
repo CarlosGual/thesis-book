@@ -109,9 +109,17 @@ The main contributions of this thesis are summarized as follows:
     This includes a definition of an experimental setup that can be used to evaluate the performance of different models in real-world environments.
     On top of that, this also includes the release of a novel ROS package called ROS4VSN that provides a set of tools and utilities to facilitate the development of \acrshort{vsn} algorithms in real-world scenarios.
     \item A novel approach to \acrshort{rl} that combines the advantages of Offline Reinforcement Learning~\cite{levine2020} with DD-PPO~\cite{Wijmans2019DDPPOLN} to train \acrshort{vsn} agents without the need to query any environment, just by using offline data.
-    \item
+    \item A novel approach to imitation learning via meta-learning~\cite{finnOneShotVisualImitation2017} that allows agents to learn from a few demonstrations and adapt to new environments.
 \end{itemize}
 
 \section{Thesis Structure}\label{sec:thesis-structure}
 
 The structure of this thesis is as follows:
+
+\begin{itemize}
+    \item \textbf{Chapter~\ref{ch:background}:} This chapter provides a comprehensive background on \acrshort{vsn} and \acrshort{rl}, including a review of the state-of-the-art methods and their limitations.
+    \item \textbf{Chapter~\ref{ch:benchmarks}:} This chapter defines the \acrshort{vsn} problem and provides a set of benchmarks that can be used to evaluate the performance of different algorithms in simulated environments.
+    \item \textbf{Chapter~\ref{ch:ros4vsn}:} This chapter presents ROS4VSN, a novel ROS package that provides a set of tools and utilities to facilitate the development of \acrshort{vsn} algorithms in real-world scenarios.
+    \item \textbf{Chapter~\ref{ch:offline_rl}:} This chapter presents a novel approach to offline reinforcement learning for robotic visual navigation that uses a combination of imitation learning and reinforcement learning.
+    \item \textbf{Chapter~\ref{ch:meta_imitation_learning}:} This chapter presents a novel approach to meta imitation learning for robotic visual navigation that uses a combination of meta-learning and imitation learning.
+    \item \textbf{Chapter~\ref{ch:conclusions}:} This chapter summarizes the main contributions of the thesis, discusses the limitations and future work, and concludes the thesis.
