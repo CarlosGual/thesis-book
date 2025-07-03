@@ -1,21 +1,25 @@
 \chapter{Related Work}\label{ch:related-work}
 
-\textbf{Visual Semantic Navigation.} We can identify in the literature the following groups of works for the \acrshort{vsn} problem, depending on the learning paradigm.
-In the first group, there are those works that focus on the task of navigating to an object in realistic indoor environments, \eg~\cite{zhu2017, wijmans2020, chang2020, khandelwal2022}, using simulators and an agent based on CNNs as visual encoders and RNNs as the actor-critic head, following a RL paradigm.
-The second group consists of the works that address the \acrshort{vsn} problem using imitation learning~\cite{wu2020a, ramrakhya2022} to build navigation policies from expert demonstrations.
-Finally, in the third set we have the approaches using meta-learning techniques in order to be able to quickly adapt to new environments~\cite{wang2017, wortsman2019, zhang2022}.
+As the fields of \acrshort{vsn} \acrshort{rl} are very broad, this chapter aims to provide an extensive and organized overview of the most relevant works in the literature.
+More specifically, this chapter delves into the main topics discussed alongside this thesis.
+Since the main focus of this work is within robotic navigation, \acrlong{vsn} is the first topic covered.
+It will lay the groundwork for how the other topics are related to robotic navigation and how they can be applied.
+The following section will cover the sparsity and exploration methods, which are crucial for addressing the challenges of sparse rewards and exploration in \acrshort{rl}.
+The next section will discuss the simulation-to-reality transfer in robotic navigation, which is essential for deploying models trained in simulation to real robots.
+The subsequent section will cover offline \acrshort{rl}, which is a paradigm that allows training models using fixed datasets, without the need for online data collection.
+Finally, the last section will discuss meta \acrshort{rl}, which focuses on learning policies that can quickly adapt to new environments.
 
-Our work belongs to the first group.
-In fact, our proposal is a simplification of the approach in~\cite{khandelwal2022}, where we build a model based on a CLIP feature extractor and two LSTMs encoders for the agent state, introducing also reward shaping~\cite{wijmans2020} and $\epsilon\text{-}greedy$~\cite{mnih2013}.
+While section~\ref{sec:visual-semantic-navigation} applies to the whole content of this document, the rest of the sections are more focused on the specific contributions of this thesis:
 
-\textbf{Sparsity and exploration methods.} To address the sparse reward and exploration problems, different approaches have been proposed.
-Auxiliary tasks~\cite{jaderberg2016, ye2021} help the agent to explore the environment and gather extrinsic reward by maximizing pseudo-reward functions.
-Curiosity-driven exploration~\cite{pathak2017} leverages on the error of the agent's ability to predict the next state to introduce a new intrinsic reward that enables the agent to explore the environment.
-When dealing with procedurally-generated environments, a curriculum learning mechanism can be incorporated so the episodes are ordered by an exploration score~\cite{zha2020b}, and then the agent imitates the best ones.
-We also use procedurally-generated environments, but we rely on a RL approach combined with reward shaping~\cite{ng1999, jestel2021} and $\epsilon\text{-}greedy$~\cite{mnih2013} techniques to learn to navigate in them.
+\begin{itemize}
+    \item Section~\ref{sec:sparsity-and-exploration-methods} refers to chapter~\ref{ch:understanding-robotic-visual-semantic-navigation}, where we explore exploration methods based on the use of procedural environments and simulated environments.
+    \item Section~\ref{sec:simulation-to-reality-transfer-in-robotic-navigation} is related to chapter~\ref{ch:ros4vsn:-enable-real-world-robotic-visual-semantic-navigation}, where we present the ROS4\acrshort{vsn} library, which allows the integration of different \acrshort{vsn} models in real robots.
+    \item Section~\ref{sec:offline-reinforcement-learning} is related to chapter~\ref{sec:offline_rl4rvsn}, where we explore the use of offline \acrshort{rl} techniques to train navigation policies in simulated environments.
+    \item Section~\ref{sec:meta-reinforcement-learning} is related to chapter~\ref{sec:mil-for-real-world-navigation}, where we explore the use of meta \acrshort{rl} techniques to train navigation policies that can quickly adapt to new environments.
+\end{itemize}
 
+\section{Visual Semantic Navigation}\label{sec:visual-semantic-navigation}
 
-\textbf{Visual Semantic Navigation}.
 To navigate in unfamiliar environments, traditional methods use depth sensors~\cite{newcombe2011, thrun2001} and RGB cameras~\cite{jones2011, sattler2018} to build geometric maps and simultaneously determine the robot's position in relation to the map.
 This is known as Simultaneous Localization and Mapping (SLAM)~\cite{Kazerouni2022, campos2021, labbe2022}).
 Typically, these SLAM models use heuristic algorithms to create graph-based representations of the environment, allowing the robot to visit the different nodes of the graph when navigating to specific points.
@@ -48,7 +52,14 @@ These integrations required several technical adaptations, particularly in the a
 Overall, we are able to show how ROS4\acrshort{vsn} allows easily testing and comparing different \acrshort{vsn} methods in the real world.
 To the best of our knowledge, our work is the first to develop a model agnostic ROS package for visual semantic navigation, where multiple models can be integrated.
 
-\textbf{Simulation-to-reality transfer in robotic navigation}.
+\section{Sparsity and exploration methods}\label{sec:sparsity-and-exploration-methods}
+To address the sparse reward and exploration problems, different approaches have been proposed.
+Auxiliary tasks~\cite{jaderberg2016, ye2021} help the agent to explore the environment and gather extrinsic reward by maximizing pseudo-reward functions.
+Curiosity-driven exploration~\cite{pathak2017} leverages on the error of the agent's ability to predict the next state to introduce a new intrinsic reward that enables the agent to explore the environment.
+When dealing with procedurally-generated environments, a curriculum learning mechanism can be incorporated so the episodes are ordered by an exploration score~\cite{zha2020b}, and then the agent imitates the best ones.
+We also use procedurally-generated environments, but we rely on a RL approach combined with reward shaping~\cite{ng1999, jestel2021} and $\epsilon\text{-}greedy$~\cite{mnih2013} techniques to learn to navigate in them.
+
+\section{Simulation-to-reality transfer in robotic navigation}\label{sec:simulation-to-reality-transfer-in-robotic-navigation}
 Deploying a model trained in simulation to a real robot is a challenging task.
 Due to logistical constraints, training a model in the real world —especially with RL techniques— is often impractical, prompting the use of alternative methods to address this challenge
 For example, \cite{kim2022} propose a monocular vision-based time-to-collision estimation for small drones by domain adaptation of simulated images.
@@ -76,3 +87,7 @@ Fourth, in our study, we employed two different robotic platforms: one commercia
 This demonstrates the versatility of the proposed solution, showing that it can be integrated into different robots.
 And finally, in our work, we propose an experimental evaluation specifically designed for testing in the real world, which can be employed in future research studies.
 Overall, we hope that our ROS-based library will help to further advance the field of visual semantic navigation in real robots.
+
+\section{Offline Reinforcement Learning}\label{sec:offline-reinforcement-learning}
+
+\section{Meta Reinforcement Learning}\label{sec:meta-reinforcement-learning}
