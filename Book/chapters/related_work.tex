@@ -20,6 +20,18 @@ While section~\ref{sec:visual-semantic-navigation} applies to the whole content 
 
 \section{Visual Semantic Navigation}\label{sec:visual-semantic-navigation}
 
+\acrfull{vsn} is a subfield of robotic navigation that focuses on enabling robots to navigate in environments using visual observations and semantic information.
+In this context, semantic information refers to the understanding of the environment's objects and their relationships, which can be used to guide the robot's navigation decisions.
+\acrshort{vsn} algorithms can be categorized into different approaches based on their training methods and architectures.
+For the sake of clarity, this document follows the same categorization as~\cite{gervet2022}, depicted in figure~\ref{fig:vsn-categories}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/related_work/methods_overview}
+    \caption{Categories of visual semantic navigation approaches.}
+    \label{fig:vsn-categories}
+\end{figure}
+
 To navigate in unfamiliar environments, traditional methods use depth sensors~\cite{newcombe2011, thrun2001} and RGB cameras~\cite{jones2011, sattler2018} to build geometric maps and simultaneously determine the robot's position in relation to the map.
 This is known as Simultaneous Localization and Mapping (SLAM)~\cite{Kazerouni2022, campos2021, labbe2022}).
 Typically, these SLAM models use heuristic algorithms to create graph-based representations of the environment, allowing the robot to visit the different nodes of the graph when navigating to specific points.
