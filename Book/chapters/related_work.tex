@@ -127,8 +127,8 @@ This thesis also uses procedurally-generated environments, but it relies on a RL
 
 \section{Simulation-to-reality transfer in robotic navigation}\label{sec:simulation-to-reality-transfer-in-robotic-navigation}
 Deploying a model trained in simulation to a real robot is a challenging task.
-Due to logistical constraints, training a model in the real world —especially with RL techniques— is often impractical, prompting the use of alternative methods to address this challenge
-For example, \cite{kim2022} propose a monocular vision-based time-to-collision estimation for small drones by domain adaptation of simulated images.
+Due to logistical constraints, training a model in the real world —especially with RL techniques— is often impractical, prompting the use of alternative methods to address this challenge.
+For example,~\cite{kim2022} proposes a monocular vision-based time-to-collision estimation for small drones by domain adaptation of simulated images.
 Their method converts simulated images into real-like synthetic images using a sim-to-real method.
 This is done with the aim of minimizing efforts and time invested in the collection of training datasets within real-world scenarios, while simultaneously maximizing the advantages inherent in simulated environments.
 
@@ -155,5 +155,37 @@ They compare the performance of different \acrshort{vsn} methods in simulated an
 Interestingly, the conclusion of chapter~\ref{ch:ros4vsn:-enable-real-world-robotic-visual-semantic-navigation}, is the same as in~\cite{gervet2022}: that modular-learning approaches are the best ones for deployment in the real world.
 
 \section{Offline Reinforcement Learning}\label{sec:offline-reinforcement-learning}
+
+Offline reinforcement learning (offline RL) refers to learning a policy from a fixed dataset of environment interactions, without additional online exploration~\cite{levine2020} (figure \ref{fig:diagram-offline}).
+This paradigm is appealing for robotics, where collecting data is costly or risky, since it allows agents to leverage large logs of prior experiments or demonstrations.
+However, a core challenge in offline RL is distributional shift: the learned policy may choose state-action pairs not well-covered by the dataset, leading to arbitrarily bad value estimates and unstable policy updates.
+Over the past years, a number of algorithmic strategies have been proposed to address this issue and enable effective offline learning of robotic skills.
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{figures/related_work/diagram_offline}
+    \caption{\textbf{Offline reinforcement learning} is a paradigm that allows training models using fixed datasets, without the need for online data collection.
+    In this diagram, the offline RL process is depicted, where a dataset of environment interactions is used to train a policy.
+    The policy is then evaluated in the environment, and the process is repeated until convergence.
+    Figure from~\cite{levine2020}.}
+    \label{fig:diagram-offline}
+\end{figure}
+
+\subsection{Conservative Value Estimation}\label{subsec:conservative-value-estimation}
+
+One line of work imposes \textit{pessimism} in value function learning to avoid overestimating unseen actions.
+For example, Conservative Q-Learning (CQL)~\cite{conservative} augments the Bellman objective with a penalty on Q-values for out-of-distribution actions.
+By learning a deliberately conservative Q-function (lower-bounding the true values), CQL prevents the policy from exploiting spurious high rewards for actions outside the dataset support.
+Similarly, Implicit Q-Learning (IQL)~\cite{kostrikov2022offline} avoids querying unseen actions altogether during training.
+Instead of a max over actions, IQL uses an expectile regression to estimate the value of the \textit{best} in-dataset actions, then extracts a policy via advantage-weighted behavior cloning.
+
+\subsection{Policy Constraints and Behavior Regularization}\label{subsec:policy-constraints-and-behavior-regularization}
+
+Another broad strategy is to constrain the learned policy to stay close to the behavior policy that generated the data.
+A prominent example is Batch-Constrained deep Q-learning (BCQ)~\cite{Fujimoto2018OffPolicyDR}, which modifies the Q-learning update to consider only actions that are likely under the offline dataset instead of maximizing over all actions.
+In practice, BCQ trains a generative model (e.g. a VAE) to produce candidate actions similar to those in the dataset, ensuring that the policy cannot stray far from logged behavior.
+Likewise, Bootstrapping Error Accumulation Reduction (BEAR)~\cite{Kumar2019StabilizingOQ} and Behavior-Regularized Actor-Critic (BRAC)~\cite{Wu2019BehaviorRO} add explicit divergence penalties (e.g. KL or MMD) to keep the learned policy distribution close to the dataset behavior policy.
+By limiting policy deviation, these methods address bootstrapping error and distribution shift, effectively preventing the agent from choosing out-of-distribution actions with erroneously high value estimates.
+Variants of this idea combine RL updates with imitation learning: for instance, Advantage-Weighted Actor-Critic (AWAC)~\cite{Nair2020AcceleratingOR} and Critic-regularized Regression (CRR)~\cite{NEURIPS2020_588cb956} constrain the policy toward the dataset behavior while weighting actions by their estimated advantages, thus improving performance without sacrificing stability.
+Overall, policy constraint and behavior regularization approaches have proven effective both in simulation and in real-world settings by leveraging the data’s demonstrated behaviors as an anchor.
 
 \section{Meta Reinforcement Learning}\label{sec:meta-reinforcement-learning}

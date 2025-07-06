@@ -19,6 +19,67 @@
   langid = {english},
 }
 
+@inproceedings{Fujimoto2018OffPolicyDR,
+  title={Off-Policy Deep Reinforcement Learning without Exploration},
+  author={Scott Fujimoto and David Meger and Doina Precup},
+  booktitle={International Conference on Machine Learning},
+  year={2018},
+  url={https://api.semanticscholar.org/CorpusID:54457299}
+}
+
+@article{Wu2019BehaviorRO,
+  title={Behavior Regularized Offline Reinforcement Learning},
+  author={Yifan Wu and G. Tucker and Ofir Nachum},
+  journal={ArXiv},
+  year={2019},
+  volume={abs/1911.11361},
+  url={https://api.semanticscholar.org/CorpusID:208291277}
+}
+
+@article{Nair2020AcceleratingOR,
+  title={Accelerating Online Reinforcement Learning with Offline Datasets},
+  author={Ashvin Nair and Murtaza Dalal and Abhishek Gupta and Sergey Levine},
+  journal={ArXiv},
+  year={2020},
+  volume={abs/2006.09359},
+  url={https://api.semanticscholar.org/CorpusID:219708452}
+}
+
+@inproceedings{NEURIPS2020_588cb956,
+ author = {Wang, Ziyu and Novikov, Alexander and Zolna, Konrad and Merel, Josh S and Springenberg, Jost Tobias and Reed, Scott E and Shahriari, Bobak and Siegel, Noah and Gulcehre, Caglar and Heess, Nicolas and de Freitas, Nando},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {H. Larochelle and M. Ranzato and R. Hadsell and M.F. Balcan and H. Lin},
+ pages = {7768--7778},
+ publisher = {Curran Associates, Inc.},
+ title = {Critic Regularized Regression},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2020/file/588cb956d6bbe67078f29f8de420a13d-Paper.pdf},
+ volume = {33},
+ year = {2020}
+}
+
+@inproceedings{Kumar2019StabilizingOQ,
+  title={Stabilizing Off-Policy Q-Learning via Bootstrapping Error Reduction},
+  author={Aviral Kumar and Justin Fu and G. Tucker and Sergey Levine},
+  booktitle={Neural Information Processing Systems},
+  year={2019},
+  url={https://api.semanticscholar.org/CorpusID:173990380}
+}
+
+@inproceedings{conservative,
+author = {Kumar, Aviral and Zhou, Aurick and Tucker, George and Levine, Sergey},
+title = {Conservative Q-learning for offline reinforcement learning},
+year = {2020},
+isbn = {9781713829546},
+publisher = {Curran Associates Inc.},
+address = {Red Hook, NY, USA},
+abstract = {Effectively leveraging large, previously collected datasets in reinforcement learning (RL) is a key challenge for large-scale real-world applications. Offline RL algorithms promise to learn effective policies from previously-collected, static datasets without further interaction. However, in practice, offline RL presents a major challenge, and standard off-policy RL methods can fail due to overestimation of values induced by the distributional shift between the dataset and the learned policy, especially when training on complex and multi-modal data distributions. In this paper, we propose conservative Q-learning (CQL), which aims to address these limitations by learning a conservative Q-function such that the expected value of a policy under this Q-function lower-bounds its true value. We theoretically show that CQL produces a lower bound on the value of the current policy and that it can be incorporated into a policy learning procedure with theoretical improvement guarantees. In practice, CQL augments the standard Bellman error objective with a simple Q-value regularizer which is straightforward to implement on top of existing deep Q-learning and actor-critic implementations. On both discrete and continuous control domains, we show that CQL substantially outperforms existing offline RL methods, often learning policies that attain 2-5 times higher final return, especially when learning from complex and multi-modal data distributions.},
+booktitle = {Proceedings of the 34th International Conference on Neural Information Processing Systems},
+articleno = {100},
+numpages = {13},
+location = {Vancouver, BC, Canada},
+series = {NIPS '20}
+}
+
 @article{Beck_2025,
    title={A Tutorial on Meta-Reinforcement Learning},
    volume={18},

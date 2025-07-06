@@ -6,8 +6,8 @@
 - [x] Finish section 5.2.4 (Conclusions metanav).
 - [x] Finish section 5.3 (Training problems).
 - [x] Finish section 1 (Introduction).
+- - [ ] Finish section 2.5 (Related work meta RL).
 - [ ] Finish section 6 (Conclusions and future work).
-- [ ] Finish section 2 (Related work).
 
 ## Small fixes
 
