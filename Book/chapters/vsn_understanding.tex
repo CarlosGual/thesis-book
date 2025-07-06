@@ -1,6 +1,5 @@
 \chapter{Understanding Robotic Visual Semantic Navigation}\label{ch:understanding-robotic-visual-semantic-navigation}
 
-\section{Introduction}\label{sec:introduction}
 %Describe motivation of the problem (navigation is important for robots)
 One of the most important tasks that humans perform in their daily lives is semantic and goal-oriented navigation.
 This ability to navigate like a human towards a target in the environment is considered one of the ``holy grail'' goals of intelligent robots.
@@ -15,7 +14,7 @@ Technically, a \acrshort{vsn} approach is a learning-based navigation model, whe
 Nor the map of the environment is known a priori, neither the map is built on the fly.
 The majority of methods integrate reinforcement learning (RL) techniques with current developments in deep learning models for visual perception.
 
-\begin{figure}[t]
+\begin{figure}
   \centering
    \includegraphics[width=0.6\linewidth]{figures/understanding_vsn/graphical_abstract}
    \caption{Can an agent pinpoint a target in a maze using a visual semantic navigation (\acrshort{vsn}) model based on state-of-the-art RL and deep learning models? We explore and analyze the solutions for the main challenges in \acrshort{vsn}, \ie unknown environments, visibility of targets and path planning.}
@@ -38,8 +37,6 @@ For a \acrshort{vsn} model, the object we have to navigate to may not be visible
 How does the agent learn a search strategy to find the object in the maze?
 And third, even if the target is visible, the robot must devise a feasible route to reach it.
 
-
-
 %Highlight our contributions
 The main contributions of our work are as follows:
 \begin{enumerate}
@@ -50,6 +47,7 @@ Technically, we have designed a model that combines a CLIP encoder with a set of
  It has been implemented using pyRIL~\cite{pyRIL}, an open source python library for RL, and two navigation environments: a maze navigation setup of Miniwolrd-Maze from \textit{gym-miniworld}~\cite{gym_miniworld}; and a navigation through a 3D photorealistic scan indoor space provided by HM3D dataset~\cite{ramakrishnan2021} in Habitat~\cite{szot2021} simulator.
  We release the codes to reproduce our experiments, as well as the whole experimental setup, so that others can compare their work with our results.
 \end{enumerate}
+
 \section{RL For Navigation}\label{sec:navigation}
 
 \subsection{Problem Formulation}\label{subsec:problem-formulation}
@@ -129,7 +127,7 @@ This introduces a balance between exploration and exploitation.
 A diagram of the implemented agent can be found in figure~\ref{fig:network_clip_diagram}.
 To train the models, we use Proximal Policy Optimization (PPO)~\cite{schulman2017}, an on-policy RL algorithm.
 
-\begin{figure}[t]
+\begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth]{figures/understanding_vsn/network_clip_diagram}
     \caption{\textbf{Model diagram}. This figure contains a high level representation of the model used: a visual encoder followed by an actor-critic module encoded by LSTMs. The visual encoder is frozen and we only train the actor-critic module.}
@@ -153,9 +151,7 @@ In our experiments, we aim to answer the following questions:
 
 \subsection{Experimental setup}\label{subsec:experimental-setup}
 
-
-
-\paragraph{Navigation benchmarks}
+\paragraph*{Navigation benchmarks}
 %Define the two scenarios we propose: Maze and Habitat. Justify why the are interesting.
 %The first environment we face is Miniwolrd-Maze from \textit{gym-miniworld}~\cite{gym_miniworld}.
 We conducted our main experimentation in the Miniwolrd-Maze environment from \textit{gym-miniworld}~\cite{gym_miniworld}.
@@ -178,7 +174,7 @@ As for the evaluation metrics, we evaluate the Maze models using Success Rate (S
 Additionally, for Habitat models we also employ Shortest Path Length (SPL) and Distance To Goal (DTG).
 All these are the standard metrics for the ObjectNav problem in Habitat Challenge~\cite{batra2020}.
 
-\paragraph{Implementation details}
+\paragraph*{Implementation details}
 %Provide the details of the benchmark we propose: description of PyRIL, models for navigation, implementation details that can help others to replicate/understand the results.
 We leverage on the state-of-the-art RL approach for embodied navigation in \cite{khandelwal2022} with some minor simplifications.
 As it is shown in figure~\ref{fig:network_clip_diagram}, the first part of our model consists in a pre-trained CLIP plus RestNet50 module as feature extractor, which receives an RGB image and produces a latent vector of size 1024.
