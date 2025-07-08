@@ -129,7 +129,7 @@ To train the models, we use Proximal Policy Optimization (PPO)~\cite{schulman201
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth]{figures/understanding_vsn/network_clip_diagram}
+    \includegraphics[width=\linewidth]{figures/understanding_vsn/network_clip_diagram}
     \caption{\textbf{Model diagram}. This figure contains a high level representation of the model used: a visual encoder followed by an actor-critic module encoded by LSTMs. The visual encoder is frozen and we only train the actor-critic module.}
     \label{fig:network_clip_diagram}
 \end{figure}
@@ -244,7 +244,7 @@ When the agent reaches a corner near the target (red square), it can get stuck a
 
 \begin{table}
     \centering
-    \scalebox{0.88}{\begin{tabular}{c c c c c c}
+    \begin{tabular}{c c c c c c}
         \toprule
         Output type                                        & Maze         & Success                  & SPE               & Reward                   \\
         \midrule
@@ -257,14 +257,14 @@ When the agent reaches a corner near the target (red square), it can get stuck a
         \multirow{2}{*}{$random$}                          & $S3$ & 0.18 $\pm$ 0.39          & 278.04 $\pm$ 51.55           & 0.37 $\pm$ 3.66          \\
         & $S5$ & 0.02 $\pm$ 0.14          & 596.07 $\pm$ 32.83           & -2.09 $\pm$ 4.06         \\
         \bottomrule
-    \end{tabular}}
+    \end{tabular}
     \caption{\textbf{Evaluation performance for the best models on 100 test mazes.} We compare the evaluation between using $\epsilon\text{-}greedy$ with $\epsilon=0.2$ and using an \textit{stochastic} output, \ie, sampling actions from the last layer of the agent. In both mazes the best result is obtained with $\epsilon\text{-}greedy$.}
     \label{tab:results-maze}
 \end{table}
 
 \begin{table}
     \centering
-    \scalebox{0.77}{\begin{tabular}{c c c c c c}
+    {\begin{tabular}{c c c c c c}
         \toprule
         Reward function            & Exploration strategy     & Success                  & SPE               & Reward                   \\
         \midrule
@@ -273,23 +273,23 @@ When the agent reaches a corner near the target (red square), it can get stuck a
         \textit{distance reward}   & No                       & 0.02 $\pm$ 0.14          & 588.66 $\pm$ 79.78           & -1.24 $\pm$ 4.18         \\
         \textit{navigation reward} & No                       & 0.00 $\pm$ 0.00          & 600.00 $\pm$ 0.00            & 0.00 $\pm$ 0.00          \\
         \bottomrule
-    \end{tabular}}
+    \end{tabular}
     \caption{\textbf{Ablation study for S5 mazes on 100 test mazes.} The results show that the best performance is obtained when \textit{distance reward} and $\epsilon\text{-}greedy$ techniques are used.}
     \label{tab:ablation-study}
 \end{table}
 
 \begin{figure}
     \centering
-    \begin{subfigure}[b]{0.4\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \centering
-        \includegraphics[width=0.8\textwidth]{figures/understanding_vsn/qualitative_results/fail}
+        \includegraphics[width=\textwidth]{figures/understanding_vsn/qualitative_results/fail}
         \caption{Failure case.}
         \label{fig:maze_qualitative_fail}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.4\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \centering
-        \includegraphics[width=0.8\textwidth]{figures/understanding_vsn/qualitative_results/success}
+        \includegraphics[width=\textwidth]{figures/understanding_vsn/qualitative_results/success}
         \caption{Success case.}
         \label{fig:maze_qualitative_success}
     \end{subfigure}~\caption{\textbf{Qualitative results for Miniworld-Maze agent.} We show agent final state and trajectory for a fail case (\ref{fig:maze_qualitative_fail}) and a success case (\ref{fig:maze_qualitative_success}). In the success case, $\epsilon\text{-}greedy$ forces the agent to select a random action, thus exploring the environment, escaping the corner and finally reaching the target.}
@@ -314,7 +314,7 @@ It shows the final state (left image) and the top view with the agent's trajecto
 These figures clearly show how in both cases a different valid goal is reached (the agent reaches two different chairs) and how the $\epsilon\text{-greedy}$ strategy leads the agent to do coarser movements.
 
 \begin{table}
-    \scalebox{0.7}{\begin{tabular}{c c c c c c}
+    \begin{tabular}{c c c c c c}
         \toprule
         Output type                       & Success                  & SPL              & DTG               & SPE               & Reward                   \\
         \midrule
@@ -323,28 +323,28 @@ These figures clearly show how in both cases a different valid goal is reached (
 %        Ours $+\; deterministic$          & $0.13 \pm 0.33$         & $0.12 \pm 0.30$  $ $2.72 \pm 1.57$   & $432.57 \pm 161.40$          & $-2.03 \pm 3.84$         \\
         $random$                          & $0.05 \pm 0.22$          & $0.02 \pm 0.10$  &$4.49 \pm 1.72$    & $495.50 \pm 26.96$           & $-4.68 \pm 2.16$         \\
         \bottomrule
-    \end{tabular}}
+    \end{tabular}
     \caption{\textbf{Best agent performance on 100 test episodes in Habitat.} The $\epsilon\text{-greedy}$ output mode reports the best results.}
     \label{tab:results-habitat}
 \end{table}
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{figures/understanding_vsn/habitat_reward}
+    \includegraphics[width=0.8\linewidth]{figures/understanding_vsn/habitat_reward}
     \caption{\textbf{Learning curve of Habitat experiment.} This curve shows how the agent starts with a sub-optimal policy, receiving low rewards around $-5$. Then, the rewards increase until a value around 5, once the agent gets an optimal policy.}
     \label{fig:reward-habitat-results}
 \end{figure}
 
 \begin{figure}
     \centering
-    \begin{subfigure}[b]{0.4\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/understanding_vsn/qualitative_results/habitat_epsilon}
         \caption{$\epsilon\text{-greedy}$ output.}
         \label{fig:habitat_qualitative_epsilon}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.4\textwidth}
+    \begin{subfigure}[b]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/understanding_vsn/qualitative_results/habitat_stochastic}
         \caption{$Stochastic$ output.}
@@ -366,5 +366,5 @@ These figures clearly show how in both cases a different valid goal is reached (
 In this paper, we offer a thorough experimental evaluation setup for the \acrshort{vsn} problem based on the open-source pyRIL library and two navigation environments: Miniworld-Maze; and a 3D scanned scene from HM3D database using Habitat simulator.
 Following this proposal, we offer a detailed analysis of a state-of-the-art \acrshort{vsn} model based on a CLIP feature extractor and LSTMs encoders for the agent state, introducing also reward shaping and $\epsilon\text{-}greedy$ techniques.
 Our results confirm the impact of these techniques in both environments.
-The models, data and codes are publicly available at \url{https://github.com/gramuah/vsn} to encourage much needed further research on \acrshort{vsn}\@.
+The models, data and codes are publicly available at \url{https://github.com/gramuah/vsn} to encourage further research on \acrshort{vsn}\@.
 

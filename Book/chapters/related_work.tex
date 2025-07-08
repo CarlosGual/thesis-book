@@ -108,12 +108,14 @@ And the recent progress in large language models (LLMs) has led to the possibili
 In this case, the LLMs are used as a reasoning module in charge of understanding the semantic information present on the environment.
 They then share this information with different modules in charge of navigating to the specified goal.
 
+This thesis focuses on the end-to-end learning based methods, specifically on the analysis of the behavior of these models in the real world and the use of RL and IL techniques to train visual navigation policies in simulated environments.
+
 \section{Sparsity and exploration methods}\label{sec:sparsity-and-exploration-methods}
 To address the sparse reward and exploration problems, different approaches have been proposed.
 Auxiliary tasks~\cite{jaderberg2016, ye2021} help the agent to explore the environment and gather extrinsic reward by maximizing pseudo-reward functions.
 Curiosity-driven exploration~\cite{pathak2017} (depicted on figure \ref{fig:curiosity}) leverages on the error of the agent's ability to predict the next state to introduce a new intrinsic reward that enables the agent to explore the environment.
 When dealing with procedurally-generated environments, a curriculum learning mechanism can be incorporated so the episodes are ordered by an exploration score~\cite{zha2020b}, and then the agent imitates the best ones.
-This thesis also uses procedurally-generated environments, but it relies on a RL approach combined with reward shaping~\cite{ng1999, jestel2021} and $\epsilon\text{-}greedy$~\cite{mnih2013} techniques to learn to navigate in them.
+This thesis, in chapter~\ref{ch:understanding-robotic-visual-semantic-navigation}, also uses procedurally-generated environments, but it relies on a RL approach combined with reward shaping~\cite{ng1999, jestel2021} and $\epsilon\text{-}greedy$~\cite{mnih2013} techniques to learn to navigate in them.
 
 \begin{figure}
     \centering
@@ -188,6 +190,8 @@ By limiting policy deviation, these methods address bootstrapping error and dist
 Variants of this idea combine RL updates with imitation learning: for instance, Advantage-Weighted Actor-Critic (AWAC)~\cite{Nair2020AcceleratingOR} and Critic-regularized Regression (CRR)~\cite{NEURIPS2020_588cb956} constrain the policy toward the dataset behavior while weighting actions by their estimated advantages, thus improving performance without sacrificing stability.
 Overall, policy constraint and behavior regularization approaches have proven effective both in simulation and in real-world settings by leveraging the data’s demonstrated behaviors as an anchor.
 
+The work presented in chapter~\ref{sec:offline_rl4rvsn} builds upon these ideas, using a modified version of IQL~\cite{kostrikov2022offline} to train a navigation policy from a fixed dataset of demonstrations.
+
 \section{Few-Shot Meta Imitation Learning}\label{sec:meta-imitation-learning}
 
 Meta-imitation learning (MIL) extends imitation learning into the meta-learning regime, allowing robots to rapidly learn new skills from only a few demonstrations by leveraging experience across many tasks.
@@ -250,10 +254,12 @@ For instance, figure~\ref{fig:transformer-mil} shows how task representations ca
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/related_work/transformer_mil}
-    \caption{\textbf{Meta-Controller}: is a technique that avoids explicit gradient updates at test time by conditioning the policy on task-specific context, typically derived from demonstrations.
+    \caption{\textbf{Meta-Controller}: a technique for few-shot imitation learning to simultaneously generalize to unseen embodiments and tasks using a few demonstrations.
     First, the states and actions are encoded into a sequence of joint-level tokens.
     Then, this state tokens are encoded by the state encoder to obtain a task representation.
     Finally, the task representation is used to condition the matching-based policy network, which outputs the next action to be executed by the robot.
     Figure from~\cite{cho2024metacontroller}.}
     \label{fig:transformer-mil}
 \end{figure}
+
+Chapter~\ref{sec:meta-imitation-learning} extends the concepts of gradient-based meta-imitation learning (section~\ref{subsec:gradient-based-meta-imitation-learning}) by implementing a modified version of Model-Agnostic Meta-Learning (MAML)~\cite{finn2017} to train navigation policies using demonstrations in a meta imitation learning fashion.
