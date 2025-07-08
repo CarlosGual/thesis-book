@@ -15,7 +15,7 @@ While section~\ref{sec:visual-semantic-navigation} applies to the whole content 
     \item Section~\ref{sec:sparsity-and-exploration-methods} refers to chapter~\ref{ch:understanding-robotic-visual-semantic-navigation}, where we explore exploration methods based on the use of procedural environments and simulated environments.
     \item Section~\ref{sec:simulation-to-reality-transfer-in-robotic-navigation} is related to chapter~\ref{ch:ros4vsn:-enable-real-world-robotic-visual-semantic-navigation}, where we present the ROS4\acrshort{vsn} library, which allows the integration of different \acrshort{vsn} models in real robots.
     \item Section~\ref{sec:offline-reinforcement-learning} is related to chapter~\ref{sec:offline_rl4rvsn}, where we explore the use of offline \acrshort{rl} techniques to train navigation policies in simulated environments.
-    \item Section~\ref{sec:meta-reinforcement-learning} is related to chapter~\ref{sec:mil-for-real-world-navigation}, where we explore the use of meta \acrshort{rl} techniques to train navigation policies that can quickly adapt to new environments.
+    \item Section~\ref{sec:meta-imitation-learning} is related to chapter~\ref{sec:mil-for-real-world-navigation}, where we explore the use of meta-imitation learning techniques to train navigation policies that can quickly adapt to new environments.
 \end{itemize}
 
 \section{Visual Semantic Navigation}\label{sec:visual-semantic-navigation}
@@ -183,9 +183,77 @@ Instead of a max over actions, IQL uses an expectile regression to estimate the 
 Another broad strategy is to constrain the learned policy to stay close to the behavior policy that generated the data.
 A prominent example is Batch-Constrained deep Q-learning (BCQ)~\cite{Fujimoto2018OffPolicyDR}, which modifies the Q-learning update to consider only actions that are likely under the offline dataset instead of maximizing over all actions.
 In practice, BCQ trains a generative model (e.g. a VAE) to produce candidate actions similar to those in the dataset, ensuring that the policy cannot stray far from logged behavior.
-Likewise, Bootstrapping Error Accumulation Reduction (BEAR)~\cite{Kumar2019StabilizingOQ} and Behavior-Regularized Actor-Critic (BRAC)~\cite{Wu2019BehaviorRO} add explicit divergence penalties (e.g. KL or MMD) to keep the learned policy distribution close to the dataset behavior policy.
+Likewise, Bootstrapping Error Accumulation Reduction (BEAR)~\cite{Kumar2019StabilizingOQ} and Behavior-Regularized Actor-Critic (BRAC)~\cite{Wu2019BehaviorRO} add explicit divergence penalties (\eg KL or MMD) to keep the learned policy distribution close to the dataset behavior policy.
 By limiting policy deviation, these methods address bootstrapping error and distribution shift, effectively preventing the agent from choosing out-of-distribution actions with erroneously high value estimates.
 Variants of this idea combine RL updates with imitation learning: for instance, Advantage-Weighted Actor-Critic (AWAC)~\cite{Nair2020AcceleratingOR} and Critic-regularized Regression (CRR)~\cite{NEURIPS2020_588cb956} constrain the policy toward the dataset behavior while weighting actions by their estimated advantages, thus improving performance without sacrificing stability.
 Overall, policy constraint and behavior regularization approaches have proven effective both in simulation and in real-world settings by leveraging the data’s demonstrated behaviors as an anchor.
 
-\section{Meta Reinforcement Learning}\label{sec:meta-reinforcement-learning}
+\section{Few-Shot Meta Imitation Learning}\label{sec:meta-imitation-learning}
+
+Meta-imitation learning (MIL) extends imitation learning into the meta-learning regime, allowing robots to rapidly learn new skills from only a few demonstrations by leveraging experience across many tasks.
+The core idea is to extract common knowledge or a prior policy from a distribution of training tasks, such that only minimal adaptation is needed to master a new task.
+Early works demonstrated one-shot imitation of robotic manipulation tasks by meta-training over multiple demonstrations~\cite{Duan2017OneShotIL, finnOneShotVisualImitation2017}.
+Depending on the method used, we can distinguish between three main approaches: gradient-based and contextual and latent variable meta-imitation learning.
+
+\subsection{Gradient-based Meta Imitation Learning}\label{subsec:gradient-based-meta-imitation-learning}
+
+Many subsequent MIL approaches have adopted gradient-based adaptation for fast imitation.
+In these methods, a policy (or policy initialization) is meta-learned such that a small number of gradient steps on a new task’s demo data leads to effective behavior cloning on that task.
+For example, Model-Agnostic Meta-Learning (MAML)~\cite{finn2017} learns a policy initialization that can be quickly adapted to new tasks via gradient descent.
+The idea is to find the optimal parameters $\theta$ over a distribution of tasks $\mathcal{D}$ such that a few gradient steps on the task-specific data $\mathcal{D}_i$ lead to good performance on the task reward $R_i$ (see figure~\ref{fig:maml-mil}).
+
+MAML is specifically designed for reinforcement and supervised learning, but it can also be applied to behavior cloning losses, yielding one-shot imitation learners for robot manipulation and locomotion domains.
+The meta-learned policy serves as a strong prior that encodes behaviors common to all training tasks, and adaptation fine-tunes this prior to the specifics of the new task.
+Previous works have extended MAML to the context of imitation learning, such as learning from video demonstrations of robotic tasks~\cite{finnOneShotVisualImitation2017} or learning from human demonstrations in complex environments~\cite{Yu2018OneShotIF}.
+Figure~\ref{fig:maml-mil} illustrates the whole idea of gradient-based meta-imitation learning applied to a real use case of robotic manipulation, where the agent learns to recognize and push a new object from a single human demonstration.
+
+% add a two column subfigure
+\begin{figure}
+    % subfigure a
+    \centering
+   \begin{subfigure}[b]{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/related_work/maml}
+        \caption{Diagram of model agnostic meta learning algorithm (MAML).}
+        \label{fig:maml}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/related_work/one_shot_human}
+        \caption{The idea behind one-shot imitation learning.}
+        \label{fig:oneshot-human}
+    \end{subfigure}
+    \caption{\textbf{Gradient-based meta-imitation learning} is a technique that learns a policy initialization that can be quickly adapted to new tasks via gradient descent.
+    On \ref{fig:maml}, the meta-learning process is depicted, where a policy initialization $\theta$ is optimized over a distribution of tasks $\mathcal{D}$.
+    On \ref{fig:oneshot-human}, a whole process of one-shot imitation learning is shown.
+    The agent is meta-trained on a distribution of human and robot demonstration data.
+    Then, it learns to recognize and push a new object from a single human demonstration.
+    Figures from~\cite{finn2017} and \cite{Yu2018OneShotIF} respectively.}
+    \label{fig:maml-mil}
+\end{figure}
+
+Several recent works have built upon MAML to improve its efficiency and applicability to more complex imitation tasks.
+Dual Meta Imitation Learning (DMIL)~\cite{gao2022transferring} proposes a hierarchical meta-imitation learning framework that learns both a high-level policy and a low-level sub-skills controller via MAML.
+Meta-Imitation Learning with Adaptive Dynamical Primitives (MiLa)~\cite{Wu2024OneShotRI} allows for learning to new tasks via a single unsegmented long-horizon demonstration.
+
+\subsection{Contextual and Latent Variable Meta-Imitation}\label{subsec:contextual-and-latent-variable-meta-imitation}
+
+An alternative line of work avoids explicit gradient updates at test time by conditioning the policy on task-specific context, typically derived from demonstrations.
+Instead of learning an initial set of weights for all tasks, these methods learn to encode demonstrations into a latent representation that informs the policy of the current task.
+Typically, one-shot imitation learning models process a demonstration trajectory (or a few demos) through an encoder – using architectures like recurrent networks or self-attention – and feed this context alongside the current state to the policy network~\cite{Duan2017OneShotIL}.
+The policy thus “infers” the intended task from the demo and executes the corresponding behavior, without needing gradient fine-tuning on the new task.
+Another instantiation of this idea is to use latent variables~\cite{sontakke2023roboclip, NEURIPS2019_2b8f621e, NEURIPS2019_30de2428, 10.3389/frobt.2020.606361, Bhoopchand2023LearningFI} to represent tasks: during meta-training, a latent context $z$ is inferred for each demonstration set (via, say, a variational encoder or recurrent inference), and the policy or value function is conditioned on $z$ rather than relying on one global initialization.
+This approach, inspired by contextual meta-RL, addresses the limitation of a single meta-parameter set by allowing task-specific adaptation in the latent space.
+For instance, figure~\ref{fig:transformer-mil} shows how task representations can be encoded into parametrized state encoders using transformers~\cite{cho2024metacontroller}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/related_work/transformer_mil}
+    \caption{\textbf{Meta-Controller}: is a technique that avoids explicit gradient updates at test time by conditioning the policy on task-specific context, typically derived from demonstrations.
+    First, the states and actions are encoded into a sequence of joint-level tokens.
+    Then, this state tokens are encoded by the state encoder to obtain a task representation.
+    Finally, the task representation is used to condition the matching-based policy network, which outputs the next action to be executed by the robot.
+    Figure from~\cite{cho2024metacontroller}.}
+    \label{fig:transformer-mil}
+\end{figure}
