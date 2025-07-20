@@ -3,28 +3,62 @@
 \lettrine{\textcolor{accent_color}{T}}{his} thesis has focused on the exploration of robotic visual navigation, specifically in the context of visual semantic navigation, and how it can be improved through the use of reinforcement learning methodologies.
 The main objective has been to develop a new ROS~\cite{ros} framework that allows the integration of different algorithms and environments, as well as to explore new approaches to offline reinforcement learning and meta imitation learning for robotic visual navigation.
 Concretely, the thesis has focused into studying and solving the \acrshort{objnav} problem in the real world, which consists of navigating to a specific object instance in an determined environment using visual information.
-This is a challenging task since it involves a combination of several habilities, such as visual perception, semantic understanding, and navigation in complex environments.
+This is a challenging task since it involves a combination of several abilities, such as visual perception, semantic understanding, and navigation in complex environments.
 
 This problem has been heavily dependent on the use of simulated environments for training and evaluation, which has limited the applicability of the developed algorithms in real-world scenarios.
 However, it is not until recent years that the use of real-world data for evaluation has become more common, allowing for a better understanding of the limitations and challenges of the developed algorithms in real scenarios.
 In this scenario, the thesis focuses on studying the limitations of the current approaches to robotic visual navigation in the real world, and how they can be improved through the use of new methodologies and frameworks.
 
-Broadly, the thesis has contributed to the topics of \acrfull{vsn} and \acrshort{rl} in the context of robotic visual navigation, and how they can be improved through the use of new methodologies and frameworks.
-
+This chapter summarizes the main contributions derived from the research carried on while the development of this thesis.
+It also tackles the discussion and limitations of the proposed approaches, as well as the future research lines that can be explored to further improve the state of the art in robotic visual navigation.
+Finally, it summarizes the scientific contributions derived from this thesis, both directly related to the main topic and side contributions that have been developed in parallel.
 
 \section{Contributions}\label{sec:contributions}
+
+Broadly, the thesis has contributed to the topics of \acrfull{vsn} and different algorithms for it in the context of robotic visual navigation, and how they can be improved through the use of new methodologies and frameworks.
+
+\subsection{Contributions to the study of Visual Semantic Navigation}\label{subsec:contributions-to-visual-semantic-navigation}
+
+The \acrshort{vsn} problem has been a challenging task in the field of robotics, and almost all the proposed solutions laid on the use of reinforcement learning methodologies.
+The problem with reinforcement learning in the machine learning field is that it is a less industrialized field than others, like supervised learning or generative models.
+This has lead to a diverse use of several \acrshort{RL} libraries and frameworks, which has made it difficult to compare the results of different approaches and to reproduce the results of previous works.
+Also, the use of simulated environments for training and evaluation has limited the applicability of the developed algorithms in real-world scenarios.
+
+To address these issues, this thesis has proposed two solutions: a thorough study for evaluation protocols in \acrshort{VSN} and the development of a new framework for robotic visual navigation that allows the integration of different algorithms in real environments.
+The following list details the main contributions to the field of \acrshort{vsn} that have been developed during the thesis:
+
 \begin{itemize}
-    \item \textbf{ROS4\acrshort{vsn}:} A new framework for robotic visual navigation that allows the integration of different algorithms and environments.
-    \item \textbf{Offline Reinforcement Learning for Robotic Visual Navigation:} A new approach to offline reinforcement learning for robotic visual navigation that uses a combination of imitation learning and reinforcement learning.
-    \item \textbf{Meta Imitation Learning for Robotic Visual Navigation:} A new approach to meta imitation learning for robotic visual navigation that uses a combination of meta-learning and imitation learning.
+    \item An intensive study of the current state of the art in \acrshort{vsn} and its limitations, which has allowed to identify the main challenges and opportunities for improvement in this field.
+    The review of the literature helped to identify tantos important aspects:
+        \begin{enumerate}
+            \item There is a lack of standarized frameworks and protocols for training and evaluating \acrshort{vsn} algorithms, which has made it difficult to compare the results of different approaches and to reproduce the results of previous works.
+            \item Almost all the proposed solutions to \acrshort{vsn} are based on simulation, and while this is a common practice in the field of robotics, it does not allow for a realistic measurement of the performance of the algorithms in the real world.
+            \item Although plenty of methods have been proposed to solve the \acrshort{vsn} problem, and even some of them have been tested in real robots, there is a lack of methods developed specifically for real-world scenarios, and how to quickly adapt them to new environments.
+        \end{enumerate}
+    \item A new \acrshort{vsn} model that leverages CLIP~\cite{radford2021} encoders to process the visual information followed by an RNN module to output the navigation actions.
+    \item An evaluation of different \acrshort{rl} techniques to deal with the sample inefficiency~\cite{Yarats2019ImprovingSE} problem of online reinforcement learning: \textit{reward shaping} and $\epsilon-greedy$~\cite{mnih2013}.
+    \item The design of a new thorough experimental evaluation protocol for \acrshort{vsn} in simulation implemented via pyRIL~\cite{pyRIL} for two navigation environments: Miniworld-Maze~\cite{gym_miniworld} and Habitat~\cite{szot2021}.
+    \item The release of a new \acrshort{ros} framework for deployment of \acrshort{vsn} algorithms in real robots.
+    It allows the integration of different algorithms and environments and provides a standardized way to use them.
+    \item The first time that two state-of-the-art \acrshort{vsn} algorithms (PIRLNav~\cite{ramrakhya2023} and VLV~\cite{chang2020}) have been evaluated in real robots, which has allowed to identify the main challenges and limitations of the current approaches in real-world scenarios.
+    \item A new experimental evaluation for \acrshort{vsn} algorithms in the real world using the proposed \acrshort{ros} framework, which has allowed to measure the performance of the algorithms in real-world scenarios and to identify the main challenges and limitations of the current approaches.
 \end{itemize}
 
+\subsection{Contributions to the development of new algorithms for Visual Semantic Navigation}\label{subsec:contributions-to-new-algorithms-for-visual-semantic-navigation}
+
+The thesis has also contributed to the development of new algorithms for \acrshort{vsn} that can be used in real-world scenarios.
+While these algorithms resemble the same problem formulation used for \acrshort{rl}, they are not based on classical \acrshort{rl} methodologies but rather on offline reinforcement learning and meta-imitation learning.
+These approaches aim to go \textit{beyond} the current \acrshort{rl} methodologies and try to provide a foundation for future research in algorithms that are meant to overcome the limitations of \acrshort{rl} in the real world.
+
+Specifically, the following contributions have been made:
+
+\begin{itemize}
+    \item
+\end{itemize}
 
 \section{Discussion and Further Improvements}\label{sec:discussion-and-further-improvements}
 
-
 \section{Future Research Lines}\label{sec:future-work}
-
 
 \section{Scientific Contributions}\label{sec:final-remarks}
 
@@ -49,7 +83,7 @@ All of them are summarized in the following subsections.
 \begin{itemize}
     \item Flor-Rodríguez-Rabadán R., \textbf{Gutiérrez-Álvarez C.}, Acevedo-Rodríguez F.J., Lafuente-Arroyo S., López-Sastre R.J., \textit{SEMNAV: A Semantic Segmentation-Driven Approach to Visual Semantic Navigation}, in ArXiv, 2025.
     \item Blanco-Fernández E., \textbf{Gutiérrez-Alvarez C.}, Nasri N., Maldonado-Bascón S., López-Sastre R.J., \textit{Live Video Captioning}, in Multimedia Tools and Applications, 2025.
-    \item \item Nasri N, \textbf{Gutiérrez-Álvarez C.}, López-Sastre RJ, Lafuente-Arroyo S., Maldonado-Bascón S. \textit{Realistic Continual Learning Approach using Pre-trained Models}, in ArXiv 2024.
+    \item Nasri N, \textbf{Gutiérrez-Álvarez C.}, López-Sastre RJ, Lafuente-Arroyo S., Maldonado-Bascón S. \textit{Realistic Continual Learning Approach using Pre-trained Models}, in ArXiv 2024.
     \item Lafuente-Arroyo S., Maldonado-Bascón S., Delgado-Mena D., \textbf{Gutiérrez-Alvarez C.}, Acevedo-Rodríguez F.J., \textit{Multisensory Integration for Topological Indoor Localization of Mobile Robots in Complex Symmetrical Environments}, in Expert Systems with Applications, 2023.
     \item Nasri N, López-Sastre RJ, Pacheco-da-Costa S, Fernández-Munilla I, \textbf{Gutiérrez-Álvarez C.}, Pousada-García T, Acevedo-Rodríguez FJ, Maldonado-Bascón S. \textit{Assistive Robot with an AI-Based Application for the Reinforcement of Activities of Daily Living: Technical Validation with Users Affected by Neurodevelopmental Disorders}, in Applied Sciences, 2022.
 \end{itemize}

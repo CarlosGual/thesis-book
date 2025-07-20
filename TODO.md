@@ -18,3 +18,4 @@
 - [ ] Check if VF loss in OffNav makes sense to diverge or not.
 - [ ] Detect and prepare all acronyms.
 - [x] Delete all introduction sections in the chapters and just leave them without a section.
+- [ ] Link to the scientific contributions in the conclusions.
