@@ -7,7 +7,7 @@
 - [x] Finish section 5.3 (Training problems).
 - [x] Finish section 1 (Introduction).
 - [x] Finish section 2.5 (Related work meta RL).
-- [ ] Finish section 6 (Conclusions and future work).
+- [x] Finish section 6 (Conclusions and future work).
 
 ## Small fixes
 

@@ -53,17 +53,78 @@ These approaches aim to go \textit{beyond} the current \acrshort{rl} methodologi
 Specifically, the following contributions have been made:
 
 \begin{itemize}
-    \item
+    \item A new simplified experimental evaluation protocol for HM3D~\cite{ramakrishnan2021} dataset, based on five different setups that increase the complexity of the navigation task.
+    This allows for faster training and evaluation of algorithms.
+    \item A new approach to \acrshort{vsn} based on offline reinforcement learning called \textbf{Off}line Visual Semantic \textbf{Nav}igation (OffNav).
+    This approach allows training \acrshort{vsn} algorithms using offline data, which can be collected in real-world or simulated scenarios.
+    This algorithm is based on the Implicit Q-Learning (IQL)~\cite{kostrikov2022offline} algorithm, but adapted to decentralized distributed training and evaluation.
+    The model is able to generalize to unseen environments and in the most challenging setup it outperforms the state-of-the-art PIRLNav~\cite{ramrakhya2023} algorithm.
+    \item A novel model for \acrshort{vsn} based on meta-imitation learning called \textbf{Meta} Imitation Learning for Visual Semantic \textbf{Nav}igation (MetaNav).
+    This approach allows training navigation policies using pre-recorded demonstrations in a meta-learning fashion.
+    The model is an adaptation from~\cite{finnOneShotVisualImitation2017} to work in the \objnav setting.
 \end{itemize}
 
-\section{Discussion and Further Improvements}\label{sec:discussion-and-further-improvements}
+\section{Discussion and Limitations}\label{sec:discussion-and-limitations}
+
+As any research works, this thesis provides more questions than answers.
+Besides the contributions listed in the previous sections, there are several elements that could be addressed to improve the work here done.
+Although some of them represent limitations and challenges that have been identified during the development of this thesis, there are others than resemble all the possibilities unexplored.
+Some of these elements are listed below:
+\begin{itemize}
+    \item The \acrshort{vsn} models employed alongside this thesis are always based on the same principle: a visual feature extractor (typically CNNs, but not limited to) plus RNNs to output action distributions.
+    This is a good starting point and has been identified as a strong baseline for navigation models~\cite{wijmans2020}.
+    However, navigation could be improved by using more recent architectures, such as transformers~\cite{Vaswani2017AttentionIA} or diffusion~\cite{pmlr-v37-sohl-dickstein15} models, which have shown to be also effective in embodied AI tasks~\cite{Shah2023ViNTAF, ren2025prior}.
+    \item All the proposed algorithms and analysis performed for \acrshort{vsn} are based on the same task formulation: navigating to a specific object instance in an environment, known as \acrshort{objnav}.
+    While this is still a challenging task, specially in the real world and dynamic environments, there are other tasks that could be explored.
+    As expressed in chapter~\ref{ch:introduction}, if we want a robot to be able to interact with the environment as humans, it has to be able to perform more complex tasks than just navigating to a specific object instance.
+    There are plenty of tasks that could be explored.
+    Some of them, but not all are: vision and language navigation~\cite{Anderson2017VisionandLanguageNI}, in which and agent has to navigate to a specific location in an environment based on a natural language instruction; HAZARD navigation~\cite{Zhou2024HAZARDCE}, in which an agent has to rescue a given set of objects from disasters such as fires, floods, and winds; Open-Vocabulary Mobile Manipulation~\cite{homerobotovmm, homerobotovmmchallenge2023}, which is the problem of picking any object in any unseen environment, and placing it in a commanded location; or even more dynamic tasks such as Social Navigation~\cite{puig2024habitat}, a set of tasks that involve cooperation between multiple agents or agents and humans.
+    Some of these tasks can be about navigating in an environment while avoiding moving humans, or even rearranging objects in coordination with a human agent.
+    \item While this thesis proposes two new algorithms for \acrshort{vsn} based on offline reinforcement learning and meta-imitation learning in chapter~\ref{ch:beyond-rl}, these algorithms struggle to outperform the state-of-the-art algorithms in the most challenging setups.
+    As pointed out in section~\ref{sec:training-problems}, both algorithms suffer from an inability to be trained in the full HM3D dataset train split.
+    While further research is needed to understand the limitations of these algorithms, the experimental evidence suggests that the heavy modifications made to the original algorithms made them actually less effective than the original ones.
+    \item As the algorithms from chapter~\ref{ch:beyond-rl} showed bad performance in the most challenging setups, they were not tested in real robots.
+    However, tests on real robots are crucial to understand the limitations of the algorithms and how they can be improved, and they could have shown crucial insights on how to improve the algorithms.
+    \item All the algorithms studied or proposed in this thesis are based on robot learning.
+    All of them have at least one component trained using reinforcement learning or imitation learning.
+    However, these algorithms do not represent the whole space of algorithms that can be used for \acrshort{vsn}, and in more general any robotic task.
+    Moreover, these other algorithms can be used in conjunction with the proposed algorithms to improve their performance.
+    Nonetheless, this thesis is focused on learning algorithms, and other methods such as planning, control, or even classical computer vision methods are out of the scope.
+\end{itemize}
 
 \section{Future Research Lines}\label{sec:future-work}
 
+Despite much effort has been put into the development of this thesis, the ultimate goal of achieving a fully autonomous robot that can navigate and interact with the environment as humans do is still far from being achieved.
+Apart from all the required research that has to be made in order to fulfill the limitations and challenges listed in the previous section, there are several research lines that can be explored to further improve the state of the art in robotic visual navigation.
+
+First of all, despite the algorithms presented in chapter~\ref{ch:beyond-rl} are meant to bridge the gab between simulation and real-world scenarios, they have not been tested in real robots.
+By leveraging on the framework ROS4VSN proposed in chapter~\ref{ch:ros4vsn:-enable-real-world-robotic-visual-semantic-navigation}, these algorithms can be easily deployed in real robots and tested in real-world.
+This is the most immediate research line that can be explored, as it will reflect how these algorithms perform in real-world scenarios and how they can be improved.
+Nevertheless, developing algorithms in simulation and testing them in real robots is only the first step, even if they are meant to be used in real-world scenarios.
+The problem is that normal simulation time for end-to-end reinforcement learning algorithms surpasses that of a human lifetime.
+However, typically, humans are able to interact with an environment as soon as they reach their first year of life.
+This difference in learning time is due to the sample inefficiency of reinforcement learning algorithms, which is a well-known problem in the field.
+Making algorithms that can learn from real-world data in the same time as humans (or even faster) is a challenging task, but it is crucial to achieve fully autonomous robots.
+
+Second, in the particular case of MetaNav, proposed in section~\ref{sec:meta-imitation-learning}, there is one immediate research line that can be explored.
+Instead of using meta-imitation learning via a gradient-based approach, task-inference methods~\cite{Beck_2025, rakelly2019} can be used.
+These methods allow conditioning the policies to task representations, which can be meta-learned from the training tasks.
+This would allow for the main components of the model to be trained in the same fashion as the original algorithm, but with the added contextual information provided by the task representations.
+In the particular case of \acrshort{objnav}, these task representation could be inferred by some geometrical distribution of the object instances in the environment, such as the distance to the goal object, or even the visual features of the object.
+
+Finally, this since thesis has focused on the \acrshort{objnav} problem, all the algorithms and approaches proposed and analyzed only use visual information to navigate in an environment.
+However, there are other sources of information that can be used to improve the performance of the algorithms.
+For instance, the use of audio signals~\cite{Kondoh2023MultigoalAN} can be used to improve the performance of the algorithms in real-world scenarios, as it can provide additional information about the environment and the objects in it.
+Another example is the use of tactile sensors~\cite{Ota2023TactileEO}, which can provide additional information about the objects in the environment and can be used to improve the performance of the algorithms in real-world scenarios.
+
+These are just some examples of the many research lines that can be explored to further improve the state of the art in robotic visual navigation.
+Fortunately, the field of robotics is constantly evolving, and new approaches and methodologies are being developed every day.
+
 \section{Scientific Contributions}\label{sec:final-remarks}
 
-During the development of this thesis, it has been possible to contribute to topics of this thesis in several ways.
-It has also been possible to contribute to other topics that, although not directly related to the thesis, have been developed in parallel.
+During the development of this thesis, there have been contributions to several topics.
+Most of them are directly related to the main topic of the thesis.
+However, it has also been possible to contribute to other topics that, although not directly related to the thesis, have been developed in parallel.
 These have come from side projects or collaborations with other research groups and have contributed to the development of this thesis.
 All of them are summarized in the following subsections.
 
