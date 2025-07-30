@@ -33,14 +33,27 @@
 
 \addcontentsline{toc}{chapter}{Abstract}
 
-This document has been generated with a template for Bsc and Msc Thesis
-(trabajos fin de carrera, fin de máster, fin de grado) and PhD. Thesis,
-specially thought for its use in Universidad de Alcalá, although it
-should be easily extended and adapted for other use cases. In its
-content we include general instructions of use, and some example of
-elements than can be useful. If you have problemas, suggestions or
-comments on the template, please forward them to \contactauthor.
+This thesis explores Visual Semantic Navigation (VSN), a fundamental challenge in robotics where agents navigate in an environment using only visual information without prior maps.
+The work addresses three key challenges: navigating in unknown environments, sim-to-real adaptations, and real world performance.
+The research spans theoretical foundations, simulation-based evaluations, real-world implementations, and novel algorithmic approaches.
 
+The thesis begins by establishing a comprehensive theoretical framework for VSN, reviewing classical methods, modular-learning approaches, and end-to-end learning techniques.
+Exploration methods, sim-to-real transfer, offline reinforcement learning, and meta-learning methods are also reviewed.
+First, a VSN model that leverages CLIP encoders combined with recurrent neural networks, trained using Reinforcement Learning (RL), is proposed.
+To address the sparse reward problem inherent in navigation tasks, the research evaluates reward shaping techniques and ε-greedy exploration strategies.
+A thorough experimental evaluation protocol is developed using pyRIL for two navigation environments: Miniworld-Maze and Habitat with HM3D dataset.
+
+A significant contribution is the development of ROS4VSN, a novel Robot Operating System (ROS) framework that enables the deployment and evaluation of VSN models in real robots.
+This modular architecture includes components for robot control, camera integration, discrete movement execution, and VSN model integration.
+Two state-of-the-art VSN models (PIRLNav and VLV) are integrated into this framework and evaluated on real robotic platforms, revealing significant performance differences between simulated and real-world environments.
+
+The thesis also explores approaches beyond traditional RL to address real-world challenges.
+OffNav (Offline Visual Semantic Navigation) implements Implicit Q-Learning in a decentralized distributed manner, enabling training from fixed datasets without environment interaction.
+MetaNav (Meta Visual Semantic Navigation) combines meta-learning with imitation learning to enable rapid adaptation to new tasks with minimal examples.
+Both approaches aim to bridge the gap between simulation and reality by improving sample efficiency and generalization capabilities.
+
+The research concludes that while end-to-end learning methods show promise in simulated environments, modular approaches currently perform better in real-world scenarios.
+Future directions include exploring different meta-learning architectures, expanding beyond object navigation to more complex tasks, and incorporating additional sensory modalities like audio and tactile feedback.
 
 \textbf{Keywords:} \myThesisKeywordsEnglish.
 

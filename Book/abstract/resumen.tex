@@ -34,14 +34,27 @@
 
 \addcontentsline{toc}{chapter}{Resumen}
 
-Este documento ha sido generado con una plantilla para memorias de
-trabajos fin de carrera, fin de máster, fin de grado y tesis
-doctorales. Está especialmente pensado para su uso en la Universidad de
-Alcalá, pero debería ser fácilmente extensible y adaptable a otros casos
-de uso. En su contenido se incluyen las instrucciones generales para
-usarlo, así como algunos ejemplos de elementos que pueden ser de
-utilidad. Si tenéis problemas, sugerencias o comentarios sobre el mismo,
-dirigidlas por favor a \contactauthor.
+Esta tesis explora la Navegación Semántica Visual (VSN por sus siglas en inglés), un desafío fundamental en robótica donde los agentes navegan en un entorno utilizando únicamente información visual sin mapas previos.
+El trabajo aborda tres desafíos clave: navegar en entornos desconocidos, adaptaciones de simulación a realidad, y rendimiento en el mundo real.
+La investigación abarca fundamentos teóricos, evaluaciones basadas en simulación, implementaciones en el mundo real, y nuevos enfoques algorítmicos.
+
+La tesis comienza estableciendo un marco teórico integral para VSN, revisando métodos clásicos, enfoques de aprendizaje modular, y técnicas de aprendizaje extremo a extremo.
+También se revisan métodos de exploración, de transferencia de la simulación a la realidad, de aprendizaje por refuerzo offline, y de meta-aprendizaje.
+Primero se propone un modelo VSN que aprovecha codificadores CLIP combinados con redes neuronales recurrentes, entrenado usando Aprendizaje por Refuerzo (RL por sus siglas en inglés).
+Para abordar el problema de las recompensas escasas inherente a tareas de navegación, la investigación evalúa técnicas de modelado de recompensas y estrategias de exploración ε-greedy.
+Se desarrolla un protocolo de evaluación experimental exhaustivo usando pyRIL para dos entornos de navegación: Miniworld-Maze y Habitat con el conjunto de datos HM3D.
+
+Una contribución significativa es el desarrollo de ROS4VSN, un marco novedoso para el Robot Operating System (ROS) que permite el despliegue y evaluación de modelos de VSN en robots reales.
+Esta arquitectura modular incluye componentes para control robots, integración de cámaras, ejecución de movimientos discretos, e integración de modelos VSN.
+Dos modelos VSN de vanguardia (PIRLNav y VLV) se integran en este marco y se evalúan en plataformas robóticas reales, revelando diferencias significativas de rendimiento entre entornos simulados y del mundo real.
+
+Este trabajo también explora enfoques más allá del RL tradicional para abordar desafíos del mundo real.
+OffNav (Navegación Semántica Visual Offline) implementa Q-Learning Implícito de manera distribuida descentralizada, permitiendo el entrenamiento desde conjuntos de datos fijos sin interacción con el entorno.
+MetaNav (Meta Navegación Semántica Visual) combina meta-aprendizaje con aprendizaje por imitación para permitir adaptación rápida a nuevas tareas con ejemplos mínimos.
+Ambos enfoques buscan cerrar la brecha entre simulación y realidad mejorando la eficiencia de muestras y la capacidad de generalización.
+
+La investigación concluye que mientras los métodos de aprendizaje extremo a extremo son prometedores en entornos simulados, los enfoques modulares actualmente funcionan mejor en escenarios del mundo real.
+Las direcciones futuras incluyen explorar diferentes arquitecturas de meta-aprendizaje, expandir más allá de la navegación de objetos hacia tareas más complejas, e incorporar modalidades sensoriales adicionales como retroalimentación auditiva y táctil.
 
 \textbf{Palabras clave:} \myThesisKeywords.
 

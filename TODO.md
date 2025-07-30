@@ -11,7 +11,7 @@
 
 ## Small fixes
 
-- [ ] Make abstract.
+- [x] Make abstract.
 - [ ] Fix all references to "this paper" in chapters 2 and 3.
 - [ ] Fix meta nav abstract with $\pi_\theta$ instead of $f_\theta$.
 - [ ] Refine captions in section 5.
