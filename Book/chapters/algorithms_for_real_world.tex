@@ -31,7 +31,7 @@ To the best of our knowledge, this is the first time that an offline RL algorith
     \centering
     \includegraphics[width=0.7\linewidth]{figures/offnav/graphical_abstract}
     \caption{
-        By leveraging on the offline reinforcement learning paradigm, we can train agents from a fixed dataset of navigation experience, without querying any environment.
+        By leveraging on the offline reinforcement learning paradigm, agents can be trained from a fixed dataset of navigation experience, without querying any environment.
         This opens the possibility to create many navigation datasets from any navigation agent in any \textbf{real or simulated} environment, and then use them to train new agents for different scenarios without the need to ever query that environment.
     }
     \label{fig:abstract_offnav}
@@ -152,8 +152,8 @@ To the best of our knowledge, this is the first time that a meta imitation learn
     \centering
     \includegraphics[width=0.7\linewidth]{figures/metanav/graphical_abstract}
     \caption{
-        By leveraging on the meta imitation learning paradigm, we can train agents to adapt to new tasks with few examples.
-        This opens the possibility to create many navigation datasets from any navigation agent in any \textbf{real or simulated} environment, and then use them to train new agents for different scenarios without the need to ever query that environment.
+        The meta-imitation learning approach transforms the usual learning problem into a collection of small similar problems called tasks.
+        Here, the goal is to learn a policy that is generally good on all of them, while also adapting quickly to new tasks by using a small amount of new experience.
     }
     \label{fig:abstract_metanav}
 \end{figure}
@@ -268,7 +268,7 @@ However, if the episode is not finished, it can continue adapting and evaluating
         4                       & 23.07\%                           & 11.87\%                            & 12.23                                             \\
         5                       & 21.74\%                           & 9.38\%                             & 7.99                                              \\
     \end{tabular}
-    \caption{Evaluation of MetaNav on the \acrshort{vsn} task. Results obtained with continuous evaluation.}
+    \caption{Evaluation of MetaNav on the \acrshort{objnav} task. Results obtained with continuous evaluation.}
     \label{tab:metanav_continuos}
 \end{table}
 
@@ -284,7 +284,7 @@ However, if the episode is not finished, it can continue adapting and evaluating
         4                       & 16.67\%                           & 4.84\%                             & 12.72                                             \\
         5                       & 25.00\%                           & 9.31\%                             & 8.19                                              \\
     \end{tabular}
-    \caption{Evaluation of MetaNav on the \acrshort{vsn} task. Results obtained with per episode evaluation.}
+    \caption{Evaluation of MetaNav on the \acrshort{objnav} task. Results obtained with per episode evaluation.}
     \label{tab:metanav_episode}
 \end{table}
 
@@ -307,7 +307,7 @@ Only in setup 2, MetaNav is superior to PirlNav, while OffNav outperforms both o
         \textsc{Setup 5}            & \textbf{34.78\%} & 26.09\%          & 25.00\%          \\
         \bottomrule
     \end{tabular}
-    \caption{Success Rate for the three models on the different experimental setups.}
+    \caption{Success Rate for the Offnav, PirlNav and MetaNav models on the five experimental setups.}
     \label{tab:metanav_comparison}
 \end{table}
 

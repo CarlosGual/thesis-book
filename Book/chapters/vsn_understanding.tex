@@ -7,8 +7,7 @@ There are countless applications that could be supported by a robotic platform w
 From assistive robots that can accompany a person to perform a specific task, to platforms that navigate autonomously in complex work environments, such as logistics centers.
 
 %Describe the problem of visual semantic navigation (briefly)
-In this work, we address the problem of visual semantic navigation (\acrshort{vsn}).
-%In other words, mainly using vision-based sensors, we want a robot to learn to navigate through an environment so that it is able to reach a particular object in the surroundings, \eg a chair.
+This chapter addresses the problem of visual semantic navigation (\acrshort{vsn}).
 The goal is to make a robot capable of navigating through an environment to reach a particular object (the target) in the surroundings, such as a chair, mainly using vision-based sensors.
 Technically, a \acrshort{vsn} approach is a learning-based navigation model, where no geometry-based traditional techniques are applied.
 Nor the map of the environment is known a priori, neither the map is built on the fly.
@@ -363,7 +362,7 @@ These figures clearly show how in both cases a different valid goal is reached (
 \section{Conclusions}
 \label{sec:conclusions}
 
-In this paper, we offer a thorough experimental evaluation setup for the \acrshort{vsn} problem based on the open-source pyRIL library and two navigation environments: Miniworld-Maze; and a 3D scanned scene from HM3D database using Habitat simulator.
+In this work, we offer a thorough experimental evaluation setup for the \acrshort{vsn} problem based on the open-source pyRIL library and two navigation environments: Miniworld-Maze; and a 3D scanned scene from HM3D database using Habitat simulator.
 Following this proposal, we offer a detailed analysis of a state-of-the-art \acrshort{vsn} model based on a CLIP feature extractor and LSTMs encoders for the agent state, introducing also reward shaping and $\epsilon\text{-}greedy$ techniques.
 Our results confirm the impact of these techniques in both environments.
 The models, data and codes are publicly available at \url{https://github.com/gramuah/vsn} to encourage further research on \acrshort{vsn}\@.

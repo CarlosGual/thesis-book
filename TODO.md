@@ -12,12 +12,13 @@
 ## Small fixes
 
 - [x] Make abstract.
-- [ ] Fix all references to "this paper" in chapters 2 and 3.
-- [ ] Fix meta nav abstract with $\pi_\theta$ instead of $f_\theta$.
-- [ ] Refine captions in section 5.
+- [x] Fix all references to "this paper" in chapters 2 and 3.
+- [x] Fix meta nav abstract with $\pi_\theta$ instead of $f_\theta$.
+- [x] Refine captions in section 5.
 - [x] Reduce chapter 4 figures to line width.
 - [x] Check tables chapter 3.
+- [x] Delete all introduction sections in the chapters and just leave them without a section.
+- [x] Link to the scientific contributions in the conclusions.
+- [ ] Delete all "we" pronouns in the thesis.
 - [ ] Check if VF loss in OffNav makes sense to diverge or not.
 - [ ] Detect and prepare all acronyms.
-- [x] Delete all introduction sections in the chapters and just leave them without a section.
-- [ ] Link to the scientific contributions in the conclusions.
