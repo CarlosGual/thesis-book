@@ -7,25 +7,25 @@ This is a problem because querying real environments is expensive and time-consu
 
 Furthermore, another limitation of online RL is that it requires a large number of interactions to learn.
 This is known as sample-inefficiency, and it is a major bottleneck for real-world applications, as it requires a lot of time and resources to collect enough interactions to train a robot.
-In this chapter, we explore two alternative approaches to RL for robotic visual navigation: Offline Reinforcement Learning and Meta Imitation Learning.
+In this chapter, two alternative approaches to RL for robotic visual navigation are explored: Offline Reinforcement Learning and Meta Imitation Learning.
 
 
 \section{Offline Reinforcement Learning for Robotic Visual Navigation}\label{sec:offline_rl4rvsn}
 
-The first approach that we explore is Offline RL~\cite{levine2020}.
+The first approach that is explored is Offline RL~\cite{levine2020}.
 Offline RL consist on learning policies from a fixed dataset consisting in human demonstrations and their associated reward signals.
 This can be a powerful approach for training agents in complex environments, as it allows the agent to learn from a large amount of data without the need to interact with the environment.
-Therefore, in this work, we propose a novel approach to train \acrshort{vsn} agents without ever querying an environment, by leveraging on the Offline RL paradigm.
-We call this approach \textbf{Off}line Visual Semantic \textbf{Nav}igation (OffNav).
+Therefore, in this section, a novel approach to train \acrshort{vsn} agents without ever querying an environment is proposed, by leveraging on the Offline RL paradigm.
+This approach is called \textbf{Off}line Visual Semantic \textbf{Nav}igation (OffNav).
 
-Technically, we have implemented Implicit Q-Learning (IQL)~\cite{kostrikov2022offline} offline RL algorithm using the decentralized distributed philosophy of DD-PPO~\cite{wijmans2020} to create DD-IQL, a decentralized distributed version of IQL\@.
-Our DD-IQL is trained against a fixed dataset containing thousands of human navigation experiences~\cite{ramrakhya2023}.
-As depicted in Figure~\ref{fig:abstract_offnav}, we propose the OffNav approach, capable of efficiently learning the navigation policy required by a \acrshort{vsn} agent from human demonstrations.
+Technically, Implicit Q-Learning (IQL)~\cite{kostrikov2022offline} offline RL algorithm is implemented using the decentralized distributed philosophy of DD-PPO~\cite{wijmans2020} to create DD-IQL, a decentralized distributed version of IQL\@.
+The DD-IQL is trained against a fixed dataset containing thousands of human navigation experiences~\cite{ramrakhya2023}.
+As depicted in Figure~\ref{fig:abstract_offnav}, the OffNav approach is proposed, capable of efficiently learning the navigation policy required by a \acrshort{vsn} agent from human demonstrations.
 Subsequently, these policies can be deployed across various scenarios, and if necessary, further refined through online RL for more specific tasks.
 
-To demonstrate the capabilities of our implementation, we carried out a small analysis of its performance using different environments from HM3D dataset~\cite{Ramakrishnan2021HabitatMatterport3D}.
-Preliminary results shows that our DD-IQL implementation is able to learn navigation policies effectively.
-To the best of our knowledge, this is the first time that an offline RL algorithm is implemented for \acrshort{vsn}\@ and large environments, predicting actions directly from raw input observations.
+To demonstrate the capabilities of this implementation, a small analysis of its performance using different environments from HM3D dataset~\cite{Ramakrishnan2021HabitatMatterport3D} is carried out.
+Preliminary results shows that the DD-IQL implementation is able to learn navigation policies effectively.
+To the best of the author's knowledge, this is the first time that an offline RL algorithm is implemented for \acrshort{vsn}\@ and large environments, predicting actions directly from raw input observations.
 
 \begin{figure}
     \centering
@@ -39,25 +39,25 @@ To the best of our knowledge, this is the first time that an offline RL algorith
 
 \subsection{Offline Visual Semantic Navigation}\label{subsec:offline-navigation}
 
-In this work, we study \acrshort{objnav} navigation~\cite{batra2020}, a setup in which an agent is asked to navigate to a target object in an environment.
+In this section, \acrshort{objnav} navigation~\cite{batra2020} is studied, a setup in which an agent is asked to navigate to a target object in an environment.
 To perform this task, the agent does it using only egocentric perceptions.
 Specifically, the agent receives RGB images and GPS+Compass information that provides the agent with the current position and orientation relative to the starting point.
 The set of movements is discrete and consists of the following actions: \turnleft, \turnright, \moveforward, \lookup, \lookdown and \stopac.
 If the agent samples the \stopac action within 1m Euclidean distance respect to the target object within a 500 steps time limit, the episode is considered successful.
 In the other case, it is considered a failure.
 The performance of the navigation is measured by averaging the success over all the episodes present in an evaluation, and it receives the name of Success Rate (SR).
-We also report the Success weighted by Path Length (SPL) metric, which is the success rate weighted by the ratio between ideal and actual path length.
+The Success weighted by Path Length (SPL) metric is also reported, which is the success rate weighted by the ratio between ideal and actual path length.
 
-Since we are on an offline RL setup, we need a previously collected dataset of navigation experience.
-The dataset that we chose is collected in~\cite{ramrakhya2023}.
+Since an offline RL setup is used, a previously collected dataset of navigation experience is needed.
+The dataset that was chosen is collected in~\cite{ramrakhya2023}.
 It consists of 77k episodes of human navigation trajectories using the HM3D~\cite{Ramakrishnan2021HabitatMatterport3D} dataset.
 
-We train our policies using our DD-IQL implementation on the human demonstrations.
+The policies are trained using the DD-IQL implementation on the human demonstrations.
 The objetive is to find a policy with optimal parameters $\phi^*$ that maximizes the expected return from the dataset.
 To do so, the IQL algorithm relies on the use of expectile regression to modify a temporal-difference (TD) loss.
 This modified TD loss is able to learn an approximate Q-function from the dataset actions.
 This Q-function does not explicitly represent the corresponding policy, so a separate policy extraction step is needed.
-For policy extraction, we use advantage-weighted regression~\cite{peters2007, peng2019advantageweighted}:
+For policy extraction, advantage-weighted regression~\cite{peters2007, peng2019advantageweighted} is used:
 
 \begin{equation}
     L_\pi(\phi)=\mathbb{E}_{(s, a) \sim \mathcal{D}}\left[\exp \left(\beta\left(Q_{\hat{\theta}}(s, a)-V_\psi(s)\right)\right) \log \pi_\phi(a|s)\right]\; ,
@@ -66,26 +66,26 @@ For policy extraction, we use advantage-weighted regression~\cite{peters2007, pe
 
 where $\beta \in [0, \infty)$ controls the trade-off between cloning the expert policy and maximizing the Q-function.
 This loss can be seen as a selection of most optimal actions to clone in the dataset.
-We also employ inflection weighting~\cite{wijmans2019} to modify the loss function, thereby giving more importance to those time steps where there is a change in actions.
+Inflection weighting~\cite{wijmans2019} is also employed to modify the loss function, thereby giving more importance to those time steps where there is a change in actions.
 
-For the policy architecture, we use a simple CNN+RNN model from\cite{ramrakhya2023}.
-The difference is that we use ResNet18 for the visual encoders.
-We copy the same architecture for the policy net, the Q net and the Q target net.
-For the V net, we only use the visual encoder and a single linear layer, without any recurrent module.
+For the policy architecture, a simple CNN+RNN model from\cite{ramrakhya2023} is used.
+The difference is that ResNet18 is used for the visual encoders.
+The same architecture is copied for the policy net, the Q net and the Q target net.
+For the V net, only the visual encoder and a single linear layer are used, without any recurrent module.
 
 \subsection{Experiments and Results}\label{subsec:experiments_offnav}
 
 Is an offline RL algorithm able to learn navigation policies effectively?
-To answer this question, we have trained our DD-IQL model using the expert demonstrations on five different experimental setups.
+To answer this question, the DD-IQL model is trained using the expert demonstrations on five different experimental setups.
 These setups have been designed with an incremental difficulty.
 The first three are evaluated on the same environments in which the agents were trained, while the last two are evaluated on different environments.
 The details of the setups are depicted on figure~\ref{fig:setups}.
 
-We compare our results with the current state-of-the-art model PirlNav~\cite{ramrakhya2023}.
+The results are compared with the current state-of-the-art model PirlNav~\cite{ramrakhya2023}.
 This model is based on a two-phase training schedule.
 The first phase is a supervised learning phase, where the model is trained using behavior cloning on the expert demonstrations.
 The second phase is a reinforcement learning phase, where the model is fine-tuned using DD-PPO~algorithm~\cite{wijmans2020}.
-For a fair comparison, we train the PirlNav agent using only the behavior cloning phase on the same setups as our OffNav model.
+For a fair comparison, the PirlNav agent is trained using only the behavior cloning phase on the same setups as the OffNav model.
 
 Results are shown on table~\ref{tab:success}.
 It can be seen that both methods obtain similar performance on setups 1 to 3.
@@ -119,34 +119,35 @@ However, on setup 5, the most challenging one, OffNav outperforms PirlNav by 8.6
 
 \subsection{Conclusions and Future Work}\label{subsec:conclusions_offnav}
 
-From the results obtained in the experiments, we can conclude that the proposed OffNav method is able to learn navigation policies effectively from human demonstrations.
+From the results obtained in the experiments, it can be concluded that the proposed OffNav method is able to learn navigation policies effectively from human demonstrations.
 It can also be seen that the method is able to generalize to unseen environments, as shown in setups 4 and 5, and outperform the state-of-the-art model PirlNav~\cite{ramrakhya2023} in the most challenging one.
 Future work will focus on training the policy with more diverse environments to improve its generalization capabilities and further extend this analysis.
+The next section explores a different approach to train agents from a fixed dataset, but with the ability to adapt quickly to new tasks with few examples.
 
 
 \section{Meta Imitation Learning for Real World Navigation}\label{sec:mil-for-real-world-navigation}
 
-In section~\ref{sec:offline_rl4rvsn}, we explored the possibility of training agents from a fixed dataset of human demonstrations using offline reinforcement learning.
+In section~\ref{sec:offline_rl4rvsn}, the possibility of training agents from a fixed dataset of human demonstrations using offline reinforcement learning was explored.
 Despite the elimination of the need to query environments, this approach still requires a large amount of data to learn effectively.
 This reduces the applicability of this approach in real-world scenarios, where collecting large datasets can become an unfeasible task.
-To address this issue, we explore a different approach that can also learn from a fixed dataset, but with the ability to adapt quickly to new tasks with few examples.
-This will help us to bridge the gab between training agents in simulation and deploying them in the real world.
+To address this issue, a different approach that can also learn from a fixed dataset, but with the ability to adapt quickly to new tasks with few examples is explored.
+This will help to bridge the gab between training agents in simulation and deploying them in the real world.
 
-This second approach that we explore is known as Meta Imitation Learning~\cite{finnOneShotVisualImitation2017}.
-Here we enter into a combination of two different paradigms: Imitation Learning and Meta Reinforcement Learning.
+This second approach that is explored is known as Meta Imitation Learning~\cite{finnOneShotVisualImitation2017}.
+Here a combination of two different paradigms is used: Imitation Learning and Meta Reinforcement Learning.
 On the one hand, Meta Reinforcement learning~\cite{Beck_2025} is a set of techniques that try to teach agents to learn how to learn, enabling them to adapt quickly to new tasks with few examples.
 Imitation Learning~\cite{10602544}, on the other hand, is a paradigm that allows agents to learn from demonstrations provided by an expert.
 Thus, Meta Imitation Learning (MIL) is a combination of both realms, allowing agents to learn from a small number of demonstrations and adapt quickly to new tasks.
-We could describe our approach as a meta-learning algorithm that learns to imitation learn.
-Figure~\ref{fig:abstract_metanav} illustrates the proposed approach, which we call \textbf{Meta} Visual Semantic \textbf{Nav}igation (MetaNav).
-In our setting, we learn a parametrized policy $\pi_\phi$ that can adapt to new tasks by learning from a small number of gradient updates.
-Due to this adaptability, we can train the policy on simulation using a set of task demonstrations, and then deploy it in the real world to perform new tasks.
+This approach can be described as a meta-learning algorithm that learns to imitation learn.
+Figure~\ref{fig:abstract_metanav} illustrates the proposed approach, which is called \textbf{Meta} Visual Semantic \textbf{Nav}igation (MetaNav).
+In this setting, a parametrized policy $\pi_\phi$ is learned that can adapt to new tasks by learning from a small number of gradient updates.
+Due to this adaptability, the policy can be trained on simulation using a set of task demonstrations, and then deployed in the real world to perform new tasks.
 
-The main question that we want to answer is: \textit{Can we learn visual navigation policies via meta imitation learning that can adapt to new tasks with few examples?}
-To answer this question, we have implemented a meta imitation learning algorithm based on the work of~\cite{finnOneShotVisualImitation2017}.
-We train our algorithm on a small set of different environments from HM3D dataset~\cite{Ramakrishnan2021HabitatMatterport3D}.
-Preliminary results show that our algorithm is able to learn visual navigation policies that can adapt to new tasks with few examples.
-To the best of our knowledge, this is the first time that a meta imitation learning algorithm is implemented for \acrshort{vsn}\@ and large environments, predicting actions directly from raw input observations.
+The main question that is sought to be answered is: \textit{Can visual navigation policies be learned via meta imitation learning that can adapt to new tasks with few examples?}
+To answer this question, a meta imitation learning algorithm based on the work of~\cite{finnOneShotVisualImitation2017} is implemented.
+The algorithm is trained on a small set of different environments from HM3D dataset~\cite{Ramakrishnan2021HabitatMatterport3D}.
+Preliminary results show that the algorithm is able to learn visual navigation policies that can adapt to new tasks with few examples.
+To the best of the author's knowledge, this is the first time that a meta imitation learning algorithm is implemented for \acrshort{vsn}\@ and large environments, predicting actions directly from raw input observations.
 
 \begin{figure}
     \centering
@@ -160,38 +161,38 @@ To the best of our knowledge, this is the first time that a meta imitation learn
 
 \subsection{Meta Imitation Learning for Robotic Visual Navigation}\label{subsec:meta-imitation-learning-for-robotic-visual-navigation}
 
-In this section, we describe the proposed Meta Imitation Learning algorithm for robotic visual navigation.
-We follow the approach of~\cite{finnOneShotVisualImitation2017}, in which a vision-based policy is trained to adapt to new tasks with few examples.
+In this section, the proposed Meta Imitation Learning algorithm for robotic visual navigation is described.
+The approach of~\cite{finnOneShotVisualImitation2017} is followed, in which a vision-based policy is trained to adapt to new tasks with few examples.
 
 \subsubsection{Problem setting}\label{subsubsec:problem-setting}
 
-As described in section~\ref{subsec:offline-navigation}, we focus on \acrshort{objnav} navigation~\cite{batra2020}, where an agent must reach a specified target object within an environment by sampling actions from a discrete set.
+As described in section~\ref{subsec:offline-navigation}, the focus is on \acrshort{objnav} navigation~\cite{batra2020}, where an agent must reach a specified target object within an environment by sampling actions from a discrete set.
 The available actions are discrete and include: \turnleft, \turnright, \moveforward, \lookup, \lookdown, and \stopac.
 An episode is considered successful if the agent selects the \stopac action within 1 meter of the target object and within a 500-step limit; otherwise, it is deemed a failure.
 The agent relies solely on egocentric observations to accomplish this task.
 In particular, it receives RGB images and GPS+Compass data, which provide its current position and orientation relative to the starting point.
 
-Since we are on an imitation learning setup, we need a previously collected dataset of navigation experience.
-The dataset that we chose is collected in~\cite{ramrakhya2023}.
+Since an imitation learning setup is used, a previously collected dataset of navigation experience is needed.
+The dataset that was chosen is collected in~\cite{ramrakhya2023}.
 It consists of 77k episodes of human navigation trajectories using the HM3D~\cite{Ramakrishnan2021HabitatMatterport3D} dataset.
 This dataset consists of a set of photorealistic 3D indoor environments, each containing a variety of objects and different scenes.
 
-Finally, we define a task as a tuple of the form $\mathcal{T} = (G, S)$, where $G$ is the target object and $S$ the scene in which the navigation is taking place.
+Finally, a task is defined as a tuple of the form $\mathcal{T} = (G, S)$, where $G$ is the target object and $S$ the scene in which the navigation is taking place.
 Each task can contain multiple demonstrations $\tau_i$, each of them recorded by a human and always on the same scene and seeking the same target object.
 The variability of the demonstrations comes from the random starting points in each episode and the different paths that the human can take to reach any of the several instances of the target object.
-Thus, our goal is to learn a policy $\pi_\theta$ that can quickly adapt to combinations of new target objects $G$ and scenes $S$.
+Thus, the goal is to learn a policy $\pi_\theta$ that can quickly adapt to combinations of new target objects $G$ and scenes $S$.
 
 \subsubsection{Problem formulation}\label{subsubsec:problem-formulation}
 
-We consider a set of tasks $\mathcal{T}_i = (G, S)$ drawn from a distribution $p(\mathcal{T})$.
+A set of tasks $\mathcal{T}_i = (G, S)$ drawn from a distribution $p(\mathcal{T})$ is considered.
 Each task $\mathcal{T}_i$ consists of a collection of observations $o$ and actions $a$ generated by an expert policy $\pi^*_i$:
 \begin{equation}
     \tau = \{o_1, a_1, \dots, o_T, a_T\} \sim \pi^*_i,
 \end{equation}
 
 where $T$ is the length of the demonstration or trajectory $\tau$.
-Our objective is to learn a policy $\pi_\theta$ that maps observations $o$ to predicted actions $\hat{a}$ from different demonstrations sampled from the task distribution.
-Since we are in an imitation learning context with discrete actions, we use behavior cloning loss to train the policy from the demonstrations:
+The objective is to learn a policy $\pi_\theta$ that maps observations $o$ to predicted actions $\hat{a}$ from different demonstrations sampled from the task distribution.
+Since an imitation learning context with discrete actions is used, behavior cloning loss is employed to train the policy from the demonstrations:
 
 \begin{equation}
     \mathcal{L}^*_{\mathcal{T}_i}(\pi_\theta) = \sum_{\tau_j \sim \mathcal{T}_i} \sum_{(o_t, a_t) \in \tau^i}^T -\log (\pi_\theta(a_t|o_T)).
@@ -199,10 +200,10 @@ Since we are in an imitation learning context with discrete actions, we use beha
 \end{equation}
 
 This loss function is known as the inner loss, and its function is to adapt the policy to a specific task.
-By applying gradient descent to the inner loss, we can compute the adapted parameters $\theta^\prime_i = \theta-\alpha\nabla_{theta}\mathcal{L}^*_{\mathcal{T}_i}(\pi_\theta)$ of the policy.
+By applying gradient descent to the inner loss, the adapted parameters $\theta^\prime_i = \theta-\alpha\nabla_{theta}\mathcal{L}^*_{\mathcal{T}_i}(\pi_\theta)$ of the policy can be computed.
 Inflection weighting~\cite{wijmans2019b} is applied to the inner loss function to emphasize time steps corresponding to action changes.
 
-Once we have the adapted parameters $\theta^\prime_i$, we can use them to compute the outer loss, which is used to update the policy parameters $\theta$.
+Once the adapted parameters $\theta^\prime_i$ are obtained, they can be used to compute the outer loss, which is used to update the policy parameters $\theta$.
 The outer loss is also known as the meta-loss or meta-objective, and it is defined as:
 
 \begin{equation}
@@ -214,13 +215,13 @@ Intuitively, this meta-loss acts as a regularization term over a ``fine-tuning''
 This encourages the policy to find an average over $\theta$ meta-parameters with respect to the task distribution.
 Then, the meta-parameters can adapt to new tasks with few gradient updates, since the distance between the adapted parameters $\theta^\prime_i$ and the original parameters $\theta$ is being minimized across set of tasks.
 Note that for this goal, the meta-loss implies the use of double derivatives, which can be computationally expensive.
-In practice, we can use a first-order approximation of the meta-loss~\cite{finn2017}, which allows us to compute the outer loss without the need for second derivatives.
+In practice, a first-order approximation of the meta-loss~\cite{finn2017} is used, which allows to compute the outer loss without the need for second derivatives.
 
 \subsection{Experiments}\label{subsec:experiments_metanav}
 
 \subsubsection{Experimental setup}\label{subsubsec:experimental-setup}
 
-We use the same dataset divided in five setups as in section~\ref{subsec:experiments_offnav}.
+The same dataset divided in five setups as in section~\ref{subsec:experiments_offnav} is used.
 This dataset is a reduced version of the one used in~\cite{ramrakhya2023}, so the algorithm can be trained in a reasonable amount of time.
 A scheme with the details of the setups is depicted in figure~\ref{fig:setups}.
 However, in this case, the setups four and five do not include human demonstrations.
@@ -228,8 +229,8 @@ In that case, they had to be generated by a different pretrained model.
 The one chose was the PirlNav model~\cite{ramrakhya2023}, which has 70.4\% SR on the whole HM3D evaluation split.
 
 The policy architecture is based on a straightforward CNN+RNN model as described in~\cite{ramrakhya2023}, with the modification that ResNet18 is employed for the visual encoders.
-The implementation of the algorithm is based on the decentralized distributed philosophy of DD-PPO~\cite{wijmans2020}, which allows us to train the algorithm in a distributed manner.
-We adapt the DD-PPO algorithm to the meta imitation learning setting by modifying the inner loss function to include the behavior cloning loss from equation~\ref{eq:loss_metanav} and include the outer loss function from equation~\ref{eq:meta_loss_metanav}.
+The implementation of the algorithm is based on the decentralized distributed philosophy of DD-PPO~\cite{wijmans2020}, which allows to train the algorithm in a distributed manner.
+The DD-PPO algorithm is adapted to the meta imitation learning setting by modifying the inner loss function to include the behavior cloning loss from equation~\ref{eq:loss_metanav} and include the outer loss function from equation~\ref{eq:meta_loss_metanav}.
 
 \subsubsection{Evaluation}\label{subsubsec:evaluation_metanav}
 
@@ -245,7 +246,7 @@ In per episode evaluation, the agent receives a fixed number of steps to adapt t
 Then it is evaluated on the same task until the episode is finished, either by a success or by a reach of the max steps.
 The agent always uses 64 steps for adaptation, and in continuous evaluation, it uses 64 steps for evaluation.
 Navigation performance is evaluated again by Success Rate (SR) and Success weighted by Path Length (SPL) metrics.
-Additionally, we also report the average distance to the goal at the end of the episode, which is known as Distance to Goal.
+Additionally, the average distance to the goal at the end of the episode, which is known as Distance to Goal, is also reported.
 
 \subsection{Results}\label{subsec:results_metanav}
 
@@ -288,11 +289,10 @@ However, if the episode is not finished, it can continue adapting and evaluating
     \label{tab:metanav_episode}
 \end{table}
 
-The next goal is to compare the performance of the algorithm with the newest models.
-We compare our results with state-of-the-art model PirlNav~\cite{ramrakhya2023} and the OffNav model from section~\ref{sec:offline_rl4rvsn}.
+To compare the performance of the algorithm with the newest models, the results are evaluated against the state-of-the-art model PirlNav~\cite{ramrakhya2023} and the OffNav model from section~\ref{sec:offline_rl4rvsn}.
 The results of the comparison are shown in table~\ref{tab:metanav_comparison}.
-It can be seen that in almost any of the setups, the MetaNav model outperforms the OffNav or PirlNav models.
-Only in setup 2, MetaNav is superior to PirlNav, while OffNav outperforms both of them.
+The analysis reveals that in almost all setups, the MetaNav model outperforms the OffNav or PirlNav models.
+In setup 2, however, while MetaNav demonstrates superiority over PirlNav, OffNav outperforms both algorithms.
 
 \begin{table}
     \centering
@@ -314,21 +314,22 @@ Only in setup 2, MetaNav is superior to PirlNav, while OffNav outperforms both o
 \subsection{Conclusions}\label{subsec:conclusions_metanav}
 
 The experimental results demonstrate that the proposed MetaNav approach can effectively learn visual navigation policies capable of adapting to new tasks with limited examples.
-However, the performance of the algorithm varies across different setups, and it is not able to outperform the state-of-the-art models in all cases.
-This is a contradictory result, as the model is given a little additional experience from the evaluation episodes, while the other models do not have any input from the evaluation episodes.
-This could be due to the meta imitation learning setup, which is based on a policy-gradient method~\cite{Beck_2025}.
-Further work is needed to search for different meta-learning algorithms that can improve the performance of the algorithm, without changing the main training philosophy of the algorithm.
+However, the performance of the algorithm varies across different setups, and it does not outperform the state-of-the-art models in all cases.
+This represents a contradictory result, as the model receives additional experience from the evaluation episodes, while the other models do not have any input from the evaluation episodes.
+This phenomenon could be attributed to the meta imitation learning setup, which is based on a policy-gradient method~\cite{Beck_2025}.
+Further research is required to explore different meta-learning algorithms that can improve the performance of the algorithm, without altering the main training philosophy of the approach.
+The next section discusses the training problems encountered during the experiments and how they can be addressed in future work.
 
 \section{Training Problems}\label{sec:training-problems}
 
-Despite presenting totally different approaches to tackle the problem of robotic visual navigation on this chapter, both Offline Reinforcement Learning and Meta Imitation Learning have suffered from the same limitation.
-This limitation is its inability to learn navigation policies from the whole set of training environments present in the HM3D dataset~\cite{Ramakrishnan2021HabitatMatterport3D}.
-This is the reason why all the experiments presented in this chapter have been done using a reduced version of the HM3D dataset.
+Despite presenting different approaches to tackle the problem of robotic visual navigation in this chapter, both Offline Reinforcement Learning and Meta Imitation Learning have encountered the same limitation.
+This limitation concerns the inability to learn navigation policies from the complete set of training environments present in the HM3D dataset~\cite{Ramakrishnan2021HabitatMatterport3D}.
+For this reason, all the experiments presented in this chapter have been conducted using a reduced version of the HM3D dataset.
 
 % Hablar de que por eso hemos usado un dataset reducido.
 % Poner un par de gráficas de entrenamientos para ver que la pérdida no se estabiliza.
-In figure~\ref{fig:training_problems}, we can see the average training curves of both algorithms for four different runs, each one on the full training dataset.
-The training curves show that the loss is not able to stabilize, and the performance of the algorithms does not improve over time.
+Figure~\ref{fig:training_problems} presents the average training curves of both algorithms for four different runs, each conducted on the full training dataset.
+The training curves demonstrate that the loss fails to stabilize, and the performance of the algorithms does not improve over time.
 In the case of OffNav, the average value function loss even diverges.
 This is a clear indication that the algorithms are not able to learn from the whole dataset, which translates in a very poor SR, close to 0\%.
 

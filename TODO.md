@@ -19,6 +19,6 @@
 - [x] Check tables chapter 3.
 - [x] Delete all introduction sections in the chapters and just leave them without a section.
 - [x] Link to the scientific contributions in the conclusions.
-- [ ] Delete all "we" pronouns in the thesis.
-- [ ] Check if VF loss in OffNav makes sense to diverge or not.
+- [x] Delete all "we" pronouns in the thesis.
 - [ ] Detect and prepare all acronyms.
+- [ ] Check if VF loss in OffNav makes sense to diverge or not.
