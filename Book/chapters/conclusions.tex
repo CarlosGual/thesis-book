@@ -1,7 +1,7 @@
 \chapter{Conclusions}\label{ch:conclusions}
 
-\lettrine{\textcolor{accent_color}{T}}{his} thesis has focused on the exploration of robotic visual navigation, specifically in the context of visual semantic navigation, and how it can be improved through the use of reinforcement learning methodologies.
-The main objective has been to develop a new ROS~\cite{ros} framework that allows the integration of different algorithms and environments, as well as to explore new approaches to offline reinforcement learning and meta imitation learning for robotic visual navigation.
+\lettrine{\textcolor{accent_color}{T}}{his} thesis has focused on the exploration of robotic visual navigation, specifically in the context of visual semantic navigation, and how it can be improved through the use of \acrshort{rl} methodologies.
+The main objective has been to develop a new \acrshort{ros} framework that allows the integration of different algorithms and environments, as well as to explore new approaches to offline \acrshort{rl} and \acrshort{mil} for robotic visual navigation.
 Concretely, the thesis has focused into studying and solving the \acrshort{objnav} problem in the real world, which consists of navigating to a specific object instance in an determined environment using visual information.
 This is a challenging task since it involves a combination of several abilities, such as visual perception, semantic understanding, and navigation in complex environments.
 
@@ -73,7 +73,7 @@ Some of these elements are listed below:
 \begin{itemize}
     \item The \acrshort{vsn} models employed alongside this thesis are always based on the same principle: a visual feature extractor (typically CNNs, but not limited to) plus RNNs to output action distributions.
     This is a good starting point and has been identified as a strong baseline for navigation models~\cite{wijmans2020}.
-    However, navigation could be improved by using more recent architectures, such as transformers~\cite{Vaswani2017AttentionIA} or diffusion~\cite{pmlr-v37-sohl-dickstein15} models, which have shown to be also effective in embodied AI tasks~\cite{Shah2023ViNTAF, ren2025prior}.
+    However, navigation could be improved by using more recent architectures, such as transformers~\cite{Vaswani2017AttentionIA} or diffusion~\cite{pmlr-v37-sohl-dickstein15} models, which have shown to be also effective in embodied \acrshort{ai} tasks~\cite{Shah2023ViNTAF, ren2025prior}.
     \item All the proposed algorithms and analysis performed for \acrshort{vsn} are based on the same task formulation: navigating to a specific object instance in an environment, known as \acrshort{objnav}.
     While this is still a challenging task, specially in the real world and dynamic environments, there are other tasks that could be explored.
     As expressed in chapter~\ref{ch:introduction}, if we want a robot to be able to interact with the environment as humans, it has to be able to perform more complex tasks than just navigating to a specific object instance.
@@ -81,7 +81,7 @@ Some of these elements are listed below:
     Some of them, but not all are: vision and language navigation~\cite{Anderson2017VisionandLanguageNI}, in which and agent has to navigate to a specific location in an environment based on a natural language instruction; HAZARD navigation~\cite{Zhou2024HAZARDCE}, in which an agent has to rescue a given set of objects from disasters such as fires, floods, and winds; Open-Vocabulary Mobile Manipulation~\cite{homerobotovmm, homerobotovmmchallenge2023}, which is the problem of picking any object in any unseen environment, and placing it in a commanded location; or even more dynamic tasks such as Social Navigation~\cite{puig2024habitat}, a set of tasks that involve cooperation between multiple agents or agents and humans.
     Some of these tasks can be about navigating in an environment while avoiding moving humans, or even rearranging objects in coordination with a human agent.
     \item While this thesis proposes two new algorithms for \acrshort{vsn} based on offline reinforcement learning and meta-imitation learning in chapter~\ref{ch:beyond-rl}, these algorithms struggle to outperform the state-of-the-art algorithms in the most challenging setups.
-    As pointed out in section~\ref{sec:training-problems}, both algorithms suffer from an inability to be trained in the full HM3D dataset train split.
+    As pointed out in section~\ref{sec:training-problems}, both algorithms suffer from an inability to be trained in the full \acrshort{hm3d} dataset train split.
     While further research is needed to understand the limitations of these algorithms, the experimental evidence suggests that the heavy modifications made to the original algorithms made them actually less effective than the original ones.
     \item As the algorithms from chapter~\ref{ch:beyond-rl} showed bad performance in the most challenging setups, they were not tested in real robots.
     However, tests on real robots are crucial to understand the limitations of the algorithms and how they can be improved, and they could have shown crucial insights on how to improve the algorithms.
@@ -154,6 +154,6 @@ All of them are summarized in the following subsections.
     See paper \href{https://arxiv.org/abs/2404.07729}{here}.
     \item Lafuente-Arroyo S., Maldonado-Bascón S., Delgado-Mena D., \textbf{Gutiérrez-Alvarez C.}, Acevedo-Rodríguez F.J., \textit{Multisensory Integration for Topological Indoor Localization of Mobile Robots in Complex Symmetrical Environments}, in Expert Systems with Applications, 2023.
     See paper \href{https://www.sciencedirect.com/science/article/pii/S0957417423030634}{here}.
-    \item Nasri N, López-Sastre RJ, Pacheco-da-Costa S, Fernández-Munilla I, \textbf{Gutiérrez-Álvarez C.}, Pousada-García T, Acevedo-Rodríguez FJ, Maldonado-Bascón S. \textit{Assistive Robot with an AI-Based Application for the Reinforcement of Activities of Daily Living: Technical Validation with Users Affected by Neurodevelopmental Disorders}, in Applied Sciences, 2022.
+    \item Nasri N, López-Sastre RJ, Pacheco-da-Costa S, Fernández-Munilla I, \textbf{Gutiérrez-Álvarez C.}, Pousada-García T, Acevedo-Rodríguez FJ, Maldonado-Bascón S. \textit{Assistive Robot with an \acrshort{ai}-Based Application for the Reinforcement of Activities of Daily Living: Technical Validation with Users Affected by Neurodevelopmental Disorders}, in Applied Sciences, 2022.
     See paper \href{https://www.mdpi.com/2076-3417/12/19/9566}{here}.
 \end{itemize}

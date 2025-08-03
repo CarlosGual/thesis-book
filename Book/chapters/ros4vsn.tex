@@ -2,7 +2,7 @@
 
 %Motivation an \acrshort{vsn} problem description.
 \lettrine{\textcolor{accent_color}{C}}{an} a robotic agent navigate and interact in the real world as seamlessly as humans do?
-This is the fundamental question driving research within the embodied AI community.
+This is the fundamental question driving research within the embodied \acrshort{ai} community.
 The problem is formally known as Visual Semantic Navigation (\acrshort{vsn}), \eg~\cite{ramrakhya2023,Cai2024DGMemLV,chang2020}.
 However, mimicking human navigation is a challenging task for robots, particularly in unseen environments, as it requires efficient exploration and a deep understanding of the objects and structures within the space.
 For unknown scenarios, humans can leverage prior semantic information achieved from previous scenes to navigate in new environments, but it is still a challenging task to incorporate that knowledge into embodied agents, especially in real robotic platforms navigating in the real world.
@@ -15,7 +15,7 @@ The focus is on the Object-Goal Navigation (\objnav)~\cite{batra2020} problem.
 As observed in figure~\ref{fig:abstract_ros4vsn}, in the \objnav task the agent has to navigate from a random position to certain object goals present in the scene, mainly using vision-based sensors.
 In contrast with traditional geometric navigation approaches, where the navigation problem is solved typically by using a map or generating it on the fly (e.g. SLAM), \acrshort{vsn} models are learning-based approaches that use \emph{no} metric map.
 Therefore, \acrshort{vsn} solutions must learn visual representations of the environment to reduce the exploration time and better generalize to unseen scenes and object categories.
-Notably, many of these solutions combine reinforcement learning (RL) and/or imitation learning (IL) strategies with recent advances in deep learning models for visual perception to address the navigation problem in \emph{virtual} environments, where embodied AI agents are trained and tested.
+Notably, many of these solutions combine \acrshort{rl} and/or \acrshort{il} strategies with recent advances in \acrshort{dl} models for visual perception to address the navigation problem in \emph{virtual} environments, where embodied \acrshort{ai} agents are trained and tested.
 However, it is crucial to thoroughly investigate how the latest solutions to the \acrshort{vsn} problem perform when deployed with real robots navigating in real-world environments.
 This is where this chapter makes its most significant contribution.
 Although there are \acrshort{vsn} works that achieve \textit{near-human} navigation performance, \eg~\cite{ramrakhya2023}, these systems are mainly trained and tested in virtual environments, so how these models would behave in the real world remains a question to be answered.
@@ -66,7 +66,7 @@ In Section~\ref{subsec:vsn_models}, the selected \acrshort{vsn} models are justi
 The ROS4\acrshort{vsn} library has been designed to be modular and flexible, so that it can be easily adapted to different robots and \acrshort{vsn} models.
 It is built on top of ROS \textit{Noetic}~\cite{ros} open-source robotic middleware, because of its flexibility, support, compatibility, and popularity among the robotics community.
 ROS provides a collection of useful tools, libraries, and conventions to simplify the task of creating complex and robust robot behaviors across a wide variety of robotic platforms, which makes it suitable for this framework.
-The architecture of the framework has been designed to have three main capabilities: it can receive and process information from the environment, infer actions using an AI \acrshort{vsn} model, and control the actuators of a platform to reach a specific navigation goal.
+The architecture of the framework has been designed to have three main capabilities: it can receive and process information from the environment, infer actions using an \acrshort{ai} \acrshort{vsn} model, and control the actuators of a platform to reach a specific navigation goal.
 This design facilitates the integration of different \acrshort{vsn} models, since it only requires replacing the model with which the experiments are to be carried out.
 The architecture is divided into the following main packages, each of which plays a specific role: robot\_api, camera\_api, discrete\_move, and visual\_semantic\_navigation.
 These packages are connected to each other through ROS topics and services, and also to external hardware devices: a camera (RGB + Depth) and a differential drive robotic platform.
@@ -107,7 +107,7 @@ The modular design of ROS4\acrshort{vsn} allows it to be used with any other typ
 
 This package has been developed with the purpose of providing a precise and customizable control of the robotic platform through discrete navigation commands.
 Note that this is the way most \acrshort{vsn} models interact with their agents (\eg~\cite{ramrakhya2023,chang2020}).
-In embodied AI, navigation in simulated environments is performed using discrete action commands that agents execute to reach the specific goals: move forward (25 cm), turn left or right (30 degrees), or stop.
+In embodied \acrshort{ai}, navigation in simulated environments is performed using discrete action commands that agents execute to reach the specific goals: move forward (25 cm), turn left or right (30 degrees), or stop.
 The ROS4\acrshort{vsn} package acts as a server to which clients can request a set of discrete movements and configure the forward distance or turning angles.
 The package communications scheme is shown in detail figure~\ref{fig:discrete_move}.
 It is responsible for executing the actions requested by the visual\_semantic\_navigation package and sending a response when the action is completed.
@@ -128,7 +128,7 @@ That way, the visual\_semantic\_navigation package can wait for the response of 
 The discrete\_move server is in charge of sending the right \textit{/cmd\_vel} commands to the robot\_api package, so the robot can execute the requested action and receive the \textit{/odometry} topic information from the robot\_api package.
 That way, it can calculate the movement done by the robot, and stop the action when the requested action has been finished.
 
-Embodied AI navigation environments, such as Habitat~\cite{NEURIPS2021_021bbc7e}, are simulation environments where there are no movement errors in the agents.
+Embodied \acrshort{ai} navigation environments, such as Habitat~\cite{NEURIPS2021_021bbc7e}, are simulation environments where there are no movement errors in the agents.
 However, the scenario in question is the real world, with real robots.
 Therefore, ROS4\acrshort{vsn} must integrate error control strategies.
 To achieve this, the discrete\_move package includes two error correction strategies: one for the turn error $\epsilon_{turn}$ and one for the move straight error $\epsilon_{straight}$.
@@ -334,7 +334,7 @@ As of today, this model reports the best performance in the \objnav~\cite{batra2
 \end{figure}
 
 PILRNav is a \acrshort{vsn} approach that has been trained with a combination of imitation learning and a RL fine-tuning.
-The model uses behavior cloning (BC) to pre-train the \objnav policy on a dataset of $77k$ human demonstrations, amounting more than $2370$ human annotation hours, in the HM3D-Semantics v0.1 dataset~\cite{Ramakrishnan2021HabitatMatterport3D}.
+The model uses \acrshort{bc} to pre-train the \objnav policy on a dataset of $77k$ human demonstrations, amounting more than $2370$ human annotation hours, in the \acrshort{hm3d}-Semantics v0.1 dataset~\cite{Ramakrishnan2021HabitatMatterport3D}.
 This dataset provides up to 120 different 3D reconstructions of houses all around the world (see Figure~\ref{fig:scene_hm3d} for an example of one of them).
 Once this BC is finished, a RL fine-tuning is used following the DD-PPO approach~\cite{Wijmans2019DDPPOLN}.
 The policy architecture used is a simple CNN plus an RNN from~\cite{yadav2022}.
