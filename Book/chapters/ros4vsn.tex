@@ -36,14 +36,14 @@ Although there are \acrshort{vsn} works that achieve \textit{near-human} navigat
 This chapter aims to build true embodied agents by proposing a novel solution for the integration of \acrshort{vsn} models into real robots.
 The main contributions of this chapter are as follows:
 \begin{enumerate}
- \item The first contribution is the provision to the embodied agents community of the ROS4\acrshort{vsn} development, a novel Robot Operating System (ROS)~\cite{ros} based architecture that enables testing and comparing different \acrshort{vsn} models in real robots.
- The ROS4\acrshort{vsn} development is model agnostic; thus, any \acrshort{vsn} solution can be integrated into it with ease.
+ \item The first contribution is the provision to the embodied agents community of the ROS4VSNdevelopment, a novel Robot Operating System (ROS)~\cite{ros} based architecture that enables testing and comparing different \acrshort{vsn} models in real robots.
+ The ROS4VSNdevelopment is model agnostic; thus, any \acrshort{vsn} solution can be integrated into it with ease.
  Section~\ref{subsec:ros4vsn} includes all the technical details.
  \item The second contribution involves the embedding of two state-of-the-art \acrshort{vsn} models in two different robotic platforms.
  The selected models are PIRLNav~\cite{ramrakhya2023} and VLV~\cite{chang2020}.
  To achieve this integration, it is necessary to make technical adaptations to the models so that they transition from interacting with observations provided by simulation environments to observations from the real world.
  All these technical modifications to the models are detailed in Section~\ref{subsec:vsn_models}.
- \item Finally, an experimental evaluation of the adapted \acrshort{vsn} models is presented, using the ROS4\acrshort{vsn} framework, with two different robots, in a real world scenario (Section~\ref{sec:experiments}).
+ \item Finally, an experimental evaluation of the adapted \acrshort{vsn} models is presented, using the ROS4VSNframework, with two different robots, in a real world scenario (Section~\ref{sec:experiments}).
  The main question addressed with the designed experiments is: Are the state-of-the-art \acrshort{vsn} models able to successfully operate with real robots?
  The success rate in real world navigation experiments has been measured, which has enabled the analysis of the difference in performance compared to those tests in simulation environments, where embodied AI agents are typically tested.
  This chapter demonstrates that these \acrshort{vsn} solutions perform noticeably differently when evaluated in real-world and simulated situations.
@@ -55,15 +55,15 @@ The main objective of this research has been to efficiently integrate various st
 To fulfill this goal, the first step of the proposed methodology has been to develop a ROS-based solution to ease the integration of \acrshort{vsn} solutions into real robots.
 It is crucial that the approach is model-agnostic, allowing the integration of any \acrshort{vsn}-designed model.
 This development has been named ROS4\acrshort{vsn}, and it is detailed in Section~\ref{subsec:ros4vsn}.
-Once the ROS4\acrshort{vsn} system is available, some state-of-the-art \acrshort{vsn} models need to be selected that will enable the experimental evaluation with real robots.
-In Section~\ref{subsec:vsn_models}, the selected \acrshort{vsn} models are justified and the technical modifications made to integrate them into ROS4\acrshort{vsn} are detailed.
+Once the ROS4VSNsystem is available, some state-of-the-art \acrshort{vsn} models need to be selected that will enable the experimental evaluation with real robots.
+In Section~\ref{subsec:vsn_models}, the selected \acrshort{vsn} models are justified and the technical modifications made to integrate them into ROS4VSNare detailed.
 
-%ROS4\acrshort{vsn} description
+%ROS4VSNdescription
 
 \subsection{ROS4\acrshort{vsn}: ROS for Visual Semantic Navigation}
 \label{subsec:ros4vsn}
 
-The ROS4\acrshort{vsn} library has been designed to be modular and flexible, so that it can be easily adapted to different robots and \acrshort{vsn} models.
+The ROS4VSNlibrary has been designed to be modular and flexible, so that it can be easily adapted to different robots and \acrshort{vsn} models.
 It is built on top of ROS \textit{Noetic}~\cite{ros} open-source robotic middleware, because of its flexibility, support, compatibility, and popularity among the robotics community.
 ROS provides a collection of useful tools, libraries, and conventions to simplify the task of creating complex and robust robot behaviors across a wide variety of robotic platforms, which makes it suitable for this framework.
 The architecture of the framework has been designed to have three main capabilities: it can receive and process information from the environment, infer actions using an \acrshort{ai} \acrshort{vsn} model, and control the actuators of a platform to reach a specific navigation goal.
@@ -88,7 +88,7 @@ In the particular case of this research, the development of the framework and ex
 First, a Turtlebot 2 robot, so the standard turtlebot2~\cite{kobuki} package is integrated as robot\_api.
 Since the Turtlebot 2 expects the velocity commands in the \textit{/mobile\_base/commands/velocity} topic, a remapping to the \textit{/cmd\_vel} topic from the discrete\_move package is performed.
 The second robot is known as LOLA2~\cite{LOLA}.
-A complete robot\_api package has been developed to guarantee the compatibility with the rest of ROS4\acrshort{vsn} architecture.
+A complete robot\_api package has been developed to guarantee the compatibility with the rest of ROS4VSNarchitecture.
 
 In charge of the communication with the platform, this package is also responsible for publishing the robot's odometry information through the topic \textit{/odom} (odometry topic).
 This information is crucial for the visual\_seman\-tic\_navigation and discrete\_move packages.
@@ -100,15 +100,15 @@ On the other hand, the visual\_semantic\_navigation package can use the odometry
 This package is responsible for capturing RGB and depth images from the camera.
 It publishes them through the \textit{/camera/color} and \textit{/camera/depth} topics, respectively.
 The camera used in the robotic platforms is the Orbecc Astra S, an RGB plus depth camera, based on structured light technology.
-The official ros\_astra\_camera package~\cite{orbeccros} has been adapted to be integrated in the ROS4\acrshort{vsn} architecture.
-The modular design of ROS4\acrshort{vsn} allows it to be used with any other type of camera on the robots, simply by adapting this Camera API package.
+The official ros\_astra\_camera package~\cite{orbeccros} has been adapted to be integrated in the ROS4VSNarchitecture.
+The modular design of ROS4VSNallows it to be used with any other type of camera on the robots, simply by adapting this Camera API package.
 
 \subsubsection{Discrete Move package}\label{subsubsec:discrete-move-package}
 
 This package has been developed with the purpose of providing a precise and customizable control of the robotic platform through discrete navigation commands.
 Note that this is the way most \acrshort{vsn} models interact with their agents (\eg~\cite{ramrakhya2023,chang2020}).
 In embodied \acrshort{ai}, navigation in simulated environments is performed using discrete action commands that agents execute to reach the specific goals: move forward (25 cm), turn left or right (30 degrees), or stop.
-The ROS4\acrshort{vsn} package acts as a server to which clients can request a set of discrete movements and configure the forward distance or turning angles.
+The ROS4VSNpackage acts as a server to which clients can request a set of discrete movements and configure the forward distance or turning angles.
 The package communications scheme is shown in detail figure~\ref{fig:discrete_move}.
 It is responsible for executing the actions requested by the visual\_semantic\_navigation package and sending a response when the action is completed.
 
@@ -130,7 +130,7 @@ That way, it can calculate the movement done by the robot, and stop the action w
 
 Embodied \acrshort{ai} navigation environments, such as Habitat~\cite{NEURIPS2021_021bbc7e}, are simulation environments where there are no movement errors in the agents.
 However, the scenario in question is the real world, with real robots.
-Therefore, ROS4\acrshort{vsn} must integrate error control strategies.
+Therefore, ROS4VSNmust integrate error control strategies.
 To achieve this, the discrete\_move package includes two error correction strategies: one for the turn error $\epsilon_{turn}$ and one for the move straight error $\epsilon_{straight}$.
 
 The turn error is calculated in degrees as follows,
@@ -147,7 +147,7 @@ The move straight error is computed as:
 \end{equation}
 where $d$ is the displacement distance requested by the system, $(x,y)$ encodes the current position of the robot, and $(x_{init},y_{init})$ defines the initial position of the robot.
 A successful turn happens when $\epsilon_{turn}$ is less than 0.1 degrees and a successful displacement when $\epsilon_{straight}$ is less than 5 millimeters.
-The ROS4\acrshort{vsn} architecture continuously measures these errors to adapt the rotation and displacement movements of the robots, ensuring that they occur with the highest possible precision.
+The ROS4VSNarchitecture continuously measures these errors to adapt the rotation and displacement movements of the robots, ensuring that they occur with the highest possible precision.
 
 \paragraph*{\textbf{Acceleration and braking control}}\label{par:start-and-brake-control}
 
@@ -195,7 +195,7 @@ Table~\ref{tab:discrete_configuration} shows the configuration parameters and it
 
 \subsubsection{Visual Semantic Navigation package}\label{subsubsec:visual-semantic-navigation-package}
 
-One of the main features of the ROS4\acrshort{vsn} software is that it enables easy integration of different \acrshort{vsn} models independently of the robotic platform used.
+One of the main features of the ROS4VSNsoftware is that it enables easy integration of different \acrshort{vsn} models independently of the robotic platform used.
 To achieve this, it is essential to be agnostic with respect to the software environment needed by the particular \acrshort{vsn} model, as each model may require different dependencies.
 
 The goal of this package is to simplify the deployment of \acrshort{vsn} models on real robots, providing an efficient software structure for the execution of these methods.
@@ -269,8 +269,8 @@ These models are complementary in the sense that they are based on two paradigms
 This aspect allows the study, in the experimental evaluation, of which type of approach yields better results in the real world.
 Note that the intention is not to retrain these models but rather to subject them to evaluation in the real world.
 The aim is to analyze their generalization ability for navigation outside simulation environments.
-It is precisely thanks to the ROS4\acrshort{vsn} system that this can be done, as the technical modifications made to the models are oriented towards embedding them in a ROS-based system.
-Next, a detailed description of the modifications and adaptations made to these models is provided so that they can be integrated into ROS4\acrshort{vsn} and tested on real robotic platforms.
+It is precisely thanks to the ROS4VSNsystem that this can be done, as the technical modifications made to the models are oriented towards embedding them in a ROS-based system.
+Next, a detailed description of the modifications and adaptations made to these models is provided so that they can be integrated into ROS4VSNand tested on real robotic platforms.
 
 \subsubsection{VLV}
 
@@ -288,12 +288,12 @@ VLV employs Q-learning to learn from the video sequences that have been pseudo-l
 The learned Q-function, and the associated value function, implicitly learn semantic cues for navigation.
 In other words, the model learns what images lead to the desired category and what do not.
 
-For the experiments presented in this work, the VLV model was embedded in the ROS4\acrshort{vsn} architecture.
+For the experiments presented in this work, the VLV model was embedded in the ROS4VSNarchitecture.
 See Figure~\ref{fig:vlv_overview}.
 Technically, the two navigation policies detailed in the experiments in~\cite{chang2020} that were tested in the virtual environment Habitat~\cite{NEURIPS2021_021bbc7e} were integrated.
 However, the goal is now to implement them in a real robot in the real world.
 
-This integration into the robots, using the ROS4\acrshort{vsn} architecture, has consisted of the following steps.
+This integration into the robots, using the ROS4VSNarchitecture, has consisted of the following steps.
 First, a high-level policy that stores 12 images for each node in a topological graph (obtained by rotating 12 times by 30 degrees each) is used.
 This high-level policy uses the learned value function score over these 12 images, and samples the most promising direction for seeking objects of a particular object category.
 VLV needs an object detector output to produce the final score for these images.
@@ -301,10 +301,10 @@ This way, the high-level policy is equipped with a mechanism to seek the object 
 Specifically, the detector employed is the Mask R-CNN~\cite{mask-rcnn}, which was embedded in the architecture as well.
 To navigate, this policy uses the following discrete movements/actions: \moveforward 25cm, \turnright $30^\circ$ or \turnleft $30^\circ$.
 
-These movements are compatible with the developed discrete\_move package of the ROS4\acrshort{vsn} architecture.
+These movements are compatible with the developed discrete\_move package of the ROS4VSNarchitecture.
 Once a main direction has been chosen, the approach converts it into a short-term goal by sampling a location at an offset of 1.5 meters from the chosen node\textquotesingle s location, in the chosen view\textquotesingle s direction.
 This is done using the depth-camera and a low-level navigation policy that uses occupancy maps with a fast marching planning~\cite{Sethian1996} to execute robot actions to reach the short-term goal.
-These two policies have been integrated into the ROS4\acrshort{vsn} nodes, and with them, the robot can explore the environment.
+These two policies have been integrated into the ROS4VSNnodes, and with them, the robot can explore the environment.
 
 \begin{figure}
     \centering
@@ -336,10 +336,10 @@ As of today, this model reports the best performance in the \objnav~\cite{batra2
 PILRNav is a \acrshort{vsn} approach that has been trained with a combination of imitation learning and a RL fine-tuning.
 The model uses \acrshort{bc} to pre-train the \objnav policy on a dataset of $77k$ human demonstrations, amounting more than $2370$ human annotation hours, in the \acrshort{hm3d}-Semantics v0.1 dataset~\cite{Ramakrishnan2021HabitatMatterport3D}.
 This dataset provides up to 120 different 3D reconstructions of houses all around the world (see Figure~\ref{fig:scene_hm3d} for an example of one of them).
-Once this BC is finished, a RL fine-tuning is used following the DD-PPO approach~\cite{Wijmans2019DDPPOLN}.
+Once this BC is finished, a RL fine-tuning is used following the \acrshort{ddppo} approach~\cite{Wijmans2019DDPPOLN}.
 The policy architecture used is a simple CNN plus an RNN from~\cite{yadav2022}.
 
-In order to integrate PIRLNav into the ROS4\acrshort{vsn} architecture, the following actions were performed.
+In order to integrate PIRLNav into the ROS4VSN architecture, the following actions were performed.
 See figure~\ref{fig:pirlnav_overview}.
 The original PIRLNav needs to receive as inputs the RGB image that the agent observes, as well as the noiseless GPS and compass information offered by Habitat simulator.
 GPS and compass Habitat sensor provide the agent\textquotesingle s current location and orientation information relative to the start of the episode.
@@ -349,7 +349,7 @@ For the compass, the relative orientation is recovered by analyzing all the robo
 Note that these are not anymore noiseless sensors, as the ones used in the simulated world in which the PIRLNav model was trained.
 Fortunately, no important impact on the performance of the model was observed, due to this loss of precision for these sensors.
 
-PIRLNav is therefore integrated in the ROS4\acrshort{vsn} architecture to control the navigation of the robot as it has been detailed.
+PIRLNav is therefore integrated in the ROS4VSN architecture to control the navigation of the robot as it has been detailed.
 For every captured image, as well as the GPS+compass data, the model is able to determine the next discrete movement action to be executed by the robotic platforms.
 The action space used for the experiments with this model is: \moveforward 25 cm, \movebackward 25 cm, \turnright $30^\circ$, \turnleft  $30^\circ$ and \stopac.
 The original PIRLNav was also trained to produce the discrete action \lookup and \lookdown, since the simulated agent could tilt its camera.
@@ -359,7 +359,7 @@ This choice is based on the reasoning that, by raising the camera, more of the s
 Also, since lowering the camera provides a greater level of scene detail, moving forward is considered the most appropriate choice to replace the \lookdown action.
 Finally, to prevent collisions between the robot and objects in the scene, a procedure was developed that uses information from the depth image to detect obstacles at a given distance.
 Note that PIRLNav does not need any low-level policy as in the VLV model.
-The robot is controlled and navigates using only the set of discrete actions provided by the ROS4\acrshort{vsn} model.
+The robot is controlled and navigates using only the set of discrete actions provided by the ROS4VSN model.
 
 
 
@@ -402,7 +402,7 @@ This is the standard experiment on which most \acrshort{vsn} models are compared
 
 %Description of the robots
 Two different robots were used for the experiments: a Turtlebot 2, and the LOLA2~\cite{LOLA} platform.
-To do so, the ROS4\acrshort{vsn} was embedded in both of these platforms.
+To do so, the ROS4VSNwas embedded in both of these platforms.
 This can be easily done by adapting the robot\_api module described in Section~\ref{subsubsec:robot-api2}.
 Figure~\ref{fig:robots} shows the family picture of the robots invited to the experiments.
 The Turtlebot 2 was mainly used for the navigation experiments in the apartment described.
@@ -438,7 +438,7 @@ In particular, all the images observed by the robot during its trajectories have
 \end{figure}
 
 For the experiments, the following hardware-software setup was used, as shown in Figure~\ref{fig:setup_experiment}.
-The modular architecture of the developed ROS4\acrshort{vsn} system was used to deploy it in a distributed manner.
+The modular architecture of the developed ROS4VSNsystem was used to deploy it in a distributed manner.
 This architecture allows separating the execution of ROS packages on different devices, as long as they are connected to the same network.
 The robotic platforms were equipped with a laptop.
 This device was used to establish the communication with the robotic platform and the camera by executing the robot\_api and camera\_api packages.
@@ -526,7 +526,7 @@ Due to noise in the depth image, the target point calculation was inaccurate, le
 \label{subsubsec:pirlnav_results}
 
 The PIRLNav model analysis follows now in detail.
-Table~\ref{tab:pirlnav} shows the SR obtained for the PIRLNav model integrated into the ROS4\acrshort{vsn} architecture.
+Table~\ref{tab:pirlnav} shows the SR obtained for the PIRLNav model integrated into the ROS4VSNarchitecture.
 The SR reported for every object category is detailed.
 The agent was able to more easily locate the most common objects in the house, such as the chair and the monitor.
 The abundant and well-distributed presence of these objects facilitated the agent's work.
@@ -587,7 +587,7 @@ A video (see \url{https://youtu.be/nD0JBWNCMGg}) with more qualitative results f
 
 In this section, the stability of the navigation solution proposed is analyzed, showing how it can robustly navigate a considerable distance, in two different robots and over two different scenarios.
 The robots successfully navigated over more than 5 kilometers in less than 38 hours in two dynamic environments.
-The robots operated without direct assistance throughout the experiments, being automatically operated by the \acrshort{vsn} models integrated into the ROS4\acrshort{vsn} software architecture.
+The robots operated without direct assistance throughout the experiments, being automatically operated by the \acrshort{vsn} models integrated into the ROS4VSNsoftware architecture.
 
 \begin{table}
     \centering
@@ -611,10 +611,10 @@ This implies knowing the SR that these models are capable of delivering when tes
 Note that two \acrshort{vsn} models were selected that were originally trained with images of the real world.
 The intention was to reduce as much as possible the influence of domain shift, which is known to affect artificial intelligence systems.
 The study confirms that there is still room for improvement so that these models can achieve the same SR in real robots.
-It is expected, therefore, that the ROS4\acrshort{vsn} library plays a fundamental role in this line of research.
+It is expected, therefore, that the ROS4VSNlibrary plays a fundamental role in this line of research.
 
 Analyzing the particular behavior of the models, the following interesting discussion can be provided.
-The integration of the VLV and PIRLNav models within the ROS4\acrshort{vsn} architecture has proven to be successful.
+The integration of the VLV and PIRLNav models within the ROS4VSNarchitecture has proven to be successful.
 It has resulted in a mobile agent capable of navigating in closed environments autonomously, obtaining many experiments where the robotic platforms reach the target class without complications and following logical and direct trajectories.
 This navigation is comparable to that observed within simulated environments.
 For the VLV model that integrates an object detector, it has been observed that this fact has a significant impact on the agent's navigation, especially when it is close to the target class.
@@ -647,7 +647,7 @@ Finally, the study confirms some of the conclusions reported in recent works, \e
 Modular-learning models, such as VLV, perform better than end-to-end learning approaches, \eg~PIRLNav, when tested in the real world.
 
 \section{Conclusions}\label{sec:conclusions_ros4vsn}
-To conclude, a ROS-based framework for visual semantic navigation named ROS4\acrshort{vsn} has been presented.
+To conclude, a ROS-based framework for visual semantic navigation named ROS4VSNhas been presented.
 This framework allows to easily test and compare different \acrshort{vsn} models in real robots.
 Using ROS4\acrshort{vsn}, it has been possible to embed two cutting-edge \acrshort{vsn} models into two distinct real robotic platforms.
 The chosen models are PIRLNav~\cite{ramrakhya2023} and VLV~\cite{chang2020}.
