@@ -7,7 +7,7 @@ There are countless applications that could be supported by a robotic platform w
 From assistive robots that can accompany a person to perform a specific task, to platforms that navigate autonomously in complex work environments, such as logistics centers.
 
 %Describe the problem of visual semantic navigation (briefly)
-This chapter addresses the problem of visual semantic navigation (\acrshort{vsn}).
+This chapter addresses the problem of \acrlong{vsn}.
 The goal is to make a robot capable of navigating through an environment to reach a particular object (the target) in the surroundings, such as a chair, mainly using vision-based sensors.
 Technically, a \acrshort{vsn} approach is a learning-based navigation model, where no geometry-based traditional techniques are applied.
 Nor the map of the environment is known a priori, neither the map is built on the fly.
@@ -16,7 +16,7 @@ The majority of methods integrate \acrshort{rl} techniques with current developm
 \begin{figure}
     \centering
     \includegraphics[width=0.6\linewidth]{figures/understanding_vsn/graphical_abstract}
-    \caption{Can an agent pinpoint a target in a maze using a visual semantic navigation (\acrshort{vsn}) model based on state-of-the-art RL and deep learning models? This chapter explores and analyzes the solutions for the main challenges in \acrshort{vsn}, \ie unknown environments, visibility of targets and path planning.}
+    \caption{Can an agent pinpoint a target in a maze using a \acrshort{vsn} model based on state-of-the-art RL and deep learning models? This chapter explores and analyzes the solutions for the main challenges in \acrshort{vsn}, \ie unknown environments, visibility of targets and path planning.}
     \label{fig:graphical_abstract}
 \end{figure}
 
@@ -39,7 +39,7 @@ And third, even if the target is visible, the robot must devise a feasible route
 The main contributions of this chapter are as follows:
 \begin{enumerate}
     \item A \acrshort{vsn} model which leverages state-of-the-art \acrfull{clip} encoders~\cite{radford2021}.
-    Technically, it is a model that combines a \acrshort{clip} encoder with a set of two recurrent neural networks (\acrshort{rnn}s) for producing the discrete navigation actions that the agent needs to take (Section~\ref{sec:navigation}).
+    Technically, it is a model that combines a \acrshort{clip} encoder with a set of two \acrshort{rnn}s for producing the discrete navigation actions that the agent needs to take (Section~\ref{sec:navigation}).
     \item The agent is trained following a \acrshort{rl} paradigm for \acrshort{vsn}.
     This work evaluates the impact of each of the \acrshort{vsn} challenges mentioned above, using different techniques that have been proposed in the literature: reward shaping~\cite{sutton2018, wijmans2020} to deal with the sparsity of the reward signal naturally associated with the navigation problem; and $\epsilon\text{-}greedy$~\cite{mnih2013} as a mechanism to balance exploitation and exploration.
     \item A thorough experimental evaluation setup has been designed (Section~\ref{sec:experiments}) with the aim to offer a clear experimental environment in which to compare different \acrshort{vsn} approaches.
@@ -52,9 +52,9 @@ The main contributions of this chapter are as follows:
 
 \subsection{Problem Formulation}\label{subsec:problem-formulation}
 
-This chapter addresses the \acrshort{vsn} problem by using \acrfull{rl}.
+This chapter addresses the \acrshort{vsn} problem by using \acrshort{rl}.
 Thus, navigation can be described as a \acrfull{pomdp}, in which the agent, \ie a robot, navigates through an environment and tries to reach a determined object.
-This problem is known in the literature as the \acrshort{objnav} task~\cite{batra2020}.
+This problem is known in the literature as the \acrfull{objnav} task~\cite{batra2020}.
 
 Formally, given an initial observation distribution $p_0$, for the step $t$ the agent receives an observation $o_t \sim p_0(o)$ based on state $s_t$, which in this case is just an RGB image of what the robot observes.
 The agent takes action $a_t$, obtains reward $r_t$ from the environment and receives a new observation $o_{t+1} = \mathcal{T} (o_{t+1}|o_t, a_t)$, where $\mathcal{T}$ is the transition function.
@@ -121,7 +121,7 @@ In the beginning of the learning process, \ie when $\epsilon$ is high, random ac
 As the training process advances, lower $\epsilon$ values permit the agent to exploit the model knowledge to select the best action.
 This introduces a balance between exploration and exploitation.
 
-\textbf{Agent architecture.} The agent is encoded as a parameterized model consisting of a \acrshort{clip}~\cite{khandelwal2022} visual encoder connected to two actor-critic \acrshort{lstm}s that output a discrete distribution over the action space and the value, respectively.
+\textbf{Agent architecture.} The agent is encoded as a parameterized model consisting of a \acrshort{clip}~\cite{khandelwal2022} visual encoder connected to two actor-critic \acrfull{lstm} that output a discrete distribution over the action space and the value, respectively.
 A diagram of the implemented agent can be found in figure~\ref{fig:network_clip_diagram}.
 To train the models, \acrfull{ppo}~\cite{schulman2017}, an on-policy \acrshort{rl} algorithm, is used.
 
@@ -170,20 +170,20 @@ An \textit{oracle stop} configuration is followed in Habitat, in which the envir
 
 As for the evaluation metrics, the Maze models are evaluated using \acrfull{sr} and \acrfull{spe} metrics.
 Additionally, for Habitat models, \acrfull{spl} and \acrfull{dtg} metrics are also employed.
-All these are the standard metrics for the \acrfull{objnav} problem in Habitat Challenge~\cite{batra2020}.
+All these are the standard metrics for the \acrshort{objnav} problem in Habitat Challenge~\cite{batra2020}.
 
 \paragraph*{Implementation details}
 %Provide the details of the benchmark we propose: description of PyRIL, models for navigation, implementation details that can help others to replicate/understand the results.
 This work leverages on the state-of-the-art \acrshort{rl} approach for embodied navigation in~\cite{khandelwal2022} with some minor simplifications.
-As it is shown in figure~\ref{fig:network_clip_diagram}, the first part of the model consists of a pre-trained \acrfull{clip} plus RestNet50 module as feature extractor, which receives an RGB image and produces a latent vector of size 1024.
-The embeddings for the last 10 time steps are then computed and passed through a \acrfull{lstm} layer with 128 neurons.
+As it is shown in figure~\ref{fig:network_clip_diagram}, the first part of the model consists of a pre-trained \acrshort{clip} plus RestNet50 module as feature extractor, which receives an RGB image and produces a latent vector of size 1024.
+The embeddings for the last 10 time steps are then computed and passed through a \acrshort{lstm} layer with 128 neurons.
 Finally, two hidden linear layers of 128 neurons with a tanh unit for activation are concatenated.
 The agent has two separate networks, one for the actor and one for the critic.
 Both networks share the feature extractor.
 The output layer of the actor consists in a linear layer of the same dimension as the number of actions with a softmax function.
 The output layer of the critic consists of a linear layer with one neuron and linear activation.
 
-The \acrfull{ppo}~\cite{schulman2017} agent provided by pyRIL reinforcement learning library~\cite{pyRIL} is used.
+The \acrshort{ppo}~\cite{schulman2017} agent provided by pyRIL reinforcement learning library~\cite{pyRIL} is used.
 This is a lightweight python library which contains a collection of state-of-the-art deep reinforcement and imitation learning methods, environment wrappers, modularity and different prototyping options.
 
 As the codes are publicly released, a set of tools is provided to improve the reproducibility of \acrshort{rl} experiments, with clear and standardized evaluation protocols.
