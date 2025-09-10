@@ -43,7 +43,7 @@ The main contributions of this chapter are as follows:
     \item The agent is trained following a \acrshort{rl} paradigm for \acrshort{vsn}.
     This work evaluates the impact of each of the \acrshort{vsn} challenges mentioned above, using different techniques that have been proposed in the literature: reward shaping~\cite{sutton2018, wijmans2020} to deal with the sparsity of the reward signal naturally associated with the navigation problem; and $\epsilon\text{-}greedy$~\cite{mnih2013} as a mechanism to balance exploitation and exploration.
     \item A thorough experimental evaluation setup has been designed (Section~\ref{sec:experiments}) with the aim to offer a clear experimental environment in which to compare different \acrshort{vsn} approaches.
-    It has been implemented using pyRIL~\cite{pyRIL}, an open source python library for \acrshort{rl}, and two navigation environments: a maze navigation setup of Miniwolrd-Maze from \textit{gym-miniworld}~\cite{gym_miniworld}; and a navigation through a 3D photorealistic scan indoor space provided by \acrshort{hm3d} dataset~\cite{ramakrishnan2021} in Habitat~\cite{szot2021} simulator.
+    It has been implemented using pyRIL~\cite{pyRIL}, an open source python library for \acrshort{rl}, and two navigation environments: a maze navigation setup of Miniwolrd-Maze from \textit{gym-miniworld}~\cite{gym_miniworld}; and a navigation through a 3D photorealistic scan indoor space provided by \acrfull{hm3d} dataset~\cite{ramakrishnan2021} in Habitat~\cite{szot2021} simulator.
     The codes to reproduce the experiments are released, as well as the whole experimental setup, so that others can compare their work with these results.
 \end{enumerate}
 
@@ -242,7 +242,7 @@ When the agent reaches a corner near the target (red square), it can get stuck a
     \centering
     \begin{tabular}{c c c c c c}
         \toprule
-        Output type                                        & Maze & Success                  & \acrshort{spe}               & Reward                   \\
+        Output type                                        & Maze & \acrshort{sr}            & \acrshort{spe}               & Reward                   \\
         \midrule
         \multirow{2}{*}{Ours $+\; \epsilon\text{-}greedy$} & $S3$ & \textbf{0.75 $\pm$ 0.44} & \textbf{120.59 $\pm$ 111.85} & \textbf{6.80 $\pm$ 2.29} \\
         & $S5$ & \textbf{0.18 $\pm$ 0.38} & 534.40 $\pm$ 130.20          & \textbf{5.24 $\pm$ 5.73} \\
@@ -260,7 +260,7 @@ When the agent reaches a corner near the target (red square), it can get stuck a
     \centering
     \begin{tabular}{c c c c c c}
         \toprule
-        Reward function            & Exploration strategy     & Success                  & \acrshort{spe}               & Reward                   \\
+        Reward function            & Exploration strategy     & \acrshort{sr}            & \acrshort{spe}               & Reward                   \\
         \midrule
         \textit{distance reward}   & $\epsilon\text{-}greedy$ & \textbf{0.18 $\pm$ 0.38} & \textbf{534.40 $\pm$ 130.20} & \textbf{5.24 $\pm$ 5.73} \\
         \textit{navigation reward} & $\epsilon\text{-}greedy$ & 0.09 $\pm$ 0.29          & 575.86 $\pm$ 91.94           & 0.08 $\pm$ 0.26          \\
@@ -309,12 +309,12 @@ These figures clearly show how in both cases a different valid goal is reached (
 \begin{table}
     \begin{tabular}{c c c c c c}
         \toprule
-        Output type                       & Success                  & \acrshort{spl}                       & \acrshort{dtg}                       & \acrshort{spe}                           & Reward                   \\
+        Output type                             & \acrshort{sr}            & \acrshort{spl}           & \acrshort{dtg}           & \acrshort{spe}               & Reward                   \\
         \midrule
         Best agent $+\; \epsilon\text{-}greedy$ & \textbf{0.96 $\pm$ 0.19} & \textbf{$0.66 \pm 0.25$}  & \textbf{$0.25 \pm 0.85$}   & \textbf{189.99 $\pm$ 116.97} & \textbf{4.96 $\pm$ 1.99} \\
         Best agent $+\; stochastic$             & $0.73 \pm 0.45$          & $0.58 \pm 0.36$          & $0.63 \pm 1.17$          & $231.23 \pm 188.13$          & $3.52 \pm 3.90$          \\
 %        Ours $+\; deterministic$          & $0.13 \pm 0.33$         & $0.12 \pm 0.30$  $ $2.72 \pm 1.57$   & $432.57 \pm 161.40$          & $-2.03 \pm 3.84$         \\
-        $random$                          & $0.05 \pm 0.22$          & $0.02 \pm 0.10$          & $4.49 \pm 1.72$          & $495.50 \pm 26.96$           & $-4.68 \pm 2.16$         \\
+        $random$                                & $0.05 \pm 0.22$          & $0.02 \pm 0.10$          & $4.49 \pm 1.72$          & $495.50 \pm 26.96$           & $-4.68 \pm 2.16$         \\
         \bottomrule
     \end{tabular}
     \caption{\textbf{Best agent performance on 100 test episodes in Habitat.} The $\epsilon\text{-greedy}$ output mode reports the best results.}

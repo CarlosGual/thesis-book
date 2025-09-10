@@ -18,7 +18,7 @@ This can be a powerful approach for training agents in complex environments, as 
 Therefore, in this section, a novel approach to train \acrshort{vsn} agents without ever querying an environment is proposed, by leveraging on the Offline \acrshort{rl} paradigm.
 This approach is called \textbf{Off}line Visual Semantic \textbf{Nav}igation (OffNav).
 
-Technically, \acrfull{iql}~\cite{kostrikov2022offline} offline \acrshort{rl} algorithm is implemented using the decentralized distributed philosophy of \acrshort{ddppo}~\cite{wijmans2020} to create DD-\acrshort{iql}, a decentralized distributed version of \acrshort{iql}\@.
+Technically, an \acrfull{iql}~\cite{kostrikov2022offline} offline \acrshort{rl} algorithm is implemented using the decentralized distributed philosophy of \acrshort{ddppo}~\cite{wijmans2020} to create DD-\acrshort{iql}, a decentralized distributed version of \acrshort{iql}\@.
 The DD-\acrshort{iql} is trained against a fixed dataset containing thousands of human navigation experiences~\cite{ramrakhya2023}.
 As depicted in Figure~\ref{fig:abstract_offnav}, the OffNav approach is proposed, capable of efficiently learning the navigation policy required by a \acrshort{vsn} agent from human demonstrations.
 Subsequently, these policies can be deployed across various scenarios, and if necessary, further refined through online \acrshort{rl} for more specific tasks.

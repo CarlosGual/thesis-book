@@ -20,5 +20,9 @@
 - [x] Delete all introduction sections in the chapters and just leave them without a section.
 - [x] Link to the scientific contributions in the conclusions.
 - [x] Delete all "we" pronouns in the thesis.
-- [ ] Detect and prepare all acronyms.
-- [ ] Check if VF loss in OffNav makes sense to diverge or not.
+- [x] Detect and prepare all acronyms.
+- [x] Check if VF loss in OffNav makes sense to diverge or not.
+- [x] Check if acronyms do not appear long too many times.
+- [ ] Check and format all references.
+- [ ] Do short captions for figures and tables.
+- [ ] Check general text.

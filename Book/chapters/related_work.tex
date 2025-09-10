@@ -1,8 +1,8 @@
 \chapter{Related Work}\label{ch:related-work}
 
-\lettrine{\textcolor{accent_color}{A}}{s} the fields of \acrshort{vsn} and \acrshort{rl} are very broad, this chapter aims to provide an extensive and organized overview of the most relevant works in the literature.
+\lettrine{\textcolor{accent_color}{A}}{s} the fields of \acrlong{vsn} and \acrshort{rl} are very broad, this chapter aims to provide an extensive and organized overview of the most relevant works in the literature.
 More specifically, this chapter delves into the main topics discussed alongside this thesis.
-Since the main focus of this thesis is within robotic navigation, \acrlong{vsn} is the first topic covered.
+Since the main focus of this thesis is within robotic navigation, \acrshort{vsn} is the first topic covered.
 It will lay the groundwork for how the other topics are related to robotic navigation and how they can be applied.
 The following section will cover the sparsity and exploration methods, which are crucial for addressing the challenges of sparse rewards and exploration in \acrshort{rl}.
 The next section will discuss the simulation-to-reality transfer in robotic navigation, which is essential for deploying models trained in simulation to real robots.
@@ -85,7 +85,7 @@ The neural networks are trained using \acrfull{il} or \acrshort{rl} approaches.
 When \acrshort{il} is applied to the visual navigation problem, navigation policies are learnt from expert demonstrations (\eg~\cite{ramrakhya2022,yadav2022}).
 It can also be used combined with a \acrshort{rl} fine-tuning phase to achieve better performance~\cite{ramrakhya2023}.
 
-Other works focus on the use of an end-to-end \acrshort{rl} approach to solve \acrshort{objnav} navigation~\cite{zhu2017, gutierrez2019, khandelwal2022, Liu2022, Yadav2023OVRLV2AS, Xu2024DeepRL, YokoyamaHM3DOVONAD}.
+Other works focus on the use of an end-to-end \acrshort{rl} approach to solve \acrfull{objnav} navigation~\cite{zhu2017, gutierrez2019, khandelwal2022, Liu2022, Yadav2023OVRLV2AS, Xu2024DeepRL, YokoyamaHM3DOVONAD}.
 One of the most notable examples is the \acrfull{ddppo}~\cite{wijmans2020}, which laid the foundation and framework for training end-to-end and modular learning agents within Habitat simulator.
 \acrshort{ddppo} uses a \acrfull{ppo}~\cite{schulman2017} algorithm to train a visual navigation policy that can navigate to specified goals in a simulated environment.
 It also does it via Synchronous-\acrshort{rl} (see figure \ref{fig:ddppo}), which allows the agent to learn from multiple GPU batched environments, speeding up the training process.
@@ -185,7 +185,7 @@ Instead of a max over actions, \acrshort{iql} uses an expectile regression to es
 Another broad strategy is to constrain the learned policy to stay close to the behavior policy that generated the data.
 A prominent example is Batch-Constrained deep Q-learning (BCQ)~\cite{Fujimoto2018OffPolicyDR}, which modifies the Q-learning update to consider only actions that are likely under the offline dataset instead of maximizing over all actions.
 In practice, BCQ trains a generative model (e.g.,\ a \acrfull{vae}) to produce candidate actions similar to those in the dataset, ensuring that the policy cannot stray far from logged behavior.
-Likewise, Bootstrapping Error Accumulation Reduction (BEAR)~\cite{Kumar2019StabilizingOQ} and Behavior-Regularized Actor-Critic (BRAC)~\cite{Wu2019BehaviorRO} add explicit divergence penalties (\eg \acrshort{kl} or \acrshort{mmd}) to keep the learned policy distribution close to the dataset behavior policy.
+Likewise, Bootstrapping Error Accumulation Reduction (BEAR)~\cite{Kumar2019StabilizingOQ} and Behavior-Regularized Actor-Critic (BRAC)~\cite{Wu2019BehaviorRO} add explicit divergence penalties (\eg \acrfull{kl} or \acrfull{mmd}) to keep the learned policy distribution close to the dataset behavior policy.
 By limiting policy deviation, these methods address bootstrapping error and distribution shift, effectively preventing the agent from choosing out-of-distribution actions with erroneously high value estimates.
 Variants of this idea combine \acrshort{rl} updates with imitation learning: for instance, Advantage-Weighted Actor-Critic (AWAC)~\cite{Nair2020AcceleratingOR} and Critic-regularized Regression (CRR)~\cite{NEURIPS2020_588cb956} constrain the policy toward the dataset behavior while weighting actions by their estimated advantages, thus improving performance without sacrificing stability.
 Overall, policy constraint and behavior regularization approaches have proven effective both in simulation and in real-world settings by leveraging the data’s demonstrated behaviors as an anchor.

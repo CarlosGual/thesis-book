@@ -22,32 +22,33 @@ Although there are \acrshort{vsn} works that achieve \textit{near-human} navigat
 
 \begin{figure}
     \centering
-        \includegraphics[width=\linewidth]{figures/ros4vsn/abstract_paper}
-        \caption{
+    \includegraphics[width=\linewidth]{figures/ros4vsn/abstract_paper}
+    \caption{
         \acrshort{objnav} task is a complex navigation problem.
         An agent needs to employ vision-based sensors to navigate from a random starting point to specific object goals within the scene.
         Many different hardware and software components need to be fully integrated to solve it, making it difficult to deploy and test these \acrshort{vsn} models in real robots.
         Therefore, the best current solutions are trained and tested in virtual environments.
         The goal is to bridge the gap between virtual and physical environments by providing a ROS-based framework that simplifies testing and comparing various \acrshort{vsn} models on real robotic platforms.
-        }
-        \label{fig:abstract_ros4vsn}
+    }
+    \label{fig:abstract_ros4vsn}
 \end{figure}
 
 This chapter aims to build true embodied agents by proposing a novel solution for the integration of \acrshort{vsn} models into real robots.
 The main contributions of this chapter are as follows:
 \begin{enumerate}
- \item The first contribution is the provision to the embodied agents community of the ROS4VSN development, a novel \acrfull{ros}~\cite{ros} based architecture that enables testing and comparing different \acrshort{vsn} models in real robots.
- The ROS4VSN development is model agnostic; thus, any \acrshort{vsn} solution can be integrated into it with ease.
- Section~\ref{subsec:ros4vsn} includes all the technical details.
- \item The second contribution involves the embedding of two state-of-the-art \acrshort{vsn} models in two different robotic platforms.
- The selected models are PIRLNav~\cite{ramrakhya2023} and VLV~\cite{chang2020}.
- To achieve this integration, it is necessary to make technical adaptations to the models so that they transition from interacting with observations provided by simulation environments to observations from the real world.
- All these technical modifications to the models are detailed in Section~\ref{subsec:vsn_models}.
- \item Finally, an experimental evaluation of the adapted \acrshort{vsn} models is presented, using the ROS4VSN framework, with two different robots, in a real world scenario (Section~\ref{sec:experiments}).
- The main question addressed with the designed experiments is: Are the state-of-the-art \acrshort{vsn} models able to successfully operate with real robots?
- The success rate in real world navigation experiments has been measured, which has enabled the analysis of the difference in performance compared to those tests in simulation environments, where embodied \acrshort{ai} agents are typically tested.
- This chapter demonstrates that these \acrshort{vsn} solutions perform noticeably differently when evaluated in real-world and simulated situations.
+    \item The first contribution is the provision to the embodied agents community of the ROS4VSN development, a novel \acrfull{ros}~\cite{ros} based architecture that enables testing and comparing different \acrshort{vsn} models in real robots.
+    The ROS4VSN development is model agnostic; thus, any \acrshort{vsn} solution can be integrated into it with ease.
+    Section~\ref{subsec:ros4vsn} includes all the technical details.
+    \item The second contribution involves the embedding of two state-of-the-art \acrshort{vsn} models in two different robotic platforms.
+    The selected models are PIRLNav~\cite{ramrakhya2023} and VLV~\cite{chang2020}.
+    To achieve this integration, it is necessary to make technical adaptations to the models so that they transition from interacting with observations provided by simulation environments to observations from the real world.
+    All these technical modifications to the models are detailed in Section~\ref{subsec:vsn_models}.
+    \item Finally, an experimental evaluation of the adapted \acrshort{vsn} models is presented, using the ROS4VSN framework, with two different robots, in a real world scenario (Section~\ref{sec:experiments}).
+    The main question addressed with the designed experiments is: Are the state-of-the-art \acrshort{vsn} models able to successfully operate with real robots?
+    The success rate in real world navigation experiments has been measured, which has enabled the analysis of the difference in performance compared to those tests in simulation environments, where embodied \acrshort{ai} agents are typically tested.
+    This chapter demonstrates that these \acrshort{vsn} solutions perform noticeably differently when evaluated in real-world and simulated situations.
 \end{enumerate}
+
 
 \section{Methodology}\label{sec:methodology}
 %Intro
@@ -322,7 +323,7 @@ As of today, this model reports the best performance in the \acrshort{objnav}~\c
 \end{figure}
 
 PILRNav is a \acrshort{vsn} approach that has been trained with a combination of imitation learning and a \acrshort{rl} fine-tuning.
-The model uses \acrshort{bc} to pre-train the \acrshort{objnav} policy on a dataset of $77k$ human demonstrations, amounting more than $2370$ human annotation hours, in the \acrshort{hm3d}-Semantics v0.1 dataset~\cite{Ramakrishnan2021HabitatMatterport3D}.
+The model uses \acrfull{bc} to pre-train the \acrshort{objnav} policy on a dataset of $77k$ human demonstrations, amounting more than $2370$ human annotation hours, in the \acrshort{hm3d}-Semantics v0.1 dataset~\cite{Ramakrishnan2021HabitatMatterport3D}.
 This dataset provides up to 120 different 3D reconstructions of houses all around the world (see Figure~\ref{fig:scene_hm3d} for an example of one of them).
 Once this \acrshort{bc} is finished, a \acrshort{rl} fine-tuning is used following the \acrshort{ddppo} approach~\cite{Wijmans2019DDPPOLN}.
 The policy architecture used is a simple \acrshort{cnn} plus a \acrshort{rnn} from~\cite{yadav2022}.
@@ -350,8 +351,6 @@ Note that PIRLNav does not need any low-level policy as in the VLV model.
 The robot is controlled and navigates using only the set of discrete actions provided by the ROS4VSN model.
 
 
-
-
 \section{Experiments}\label{sec:experiments}
 This section describes the experimental evaluation designed for testing the developments in the real world.
 The goal of the experimental evaluation is to answer the following question: Are the state-of-the-art \acrshort{vsn} models able to successfully operate with real robots?
@@ -367,9 +366,9 @@ For doing so, the following experimental setup is proposed.
 
 \begin{figure}[t]
     \centering
-        \includegraphics[width=\linewidth]{figures/ros4vsn/plano_vivienda}
-        \caption{Floor plan where the experiments were performed, indicating the 15 starting positions used.}
-        \label{fig:floor_plan}
+    \includegraphics[width=\linewidth]{figures/ros4vsn/plano_vivienda}
+    \caption{Floor plan where the experiments were performed, indicating the 15 starting positions used.}
+    \label{fig:floor_plan}
 \end{figure}
 
 In a 75 m$^2$ apartment, up to 15 random starting positions were defined (see Fig.~\ref{fig:floor_plan}).
@@ -420,9 +419,9 @@ In particular, all the images observed by the robot during its trajectories have
 
 \begin{figure}
     \centering
-        \includegraphics[width=\linewidth]{figures/ros4vsn/hw-sw-scheme}
-        \caption{Hardware-software architecture for the development of experiments.}
-        \label{fig:setup_experiment}
+    \includegraphics[width=\linewidth]{figures/ros4vsn/hw-sw-scheme}
+    \caption{Hardware-software architecture for the development of experiments.}
+    \label{fig:setup_experiment}
 \end{figure}
 
 For the experiments, the following hardware-software setup was used, as shown in Figure~\ref{fig:setup_experiment}.
@@ -433,7 +432,6 @@ This device was used to establish the communication with the robotic platform an
 At the same time, the discrete\_move package was executed to receive the actions to be executed by the robot.
 On the other hand, a workstation was used to run the \acrshort{vsn} nodes, which was equipped with an i7-1165G7 processor and an NVIDIA GeForce RTX 2060 graphics card.
 Code to reproduce all the experiments is provided at \url{https://github.com/gramuah/ros4vsn}.
-
 
 \subsection{\acrshort{vsn} navigation results}
 \label{subsec:vsn}
@@ -456,10 +454,10 @@ While the difference between VLV and PIRLNav \acrshort{sr} in the virtual enviro
     \centering
     \begin{tabular}{l|cc}
         \toprule
-        \textbf{Models} & \acrshort{sr} (Real World) & \acrshort{sr} (Virtual Environment) \\
+        \textbf{Models}                       & \acrshort{sr} (Real World) & \acrshort{sr} (Virtual Environment) \\
         \midrule
-        \textsc{VLV}~\cite{chang2020} & $29.33\%$ & $39\%$ \\
-        \textsc{PIRLNav}~\cite{ramrakhya2023} & $21.11\%$ & $65\%$ \\
+        \textsc{VLV}~\cite{chang2020}         & $29.33\%$                  & $39\%$                              \\
+        \textsc{PIRLNav}~\cite{ramrakhya2023} & $21.11\%$                  & $65\%$                              \\
         \bottomrule
     \end{tabular}
     \caption{Real world success rate against simulation.}
@@ -479,18 +477,18 @@ Additionally, only one success was observed from positions 1, 2, and 13.
 Notably, the VLV implementation can reach most targets in under 60 steps.
 
 \begin{table}[t]
-\centering
-\begin{tabular}{c|cccc}
-\toprule
-\textit{\textbf{Object Goal}} & \textit{\textbf{Successful episodes}} & \textit{\textbf{SR}} &  \textit{\textbf{Avg. number of actions}}   \\ \midrule
-Chair                & 6/15     & 40\%   &   30  \\
-Sofa                 & 6/15     & 40\%   &   65  \\
-Table                & 6/15     & 40\%   &   42  \\
-Bed                  & 3/15     & 20\%   &   39  \\
-Toilet               & 1/15     & 6,67\%    &   42  \\ \bottomrule
-\end{tabular}
-\caption{VLV \acrshort{vsn} experiment. The number of successful episodes over 15, the corresponding SR per-object goal, and the average number of actions taken to reach the target are reported.}
-\label{tab:vlv}
+    \centering
+    \begin{tabular}{c|cccc}
+        \toprule
+        \textit{\textbf{Object Goal}} & \textit{\textbf{Successful episodes}} & \acrshort{sr} & \textit{\textbf{Avg. number of actions}}   \\ \midrule
+        Chair                         & 6/15                                  & 40\%          & 30                                       \\
+        Sofa                          & 6/15                                  & 40\%          & 65                                       \\
+        Table                         & 6/15                                  & 40\%          & 42                                       \\
+        Bed                           & 3/15                                  & 20\%          & 39                                       \\
+        Toilet                        & 1/15                                  & 6,67\%        & 42                                       \\ \bottomrule
+    \end{tabular}
+    \caption{VLV \acrshort{vsn} experiment. The number of successful episodes over 15, the corresponding SR per-object goal, and the average number of actions taken to reach the target are reported.}
+    \label{tab:vlv}
 \end{table}
 
 Figure~\ref{fig:vlv_qualitative} shows qualitative results for four navigation experiments with the VLV model.
@@ -504,10 +502,10 @@ Due to noise in the depth image, the target point calculation was inaccurate, le
 
 \begin{figure*}[t]
     \centering
-        \makebox[\textwidth][c]{
+    \makebox[\textwidth][c]{
         \includegraphics[width=\linewidth]{figures/ros4vsn/vlv_qualitative}}
-        \caption{VLV qualitative navigation results. The first two rows show two successful cases, where the robot reached the target, while the last two rows show two situations where the navigation experiment failed.}
-        \label{fig:vlv_qualitative}
+    \caption{VLV qualitative navigation results. The first two rows show two successful cases, where the robot reached the target, while the last two rows show two situations where the navigation experiment failed.}
+    \label{fig:vlv_qualitative}
 \end{figure*}
 
 \subsubsection{PIRLNav results}
@@ -529,19 +527,19 @@ Even though the plant was visible on multiple occasions during navigation, the a
 Overall, considering all the categories, the \acrshort{sr} for the PIRLNav model is of $21.11\%$.
 
 \begin{table}[t]
-\centering
-\begin{tabular}{c|cccc}
-\toprule
-\textit{\textbf{Object Goal}} & \textit{\textbf{Successful episodes}} & \textit{\textbf{SR}} &  \textit{\textbf{Avg. number of actions}}   \\ \midrule
-Chair                & 5/15     & 33,33\%   &   49  \\
-Monitor              & 5/15     & 33,33\%   &   91  \\
-Sofa                 & 5/15     & 33,33\%   &   70  \\
-Bed                  & 3/15     & 20,00\%   &   97  \\
-Toilet               & 1/15     & 6,67\%    &   61  \\
-Plant                & 0/15     & 0,00\%    &   82  \\ \bottomrule
-\end{tabular}
-\caption{PIRLNav \acrshort{vsn} experiment. The number of successful episodes over 15, the corresponding SR per-object goal, and the average number of actions taken to reach the target are reported.}
-\label{tab:pirlnav}
+    \centering
+    \begin{tabular}{c|cccc}
+        \toprule
+        \textit{\textbf{Object Goal}} & \textit{\textbf{Successful episodes}} & \acrshort{sr} & \textit{\textbf{Avg. number of actions}}   \\ \midrule
+        Chair                         & 5/15                                  & 33,33\%       & 49                                       \\
+        Monitor                       & 5/15                                  & 33,33\%       & 91                                       \\
+        Sofa                          & 5/15                                  & 33,33\%       & 70                                       \\
+        Bed                           & 3/15                                  & 20,00\%       & 97                                       \\
+        Toilet                        & 1/15                                  & 6,67\%        & 61                                       \\
+        Plant                         & 0/15                                  & 0,00\%        & 82                                       \\ \bottomrule
+    \end{tabular}
+    \caption{PIRLNav \acrshort{vsn} experiment. The number of successful episodes over 15, the corresponding SR per-object goal, and the average number of actions taken to reach the target are reported.}
+    \label{tab:pirlnav}
 \end{table}
 
 To conclude the analysis of the PIRLNav model, some qualitative results are provided.
@@ -562,10 +560,10 @@ As it can be seen in this episode, the model had difficulty getting through the 
 
 \begin{figure}
     \centering
-        \makebox[\textwidth][c]{
+    \makebox[\textwidth][c]{
         \includegraphics[width=\linewidth]{figures/ros4vsn/pirlnav_qualitative}}
-        \caption{PIRLNav qualitative navigation results. The first two rows show two successful cases, where the robot reached the target, while the last two rows show two situations where the navigation experiment failed.}
-        \label{fig:pirlnav_qualitative}
+    \caption{PIRLNav qualitative navigation results. The first two rows show two successful cases, where the robot reached the target, while the last two rows show two situations where the navigation experiment failed.}
+    \label{fig:pirlnav_qualitative}
 \end{figure}
 
 A video (see \url{https://youtu.be/nD0JBWNCMGg}) with more qualitative results for both of the \acrshort{vsn} models used in the experiments is provided.
@@ -583,9 +581,9 @@ The robots operated without direct assistance throughout the experiments, being 
         \toprule
         \textbf{Robot} & Time (Hours) & Distance (km) \\
         \midrule
-        LOLA2       & 8     & 1.12 \\
-        Turtlebot 2 & 30    & 4.10 \\\midrule
-        Total       & 38    & 5.22 \\
+        LOLA2          & 8            & 1.12          \\
+        Turtlebot 2    & 30           & 4.10          \\\midrule
+        Total          & 38           & 5.22          \\
         \bottomrule
     \end{tabular}
     \caption{Time spent and traveled distance for both robots during the experiments.}
@@ -612,9 +610,9 @@ This explains the difference of performance observed between VLV and PIRLNav in 
 
 \begin{figure}[t]
     \centering
-        \includegraphics[width=\linewidth]{figures/ros4vsn/histograma_PIRLNav}
-        \caption{Histogram of navigation actions sampled by PIRLNav model.}
-        \label{fig:histrogram_pirlnav}
+    \includegraphics[width=\linewidth]{figures/ros4vsn/histograma_PIRLNav}
+    \caption{Histogram of navigation actions sampled by PIRLNav model.}
+    \label{fig:histrogram_pirlnav}
 \end{figure}
 
 In terms of qualitative aspects of navigation, it is believed that the PIRLNav model is better than the VLV model.
@@ -633,6 +631,7 @@ It is believed that work should be done on solutions to increase the number of t
 
 Finally, the study confirms some of the conclusions reported in recent works, \eg~\cite{gervet2022}.
 Modular-learning models, such as VLV, perform better than end-to-end learning approaches, \eg~PIRLNav, when tested in the real world.
+
 
 \section{Conclusions}\label{sec:conclusions_ros4vsn}
 To conclude, a \acrshort{ros}-based framework for visual semantic navigation named ROS4VSN has been presented.
