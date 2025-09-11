@@ -77,7 +77,7 @@ In this thesis, the main focus will be on navigating in indoor environments, spe
 Since the first time \acrshort{rl} was applied to navigation~\cite{MAHADEVAN1992311}, many works have been proposed to tackle this problem.
 However, the vast majority of them rely on simulated environments, such as the \textit{ProcTHOR}~\cite{Deitke2022ProcTHORLE} or \textit{Habitat}~\cite{NEURIPS2021_021bbc7e} platforms.
 These platforms are invaluable for training agents in a controlled environment because they can provide a massive scale of training data and allow for fast iterations that can lead to the emergence of complex behaviors~\cite{Wijmans2022EmergenceOI}.
-Despite the advantages of these platforms, deploying algorihtms trained on simulation on real-world scenarios can be very challenging.
+Despite the advantages of these platforms, deploying algorithms trained on simulation on real-world scenarios can be very challenging.
 Several problems can arise, such as the \textit{sim-to-real} gap~\cite{kadian2020}, or the domain shift~\cite{kim2022}.
 This document focuses on the study of \acrshort{vsn} in real-world scenarios and how to overcome the challenges that appear when trying to deploy simulation-trained models on the real world.
 
@@ -110,7 +110,7 @@ The main contributions of this thesis are summarized as follows:
     Thanks to this, the ready can understand the current state of the art in \acrshort{vsn} and \acrshort{rl} and contextualize the main goals of this document.
     \item A clear definition of the \acrshort{vsn} problem and a set of benchmarks that can be used to evaluate the performance of \acrshort{vsn} algorithms in simulated environments.
     It also includes a set of metrics that can be used to evaluate the performance of different techniques such as $\epsilon$-greedy exploration or different reward functions.
-    \item A comprehensive study of the different \acrshort{vsn} algorihtms in real-world scenarios.
+    \item A comprehensive study of the different \acrshort{vsn} algorithms in real-world scenarios.
     This includes a definition of an experimental setup that can be used to evaluate the performance of different models in real-world environments.
     On top of that, this also includes the release of a novel \acrfull{ROS} package called ROS4VSN that provides a set of tools and utilities to facilitate the development of \acrshort{vsn} algorithms in real-world scenarios.
     \item A novel approach to \acrshort{rl} that combines the advantages of Offline Reinforcement Learning~\cite{levine2020} with DD-PPO~\cite{Wijmans2019DDPPOLN} to train \acrshort{vsn} agents without the need to query any environment, just by using offline data.

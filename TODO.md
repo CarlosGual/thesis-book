@@ -24,5 +24,5 @@
 - [x] Check if VF loss in OffNav makes sense to diverge or not.
 - [x] Check if acronyms do not appear long too many times.
 - [ ] Check and format all references.
-- [ ] Do short captions for figures and tables.
-- [ ] Check general text.
+- [x] Do short captions for figures and tables.
+- [x] Check general text.
