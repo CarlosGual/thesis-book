@@ -29,7 +29,7 @@ This classification separates the approaches into three main categories: classic
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/related_work/methods_overview}
-    \caption{When navigating via visual observations, several approaches can be taken.
+    \caption[Methods for \acrlong{vsn}]{When navigating via visual observations, several approaches can be taken.
     Classical methods rely on geometrical approaches to map the environment and explore it.
     Modular-learning methods use different modules to decompose the navigation problem into smaller tasks, such as exploration and navigation.
     End-to-end learning methods use deep neural networks to learn the navigation policy directly from visual observations.
@@ -48,7 +48,7 @@ One of the most well-known approaches in this category is the Kimera system~\cit
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/related_work/kimera_chart_25 Large}
-    \caption{Kimera method is one of the most representative in the semantic SLAM category.
+    \caption[Kimera method for semantic \acrshort{slam}]{Kimera method is one of the most representative in the semantic \acrshort{slam} category.
     It uses a modular architecture to combine different modules for images and \acrfull{imu} data, outputting pose estimations (a) and multiple metric-semantic reconstructions (b-e).
     Figure from~\cite{rosinol2020}.}
     \label{fig:kimera-chart}
@@ -65,7 +65,7 @@ Modular learning can be also combined with offline \acrshort{rl}~\cite{shah2022}
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/related_work/modular_learning}
-    \caption{\textbf{Hierarchical Scene Priors NAVigation (HSPNav)} for \acrlong{vsn}.
+    \caption[Hierarchical Scene Priors NAVigation (HSPNav) for \acrlong{vsn}]{\textbf{Hierarchical Scene Priors NAVigation (HSPNav)} for \acrlong{vsn}.
     This modular-learning-based approach decomposes the navigation learning (a) into several modules:
     A semantic mapping module is used to build a semantic map of the environment, which then is further processed by an Local Scene Prior (LSP) module to refine semantically a local map.
     A topological global graph is built at the same time as a Global Scene Prior (GSP).
@@ -94,7 +94,7 @@ Some authors have proposed combining the \acrshort{rl} training with different s
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/related_work/ddppo}
-    \caption{\textbf{Decentralized Distributed Proximal Policy Optimization (DD-PPO)}.
+    \caption[Decentralized Distributed Proximal Policy Optimization (DD-PPO)]{\textbf{Decentralized Distributed Proximal Policy Optimization (DD-PPO)}.
     This algorithm is included in the Habitat Lab as a baseline for training end-to-end visual navigation policies.
     It laid the foundation for the majority of the subsequent works in the field and it is used in this thesis as well.
     While typical \acrshort{rl} has been trained in an asynchronous manner, \acrshort{ddppo} uses a synchronous approach to train the agent in multiple environments at the same time.
@@ -120,7 +120,7 @@ This thesis, in chapter~\ref{ch:understanding-robotic-visual-semantic-navigation
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/related_work/curiosity}
-    \caption{\textbf{Curiosity-driven exploration} is a technique that uses the error of the agent's ability to predict the next state to introduce a new intrinsic reward that enables the agent to explore the environment.
+    \caption[Curiosity-driven exploration]{\textbf{Curiosity-driven exploration} is a technique that uses the error of the agent's ability to predict the next state to introduce a new intrinsic reward that enables the agent to explore the environment.
     The agent learns a forward model that predicts the next state given the current state and action.
     The intrinsic reward is then computed as the error between the predicted and actual next state.
     Figure from~\cite{pathak2017}.}
@@ -145,7 +145,7 @@ In the field of locomotion, training legged robotic systems in a simulated envir
 
 \begin{figure}
     \includegraphics[width=\textwidth]{figures/related_work/sim2real}
-    \caption{\textbf{Simulation-to-reality transfer} is a challenging task in robotic navigation.
+    \caption[Simulation-to-reality transfer]{\textbf{Simulation-to-reality transfer} is a challenging task in robotic navigation.
     In this example, a real-world scenario is simulated to explore the behavior of visual navigation policies both in simulation and in reality.
     The authors use a simulated environment that closely resembles the real-world scenario, allowing them to train and evaluate their policies in a controlled setting.
     Figure from~\cite{kadian2020}.}
@@ -165,7 +165,7 @@ Over the past years, a number of algorithmic strategies have been proposed to ad
 
 \begin{figure}
     \includegraphics[width=\textwidth]{figures/related_work/diagram_offline}
-    \caption{\textbf{Offline reinforcement learning} is a paradigm that allows training models using fixed datasets, without the need for online data collection.
+    \caption[Offline reinforcement learning paradigm]{\textbf{Offline reinforcement learning} is a paradigm that allows training models using fixed datasets, without the need for online data collection.
     In this diagram, the offline RL process is depicted, where a dataset of environment interactions is used to train a policy.
     The policy is then evaluated in the environment, and the process is repeated until convergence.
     Figure from~\cite{levine2020}.}
@@ -228,7 +228,7 @@ Figure~\ref{fig:maml-mil} illustrates the whole idea of gradient-based meta-imit
         \caption{The idea behind one-shot imitation learning.}
         \label{fig:oneshot-human}
     \end{subfigure}
-    \caption{\textbf{Gradient-based meta-imitation learning} is a technique that learns a policy initialization that can be quickly adapted to new tasks via gradient descent.
+    \caption[Gradient-based meta-imitation learning]{\textbf{Gradient-based meta-imitation learning} is a technique that learns a policy initialization that can be quickly adapted to new tasks via gradient descent.
     On \ref{fig:maml}, the meta-learning process is depicted, where a policy initialization $\theta$ is optimized over a distribution of tasks $\mathcal{D}$.
     On \ref{fig:oneshot-human}, a whole process of one-shot imitation learning is shown.
     The agent is meta-trained on a distribution of human and robot demonstration data.
@@ -254,7 +254,7 @@ For instance, figure~\ref{fig:transformer-mil} shows how task representations ca
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/related_work/transformer_mil}
-    \caption{\textbf{Meta-Controller}: a technique for few-shot imitation learning to simultaneously generalize to unseen embodiments and tasks using a few demonstrations.
+    \caption[Meta-Controller]{\textbf{Meta-Controller}: a technique for few-shot imitation learning to simultaneously generalize to unseen embodiments and tasks using a few demonstrations.
     First, the states and actions are encoded into a sequence of joint-level tokens.
     Then, these state tokens are encoded by the state encoder to obtain a task representation.
     Finally, the task representation is used to condition the matching-based policy network, which outputs the next action to be executed by the robot.

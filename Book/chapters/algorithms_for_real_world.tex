@@ -30,7 +30,7 @@ To the best of the author's knowledge, this is the first time that an offline \a
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{figures/offnav/graphical_abstract}
-    \caption{
+    \caption[Offline RL diagram]{
         By leveraging on the offline reinforcement learning paradigm, agents can be trained from a fixed dataset of navigation experience, without querying any environment.
         This opens the possibility to create many navigation datasets from any navigation agent in any \textbf{real or simulated} environment, and then use them to train new agents for different scenarios without the need to ever query that environment.
     }
@@ -152,7 +152,7 @@ To the best of the author's knowledge, this is the first time that a meta-imitat
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{figures/metanav/graphical_abstract}
-    \caption{
+    \caption[Meta-imitation learning diagram]{
         The meta-imitation learning approach transforms the usual learning problem into a collection of small similar problems called tasks.
         Here, the goal is to learn a policy that is generally good on all of them, while also adapting quickly to new tasks by using a small amount of new experience.
     }
@@ -347,7 +347,7 @@ This is a clear indication that the algorithms are not able to learn from the wh
         \includegraphics[width=\linewidth]{figures/metanav/metanav_losses_avg_std}
         \caption{MetaNav average action loss over four different runs.}
         \label{fig:training_problems_metanav}
-    \end{subfigure}~\caption{Training curves of OffNav (\ref{fig:training_problems_offnav}) and Metanav (\ref{fig:training_problems_metanav}) on the full training dataset. The loss does not stabilize and even diverges, indicating the algorithm's inability to learn from the complete dataset.}
+    \end{subfigure}~\caption[Training curves of OffNav and Metanav]{Training curves of OffNav (\ref{fig:training_problems_offnav}) and Metanav (\ref{fig:training_problems_metanav}) on the full training dataset. The loss does not stabilize and even diverges, indicating the algorithm's inability to learn from the complete dataset.}
     \label{fig:training_problems}
 \end{figure}
 

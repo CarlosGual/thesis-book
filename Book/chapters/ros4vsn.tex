@@ -23,7 +23,7 @@ Although there are \acrshort{vsn} works that achieve \textit{near-human} navigat
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/ros4vsn/abstract_paper}
-    \caption{
+    \caption[Object Goal Navigation diagram]{
         \acrshort{objnav} task is a complex navigation problem.
         An agent needs to employ vision-based sensors to navigate from a random starting point to specific object goals within the scene.
         Many different hardware and software components need to be fully integrated to solve it, making it difficult to deploy and test these \acrshort{vsn} models in real robots.
@@ -74,7 +74,7 @@ Figure~\ref{fig:arch_scheme} shows a visual representation of the global archite
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/ros4vsn/arquitectura_paper}
-    \caption{Architecture scheme of the ROS44\acrshort{vsn} framework.
+    \caption[Architecture scheme of the ROS4VSN framework]{Architecture scheme of the ROS4VSN framework.
     It shows the different packages, topics and connections within them and the hardware devices.}
     \label{fig:arch_scheme}
 \end{figure}
@@ -487,7 +487,7 @@ Notably, the VLV implementation can reach most targets in under 60 steps.
         Bed                           & 3/15                                  & 20\%          & 39                                       \\
         Toilet                        & 1/15                                  & 6,67\%        & 42                                       \\ \bottomrule
     \end{tabular}
-    \caption{VLV \acrshort{vsn} experiment. The number of successful episodes over 15, the corresponding SR per-object goal, and the average number of actions taken to reach the target are reported.}
+    \caption[VLV \acrshort{vsn} experiment]{VLV \acrshort{vsn} experiment. The number of successful episodes over 15, the corresponding SR per-object goal, and the average number of actions taken to reach the target are reported.}
     \label{tab:vlv}
 \end{table}
 
@@ -504,7 +504,7 @@ Due to noise in the depth image, the target point calculation was inaccurate, le
     \centering
     \makebox[\textwidth][c]{
         \includegraphics[width=\linewidth]{figures/ros4vsn/vlv_qualitative}}
-    \caption{VLV qualitative navigation results. The first two rows show two successful cases, where the robot reached the target, while the last two rows show two situations where the navigation experiment failed.}
+    \caption[VLV qualitative navigation results]{VLV qualitative navigation results. The first two rows show two successful cases, where the robot reached the target, while the last two rows show two situations where the navigation experiment failed.}
     \label{fig:vlv_qualitative}
 \end{figure*}
 
@@ -538,7 +538,7 @@ Overall, considering all the categories, the \acrshort{sr} for the PIRLNav model
         Toilet                        & 1/15                                  & 6,67\%        & 61                                       \\
         Plant                         & 0/15                                  & 0,00\%        & 82                                       \\ \bottomrule
     \end{tabular}
-    \caption{PIRLNav \acrshort{vsn} experiment. The number of successful episodes over 15, the corresponding SR per-object goal, and the average number of actions taken to reach the target are reported.}
+    \caption[PIRLNav \acrshort{vsn} experiment]{PIRLNav \acrshort{vsn} experiment. The number of successful episodes over 15, the corresponding SR per-object goal, and the average number of actions taken to reach the target are reported.}
     \label{tab:pirlnav}
 \end{table}
 
@@ -562,7 +562,7 @@ As it can be seen in this episode, the model had difficulty getting through the 
     \centering
     \makebox[\textwidth][c]{
         \includegraphics[width=\linewidth]{figures/ros4vsn/pirlnav_qualitative}}
-    \caption{PIRLNav qualitative navigation results. The first two rows show two successful cases, where the robot reached the target, while the last two rows show two situations where the navigation experiment failed.}
+    \caption[PIRLNav qualitative navigation results]{PIRLNav qualitative navigation results. The first two rows show two successful cases, where the robot reached the target, while the last two rows show two situations where the navigation experiment failed.}
     \label{fig:pirlnav_qualitative}
 \end{figure}
 
