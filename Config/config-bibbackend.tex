@@ -17,7 +17,7 @@
   \usepackage{csquotes}
 
   % Use biblatex instead of bibtex
-  \usepackage[backend=biber,style=ieee]{biblatex}
+  \usepackage[backend=biber,style=ieee,maxnames=99]{biblatex}
   % This is a dirty hack, but should work... The reason to do so is to avoid
   % the need of editing this file by the user (see Book/biblio files for more
   % details)
@@ -33,13 +33,13 @@
   }
   \ifdef{\mybibfileTwo}
   {
-    \addbibresource{../Book/biblio/library_harl.bib}
+    \addbibresource{\myreferencespath\mybibfileEight}
   }
   {
   }
   \ifdef{\mybibfileThree}
   {
-    \addbibresource{../Book/biblio/library_icara.bib}
+    \addbibresource{\myreferencespath\mybibfileEight}
   }
   {
   }
